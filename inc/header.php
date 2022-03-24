@@ -42,6 +42,25 @@ spl_autoload_register(function($class){
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+    <style type="text/css">
+        span.error
+            {
+                margin: 8px 0 0 0;
+                padding: 0;
+                height: 1%;
+                
+                color: #FF0000;
+            }
+
+            span.success
+            {
+                margin: 8px 0 0 0;
+                padding: 0;
+                height: 1%;
+                
+                color: #7b912b;
+            }
+    </style>
     
 </head>
 
