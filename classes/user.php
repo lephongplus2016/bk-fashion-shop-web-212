@@ -47,7 +47,7 @@ class user
             $check_email = "SELECT * FROM tbl_user WHERE email='$email' LIMIT 1";
             $result_check = $this->db->select($check_email);
             if($result_check){
-                $alert = "<span class='error'>Email Already Existed ! Please Enter Another Email</span>";
+                $alert = "<span class='error'>Email đã được sử dụng, vui lòng chọn email khác</span>";
                 return $alert;
             }else{
                 $query = "INSERT INTO tbl_user(name,email,address,phone,password, role) VALUES('$name','$email', '$address', '$phone', '$password','customer')";
@@ -62,6 +62,40 @@ class user
             }
         }
     }
+
+    public function login_user($data){
+
+            $email = mysqli_real_escape_string($this->db->link, $data['email']);
+            $password = mysqli_real_escape_string($this->db->link, md5($data['password']));
+            if($email=='' || $password==''){
+                $alert = "<span class='error'>Password and Email must be not empty</span>";
+                return $alert;
+            }else{
+                $check_login = "SELECT * FROM tbl_user WHERE email='$email' AND password='$password'";
+                $result_check = $this->db->select($check_login);
+                if($result_check){
+
+                    $value = $result_check->fetch_assoc();
+                    // lưu session đã login lại
+                    Session::set('user_login',true);
+                    Session::set('user_id',$value['userId']);
+                    Session::set('user_name',$value['name']);
+                    Session::set('user_role',$value['role']);
+                    $alert = "<span class='success'>Đăng nhập thành công <a href='shopping-cart.php'>Đến trang thanh toán</a></span>";
+                        return $alert;
+                }else{
+                    $alert = "<span class='error'>Sai email hoặc password</span>";
+                    return $alert;
+                }
+            }
+        }
+
+
+
+
+
+
+
 
 
 

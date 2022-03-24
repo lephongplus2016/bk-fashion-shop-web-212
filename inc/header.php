@@ -18,6 +18,13 @@ spl_autoload_register(function($class){
   header("Pragma: no-cache"); 
   header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); 
   header("Cache-Control: max-age=2592000");?>
+
+<?php 
+    if(isset($_GET['user_id'])){
+        Session::destroy();
+    }
+            ?>
+
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -127,10 +134,27 @@ spl_autoload_register(function($class){
                 </div>
                 <div class="col-lg-3 col-md-3">
                     <div class="header__nav__option">
-                        <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a>
-                        <a href="#"><img src="img/icon/heart.png" alt=""></a>
-                        <a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
+<!--                         <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a>
+ -->                        <a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
                         <div class="price">$0.00</div>
+                        
+
+                        <?php
+                            // dùng biến login_check ở session để lưu có đăng nhập chưa
+                            $login_check = Session::get('user_login'); 
+                            if($login_check==false){
+                                echo '<a href="login.php" class="btn btn-info">Login</a>';
+                            }else{
+                                echo '<br/>Xin chào '.Session::get("user_name").'- <a href="?user_id='.Session::get('user_id').'">Đăng xuất</';
+                            }
+
+                            // quyền admin
+                            $isAdmin = Session::get('user_role');
+                            if ($isAdmin == 'admin') {
+                                echo '<br/><a href="admin/index.php" class="btn btn-info">Admin page</a>';
+                            } 
+                        ?>
+
                     </div>
                 </div>
             </div>

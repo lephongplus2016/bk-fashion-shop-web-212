@@ -27,11 +27,11 @@ class Session{
     }
  }
 
- public static function checkSession(){
+ public static function checkSessionAdmin(){
     self::init();
-    if (self::get("adminlogin")== false) {
+    if (self::get("user_role") != 'admin' || self::get("user_login") == false ) {
      self::destroy();
-     header("Location:login.php");
+     header("Location:./../login.php");
     }
  }
 
@@ -39,7 +39,7 @@ class Session{
 // -> sẽ dùng để validation các trang index của login sau này
  public static function checkLogin(){
     self::init();
-    if (self::get("login")== true) {
+    if (self::get("user_login")== true) {
      header("Location:index.php");
     }
  }
@@ -48,7 +48,7 @@ class Session{
 // buộc phải login để vào những site nào có checkSession-> 
  public static function destroy(){
   session_destroy();
-  header("Location:login.php");
+     header("Location:login.php");
  }
 }
 ?>

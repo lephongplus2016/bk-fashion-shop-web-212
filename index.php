@@ -3,7 +3,12 @@
     include 'inc/slider.php';
     include 'inc/banner.php';
 ?>
-
+<!-- <?php 
+    $check =  Session::get('user_login');
+    echo $check;
+    echo Session::get('user_name');
+    echo Session::get('user_role');
+?> -->
 
     <!-- Product Section Begin -->
     <section class="product spad">

@@ -1,12 +1,5 @@
 <?php
     include 'inc/header.php';
-    // $list_user = $user->show_user();
-    // if($list_user){
-    //     while($result = $list_user->fetch_assoc()){
-    //         var_dump($result);
-    //     }
-    // }
-
 ?>
 
 <?php
@@ -14,10 +7,8 @@
         $insert_user = $user->insert_user($_POST);
         // echo "co post method";
         // var_dump($insert_user);
-        echo $insert_user;
+        // echo $insert_user;
     }
-
-    
 
 ?>
 
@@ -28,7 +19,14 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-7">
                                 <div class="card border-2 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Tạo tài khoản</h3></div>
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Tạo tài khoản</h3>
+                                        <?php 
+                                        if(isset($insert_user)){
+                                            echo $insert_user; ?>
+                                            <a href="login.php"> Đi tới đăng nhập</a>
+                                           <?php } ?>
+                                         
+                                    </div>
                                     <div class="card-body">
                                         <form action="" method="POST">
                                             <div class="row mb-3">
