@@ -109,6 +109,21 @@
                             </div>
 
 
+
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts6" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>  
+                                Tin tức  
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts6" aria-labelledby="headingOne" data-bs-parent="#collapseLayouts3">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="layout-static.php">Thêm Tin Tức</a>
+                                    <a class="nav-link" href="layout-static.php">Danh sách Tin Tức</a>
+
+                                </nav>
+                            </div>
+
+
                            <!--  <div class="sb-sidenav-menu-heading">Addons</div>
                             <a class="nav-link" href="charts.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
