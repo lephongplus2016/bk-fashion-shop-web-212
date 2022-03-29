@@ -19,8 +19,8 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="product-add.php">Thêm sản phẩm</a>
-                                    <a class="nav-link" href="layout-static.php">Danh sách sản phẩm</a>
+                                    <a class="nav-link" href="productadd.php">Thêm sản phẩm</a>
+                                    <a class="nav-link" href="productlist.php">Danh sách sản phẩm</a>
 
                                 </nav>
                             </div>

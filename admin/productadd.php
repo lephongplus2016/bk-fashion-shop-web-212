@@ -139,7 +139,3 @@
 <?php include 'inc_admin/footer.php' ?>
 
 
-
-
-
-<?php include 'inc_admin/footer.php' ?>
