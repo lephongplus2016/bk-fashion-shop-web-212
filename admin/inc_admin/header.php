@@ -21,6 +21,19 @@
 
         <!-- add ckeditor -->
         <script src="https://cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
+
+
+        <style type="text/css">
+            span.error
+                {
+                    color: #FF0000;
+                }
+
+                span.success
+                {
+                    color: #7b912b;
+                }
+        </style>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
