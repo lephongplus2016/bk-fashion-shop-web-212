@@ -87,9 +87,24 @@ class product
     }
     
 
+    public function show_product() {
+        // LENH SELECT DA DUOC VIET TRONG DATABASE.PHP
+        //$query ="SELECT * FROM tbl_product ORDER BY productID DESC";
+        // với 1 table có reference data tới table khác ta cần inner join
+        $query = "SELECT tbl_product.* , tbl_category.categoryName, tbl_brand.brandName 
+        FROM tbl_product INNER JOIN tbl_category ON tbl_product.categoryId = tbl_category.categoryId
+         INNER JOIN tbl_brand ON tbl_product.brandId = tbl_brand.brandId
+         ORDER BY tbl_product.productId DESC
+        ";
+        $result = $this->db->select($query);
+        return $result;
+    }
 
-
-
+    public function getImgByProductId($id) {
+        $query = "SELECT * FROM `tbl_image_product` WHERE productId = '$id'";
+        $result = $this->db->select($query);
+        return $result;
+    }
 
 
 
