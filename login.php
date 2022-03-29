@@ -32,6 +32,8 @@
                                             <div class="form-floating mb-3">
                                                 <input class="form-control" id="inputPassword" type="password" placeholder="Password" name="password" />
                                                 <label for="inputPassword">Password</label>
+                                                <br>
+                                                <input type="checkbox" onclick="hideShowPassword()">Show Password
                                             </div>
                                             <!-- <div class="form-check mb-3">
                                                 <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
@@ -52,7 +54,19 @@
                     </div>
                 </main>
             </div>
-            
+
+
+
+ <script>
+    function hideShowPassword() {
+      var x = document.getElementById("inputPassword");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
+</script>           
 
  <?php
     include 'inc/footer.php';

@@ -17,6 +17,7 @@ class user
 		$this->db = new Database();
 		$this->fm = new Format();
 	}
+    // riêng biệt
 
 	public function show_user(){
         $query = "SELECT * FROM tbl_user";

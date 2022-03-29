@@ -19,7 +19,7 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.php">Thêm sản phẩm</a>
+                                    <a class="nav-link" href="product-add.php">Thêm sản phẩm</a>
                                     <a class="nav-link" href="layout-static.php">Danh sách sản phẩm</a>
 
                                 </nav>
@@ -83,12 +83,12 @@
                                 </nav>
                             </div>
 
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts5" aria-expanded="false" aria-controls="collapseLayouts">
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts7" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>  
                                 Banner  
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <div class="collapse" id="collapseLayouts5" aria-labelledby="headingOne" data-bs-parent="#collapseLayouts3">
+                            <div class="collapse" id="collapseLayouts7" aria-labelledby="headingOne" data-bs-parent="#collapseLayouts3">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="layout-static.php">Thêm Banner</a>
                                     <a class="nav-link" href="layout-static.php">Danh sách Banner</a>
@@ -110,12 +110,12 @@
 
 
 
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts6" aria-expanded="false" aria-controls="collapseLayouts">
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>  
                                 Tin tức  
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <div class="collapse" id="collapseLayouts6" aria-labelledby="headingOne" data-bs-parent="#collapseLayouts3">
+                            <div class="collapse" id="collapseLayouts8" aria-labelledby="headingOne" data-bs-parent="#collapseLayouts3">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="layout-static.php">Thêm Tin Tức</a>
                                     <a class="nav-link" href="layout-static.php">Danh sách Tin Tức</a>
