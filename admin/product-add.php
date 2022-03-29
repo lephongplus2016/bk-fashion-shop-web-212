@@ -18,8 +18,8 @@
             <h3 class="mt-4">Thêm sản phẩm</h3>
              <?php 
             if(isset($check)){
-                // echo $check ;
-                var_dump($check);
+                echo $check ;
+                // var_dump($check);
                 }
              ?>
 

@@ -30,7 +30,6 @@ class product
         $gender = mysqli_real_escape_string($this->db->link, $data['gender']);
         $season = mysqli_real_escape_string($this->db->link, $data['season']);
 
-        
 
         // check input 
         if($productname=="" || $brand=="" || $category=="" || $productdes=="" || $price=="" || $color=="" || $size =="" || $model =="" || $gender ==""|| $season ==""){
@@ -63,7 +62,7 @@ class product
 
                     $div = explode('.', $file_name);
                     $file_ext = strtolower(end($div));
-                    $unique_image = substr(md5(time()), 0, 10).'.'.$file_ext;
+                    $unique_image = substr(md5(time()+$x), 0, 10).'.'.$file_ext;
                     $uploaded_image = "../img/product/".$unique_image;
                     //==============================================================================================
 
