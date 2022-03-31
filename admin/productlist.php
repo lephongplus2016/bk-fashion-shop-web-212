@@ -24,7 +24,8 @@
         	<h3 class="mt-4">Danh sách sản phẩm</h3>
         	<?php 
         	if(isset($delproduct)){
-        	     header("Location:productlist.php");
+        	     echo "<script>window.location ='productlist.php'</script>";
+
         		 echo $delproduct;
 
         		}

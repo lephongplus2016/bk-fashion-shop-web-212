@@ -1,4 +1,4 @@
-<?php include 'inc_admin/header.php' ?>
+<?php  ob_start(); include 'inc_admin/header.php' ?>
 
 <?php include 'inc_admin/sidebar.php' ?>
 
@@ -33,9 +33,9 @@
              ?>
 
              <?php 
-             $check = $product->getProductById($id);
-             if($check){
-                    while($productRow = $check->fetch_assoc())
+             $getProduct = $product->getProductById($id);
+             if($getProduct){
+                    while($productRow = $getProduct->fetch_assoc())
                             {
 
 
@@ -189,6 +189,10 @@
 
 		    <?php
 		    	}
+		    }
+		    else {
+		    	        	     header("Location:../404.php");
+
 		    }
 		    ?>
 
