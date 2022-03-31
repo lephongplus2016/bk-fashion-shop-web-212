@@ -18,7 +18,7 @@ class product
 		$this->fm = new Format();
 	}
 
-	public function inser_product($data, $file){
+	public function insert_product($data, $file){
         $productname = mysqli_real_escape_string($this->db->link, $data['productname']);
         $category = mysqli_real_escape_string($this->db->link, $data['category']);
         $brand = mysqli_real_escape_string($this->db->link, $data['brand']);
@@ -36,6 +36,11 @@ class product
                 $alert = "<span class='error'>Các trường không được rỗng</span>";
                 return $alert;
         }
+        if($_FILES["image1"]['name'] ==='' || $_FILES["image2"]['name'] ==='' ||$_FILES["image3"]['name'] ===''|| $_FILES["image4"]['name'] ==='')
+                {
+                    $alert = "<span class='error'>Các trường không được rỗng</span>";
+                    return $alert;
+                }
         else{
                 $query =  "INSERT INTO `tbl_product` (`productName`, `categoryId`, `brandId`, `price`, `color`, `size`, `model`, `gender`, `season`, `description`) VALUES ( '$productname', '$category', '$brand', '$price', '$color', '$size', '$model', '$gender', '$season', '$productdes');";
                 $result = $this->db->insert($query);
@@ -52,7 +57,11 @@ class product
                             $this_product_id = $row['productId'];
                         }
                     }
+
+
+
                 // lay hinh anh
+
                 for ($x = 1; $x < 5; $x++) {
                   //Kiem tra hình ảnh và lấy hình ảnh cho vào folder upload======================================
                     $permited  = array('jpg', 'jpeg', 'png', 'gif');
@@ -66,11 +75,7 @@ class product
                     $uploaded_image = "../img/product/".$unique_image;
                     //==============================================================================================
 
-                    if($file_name ==='')
-                    {
-                        $alert = "<span class='error'>Các trường không được rỗng</span>";
-                        return $alert;
-                    }
+                    
                     // uploads to folder
                     move_uploaded_file($file_temp,$uploaded_image);
                     $query = "INSERT INTO `tbl_image_product` ( `productId`, `image`) VALUES ( '$this_product_id', '$unique_image');";
@@ -83,7 +88,6 @@ class product
 
         }
 
-        return $this_product_id;
     }
     
 
@@ -106,6 +110,104 @@ class product
         return $result;
     }
 
+    public function getProductById($id) {
+        $query ="SELECT * FROM tbl_product WHERE productId = '$id' ORDER BY productId DESC";
+        $result = $this->db->select($query);
+        return $result;
+    }
+
+
+    public function update_product($data, $file, $id){
+        $productname = mysqli_real_escape_string($this->db->link, $data['productname']);
+        $category = mysqli_real_escape_string($this->db->link, $data['category']);
+        $brand = mysqli_real_escape_string($this->db->link, $data['brand']);
+        $productdes = mysqli_real_escape_string($this->db->link, $data['productdes']);
+        $price = mysqli_real_escape_string($this->db->link, $data['price']);
+        $color = mysqli_real_escape_string($this->db->link, $data['color']);
+        $size = mysqli_real_escape_string($this->db->link, $data['size']);
+        $model = mysqli_real_escape_string($this->db->link, $data['model']);
+        $gender = mysqli_real_escape_string($this->db->link, $data['gender']);
+        $season = mysqli_real_escape_string($this->db->link, $data['season']);
+
+
+        // check input 
+        if($productname=="" || $brand=="" || $category=="" || $productdes=="" || $price=="" || $color=="" || $size =="" || $model =="" || $gender ==""|| $season ==""){
+                $alert = "<span class='error'>Các trường không được rỗng</span>";
+                return $alert;
+        }
+        else{
+                $query =  "UPDATE `tbl_product` SET 
+                `productName` = '$productname', 
+                `categoryId`= '$category', 
+                `brandId` = '$brand', 
+                `price`= '$price', 
+                `color` = '$color', 
+                `size` = '$size', 
+                `model` ='$model', 
+                `gender` = '$gender', 
+                `season` ='$season', 
+                `description` ='$productdes'
+                WHERE productId = '$id'" ;
+                $result = $this->db->update($query);
+
+
+                // kiểm tra xem admin có thay đổi ảnh không
+                $file_name = $_FILES["image1"]['name'];
+                if(!empty($file_name)){
+                    //add image
+                    $this_product_id = $id;
+
+
+                    // xóa ảnh cũ
+                    $query = "DELETE FROM tbl_image_product where productId = '$this_product_id'";
+                    $result = $this->db->delete($query);
+                    // lay hinh anh
+                    for ($x = 1; $x < 5; $x++) {
+                      //Kiem tra hình ảnh và lấy hình ảnh cho vào folder upload======================================
+                        $permited  = array('jpg', 'jpeg', 'png', 'gif');
+                        $file_name = $_FILES["image".$x]['name'];
+                        $file_size = $_FILES["image".$x]['size'];
+                        $file_temp = $_FILES["image".$x]['tmp_name'];
+
+                        $div = explode('.', $file_name);
+                        $file_ext = strtolower(end($div));
+                        $unique_image = substr(md5(time()+$x), 0, 10).'.'.$file_ext;
+                        $uploaded_image = "../img/product/".$unique_image;
+                        //==============================================================================================
+
+                        if($file_name ==='')
+                        {
+                            $alert = "<span class='error'>Vui lòng nhập đầy đủ hình ảnh</span>";
+                            return $alert;
+                        }
+                        // uploads to folder
+                        move_uploaded_file($file_temp,$uploaded_image);
+                        $query = "INSERT INTO `tbl_image_product` ( `productId`, `image`) VALUES ( '$this_product_id', '$unique_image');";
+                        $result = $this->db->insert($query);
+                    }
+                }
+
+                $alert = "<span class='success'>Sửa sản phẩm thành công</span>";
+                return $alert;
+
+
+
+        }
+
+    }
+
+
+    public function delete_product($id) {
+        $query = "DELETE FROM tbl_product where productId = '$id'";
+            $result = $this->db->delete($query);
+            if($result){
+                $alert = "<span class='success'>Đã xóa sản phẩm</span>";
+                return $alert;
+            }else{
+                $alert = "<span class='error'>Có lỗi, vui lòng xóa lại</span>";
+                return $alert;
+            }
+    }
 
 
 

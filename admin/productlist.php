@@ -8,6 +8,14 @@
 	$product = new product();
 	$result = $product->show_product();
 
+//remove
+	if(isset($_GET['deleteid'])  && $_GET['deleteid'] != NULL) {
+		// lấy query param , không lấy được body parser 
+        $id = $_GET['deleteid'];
+        $delproduct = $product->delete_product($id);
+
+    }
+
 ?>
 <div id="layoutSidenav_content">
 
@@ -15,7 +23,11 @@
     	<div class="container-fluid px-4">
         	<h3 class="mt-4">Danh sách sản phẩm</h3>
         	<?php 
-        		// var_dump($result);
+        	if(isset($delproduct)){
+        	     header("Location:productlist.php");
+        		 echo $delproduct;
+
+        		}
         	?>
         	<!-- table -->
         	<div class="card mb-4">
@@ -39,7 +51,7 @@
                                             <th>Season</th>
                                             <th>Product description</th>
                                             <th>Image1</th>
-                                            
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <!-- <tfoot>
@@ -53,14 +65,14 @@
                                         </tr>
                                     </tfoot> -->
                                     <tbody>
-                                    	<?php 
-                                    		$no = 0;
-						                	if($result != false) { // tránh lỗi do ko có record nào
-							                	while($row = $result->fetch_assoc())
-							                		{
-							                			$no++;
-							                			$image_list = $product->getImgByProductId($row['productId']);
-						                 	?>
+                        	<?php 
+                        		$no = 0;
+			                	if($result != false) { // tránh lỗi do ko có record nào
+				                	while($row = $result->fetch_assoc())
+				                		{
+				                			$no++;
+				                			
+			                 	?>
                                         <tr>
                                             <td><?php echo $no ?></td>
                                             <td><?php echo $row['productName']; ?></td>
@@ -78,6 +90,7 @@
 
                                             	<!-- lấy 1 hình đại diện cho sản phẩm thôi -->
                                             	<?php 
+                                            		$image_list = $product->getImgByProductId($row['productId']);
 	                                            	while($i = $image_list->fetch_assoc())
 								                		{
 								                ?>
@@ -87,11 +100,17 @@
 												<?php		
 														break; } 	  
 												?>
-                                            		 
 
-                                        </tr>
-                                       		<?php } ?>
-										<?php } ?>
+
+											<td>
+												<a href="productedit.php?productId=<?php echo $row['productId'] ;?>">Edit</a> 
+						|| <a onclick="return confirm('Bạn có chắc chắn xóa?')"  href="?deleteid=<?php echo $row['productId'] ?>">Delete</a>
+											</td>
+
+
+							<?php } ?>
+						<?php } ?>	
+										</tr>
 
                                     </tbody>
                                 </table>
