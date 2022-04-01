@@ -712,6 +712,14 @@ progress {
         max-width: 1320px;
     }
 }
+
+.form-group{
+    display: flex;
+    align-items: flex-start;
+    margin: 10px 0px;
+    position: relative;
+}
+
 .row {
     --bs-gutter-x: 1.5rem;
     --bs-gutter-y: 0;
@@ -2211,6 +2219,7 @@ progress {
         -webkit-overflow-scrolling: touch;
     }
 }
+
 .form-label {
     margin-bottom: 0.5rem;
 }
