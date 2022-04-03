@@ -65,7 +65,7 @@
                             </a>
                             <div class="collapse" id="collapseLayouts4" aria-labelledby="headingOne" data-bs-parent="#collapseLayouts3">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.php">Danh sách Khách hàng</a>
+                                    <a class="nav-link" href="client.php">Danh sách Khách hàng</a>
 
                                 </nav>
                             </div>
