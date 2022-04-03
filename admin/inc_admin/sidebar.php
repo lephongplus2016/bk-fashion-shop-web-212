@@ -117,8 +117,8 @@
                             </a>
                             <div class="collapse" id="collapseLayouts8" aria-labelledby="headingOne" data-bs-parent="#collapseLayouts3">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.php">Thêm Tin Tức</a>
-                                    <a class="nav-link" href="layout-static.php">Danh sách Tin Tức</a>
+                                    <a class="nav-link" href="article-add.php">Thêm Tin Tức</a>
+                                    <a class="nav-link" href="article-list.php">Danh sách Tin Tức</a>
 
                                 </nav>
                             </div>
