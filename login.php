@@ -26,12 +26,12 @@
                                     <div class="card-body">
                                         <form action="" method="post">
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" name="email" />
                                                 <label for="inputEmail">Email address</label>
+                                                <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" name="email" />   
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputPassword" type="password" placeholder="Password" name="password" />
                                                 <label for="inputPassword">Password</label>
+                                                <input class="form-control" id="inputPassword" type="password" placeholder="Password" name="password" />
                                                 <br>
                                                 <input type="checkbox" onclick="hideShowPassword()">Show Password
                                             </div>
