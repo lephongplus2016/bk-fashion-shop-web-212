@@ -5,7 +5,15 @@
 <?php include '../classes/article.php'; 
     $article = new Article();
 	$list_article = $article->show_article();
+
+    if(isset($_GET['deleteId'])  && $_GET['deleteId'] != NULL) {
+        $id = $_GET['deleteId'];
+        $check = $article->delete_article($id);
+        echo "<script>window.location ='article-list.php'</script>";
+    }
 ?> 
+
+
 
 <div id="layoutSidenav_content">
     <main>
@@ -26,6 +34,7 @@
                                 <th>Tiêu đề</th>
                                 <th>Tác giả</th>
                                 <th>Ngày đăng</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -33,6 +42,7 @@
                                 <th>Tiêu đề</th>
                                 <th>Tác giả</th>
                                 <th>Ngày đăng</th>
+                                <th></th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -43,9 +53,11 @@
                                     {
                                         
                                         echo '<tr>';
-                                        echo '<th><a href="article-info.php?id='.$row["id"].'">'.$row["title"].'</a></th>';
-                                        echo '<th>'.$row["writer"].'</th>';
-                                        echo '<th>'.$row["datetime"].'</th>';
+                                        echo '<td>'.$row["title"].'</td>';
+                                        echo '<td>'.$row["writer"].'</td>';
+                                        echo '<td>'.$row["datetime"].'</td>';
+                                        echo '<td style="text-align:center;"><a class="link-primary" href="article-info.php?id='.$row["id"].'">Edit</a>
+                                         || <a class="link-danger" href="?deleteId='.$row["id"].'" onclick="return confirm(\'Bạn chắc chắn muốn xóa?\')">Delete</a></td>';
                                         echo '</tr>';
                                     }
                                 }
