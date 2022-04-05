@@ -2,7 +2,7 @@
 
 <?php include 'inc_admin/sidebar.php' ?>
 
-<?php include '../classes/product.php'; 
+<?php include '../classes/product.php' ; 
 	$product = new product();
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){ 
         $check = $product->insert_product($_POST, $_FILES);
@@ -18,8 +18,8 @@
             <h3 class="mt-4">Thêm sản phẩm</h3>
              <?php 
             if(isset($check)){
-                echo $check ;
-                // var_dump($check);
+                // echo $check ;
+                var_dump($check);
                 }
              ?>
 
