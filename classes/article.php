@@ -79,6 +79,14 @@ class Article
         else return false;
     }
 
+    public function getDetailsArticleById($id)
+    {
+        $query = "SELECT `tbl_article`.* , `tbl_image_article`.`image`
+                FROM `tbl_article` JOIN `tbl_image_article` ON `tbl_article`.`id` =`tbl_image_article`.`articleId`
+                WHERE `tbl_article`.`id` = '$id';";
+        return $this->db->select($query);
+    }
+
     public function update_article($data, $file, $id)
     {
         $title = mysqli_real_escape_string($this->db->link, $data['articleTitle']);
