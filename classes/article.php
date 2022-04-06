@@ -56,7 +56,9 @@ class Article
 
     public function show_article()
     {
-        $query = "SELECT `id`, `title`, `writer`, `datetime` FROM `tbl_article` ORDER BY id DESC;";
+        $query = "SELECT `tbl_article`.`id`, `title`, `writer`, `datetime`, `tbl_image_article`.`image`
+                FROM `tbl_article` JOIN `tbl_image_article` ON `tbl_article`.`id` =`tbl_image_article`.`articleId`
+                ORDER BY `tbl_article`.`id` DESC;";
         return $this->db->select($query);
     }
 

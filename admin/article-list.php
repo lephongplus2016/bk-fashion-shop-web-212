@@ -31,6 +31,7 @@
                     <table id="datatablesSimple">
                         <thead>
                             <tr>
+                                <th>Hình đại diện</th>
                                 <th>Tiêu đề</th>
                                 <th>Tác giả</th>
                                 <th>Ngày đăng</th>
@@ -39,6 +40,7 @@
                         </thead>
                         <tfoot>
                             <tr>
+                                <th>Hình đại diện</th>
                                 <th>Tiêu đề</th>
                                 <th>Tác giả</th>
                                 <th>Ngày đăng</th>
@@ -53,6 +55,7 @@
                                     {
                                         
                                         echo '<tr>';
+                                        echo '<td style="text-align:center; width: fit-content;"><img src="../img/article/'.$row["image"].'" alt="'.$row["image"].'" width = 60px"></td>';
                                         echo '<td>'.$row["title"].'</td>';
                                         echo '<td>'.$row["writer"].'</td>';
                                         echo '<td>'.$row["datetime"].'</td>';
