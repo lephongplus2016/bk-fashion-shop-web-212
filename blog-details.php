@@ -18,6 +18,11 @@
     else {
         $data = $article_details->fetch_assoc();
     }
+
+    echo '<script>
+        var temp = document.getElementsByTagName("title");
+        temp[0].innerHTML = "'.$data["title"].' - BK Fashion Shop";
+        </script>';
 ?>
 
     <!-- Blog Details Hero Begin -->

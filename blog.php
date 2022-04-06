@@ -7,6 +7,11 @@
     $article = new Article();
     $fm = new Format();
 	$list_article = $article->show_article();
+
+    echo '<script>
+        var temp = document.getElementsByTagName("title");
+        temp[0].innerHTML = "Blog - BK Fashion Shop";
+        </script>';
 ?> 
 
     <!-- Breadcrumb Section Begin -->
