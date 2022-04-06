@@ -35,7 +35,7 @@
                                 <th>Tiêu đề</th>
                                 <th>Tác giả</th>
                                 <th>Ngày đăng</th>
-                                <th></th>
+                                <th>Chỉnh sửa</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -44,7 +44,7 @@
                                 <th>Tiêu đề</th>
                                 <th>Tác giả</th>
                                 <th>Ngày đăng</th>
-                                <th></th>
+                                <th>Chỉnh sửa</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -55,12 +55,12 @@
                                     {
                                         
                                         echo '<tr>';
-                                        echo '<td style="text-align:center; width: fit-content;"><img src="../img/article/'.$row["image"].'" alt="'.$row["image"].'" width = 60px"></td>';
+                                        echo '<td style="text-align:center; width: fit-content;"><img src="../img/article/'.$row["image"].'" alt="'.$row["image"].'" width = 80px"></td>';
                                         echo '<td>'.$row["title"].'</td>';
                                         echo '<td>'.$row["writer"].'</td>';
                                         echo '<td>'.$row["datetime"].'</td>';
-                                        echo '<td style="text-align:center;"><a class="link-primary" href="article-info.php?id='.$row["id"].'">Edit</a>
-                                         || <a class="link-danger" href="?deleteId='.$row["id"].'" onclick="return confirm(\'Bạn chắc chắn muốn xóa?\')">Delete</a></td>';
+                                        echo '<td style="text-align:center;"><button class="btn btn-primary" onclick="location.assign(\'article-info.php?id='.$row["id"].'\');">Edit</Button>
+                                         <button class="btn btn-danger" onclick="if(confirm(\'Bạn chắc chắn muốn xóa?\')) location.assign(\'?deleteId='.$row["id"].'\');">Delete</button></td>';
                                         echo '</tr>';
                                     }
                                 }

@@ -36,7 +36,7 @@
 
 ?> 
 
-<script type="text/javascript">
+<script>
     
     function validate_article()
     {
