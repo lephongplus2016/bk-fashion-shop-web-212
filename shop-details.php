@@ -1,6 +1,17 @@
 <?php
     include 'inc/header.php';
 ?>
+<?php 
+
+    if(isset($_GET['productId'])  && $_GET['productId'] != NULL) {
+        $id = $_GET['productId'];
+    }
+    else{
+        // code mặc định trở về trang web cũ
+        echo "<script>window.location ='shop.php'</script>";
+    }   
+
+?>
 
     <!-- Shop Details Section Begin -->
     <section class="shop-details">
@@ -11,20 +22,32 @@
                         <div class="product__details__breadcrumb">
                             <a href="./index.php">Home</a>
                             <a href="./shop.php">Shop</a>
-                            <span>Product Details</span>
+                            <span>Chi tiết sản phẩm</span>
                         </div>
                     </div>
                 </div>
                 <div class="row">
+
                     <div class="col-lg-3 col-md-3">
                         <ul class="nav nav-tabs" role="tablist">
+<?php 
+    $image_list = $product->getImgByProductId($id);
+    $count =0;
+    while($i = $image_list->fetch_assoc())
+        {
+            $count++;
+?>
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">
-                                    <div class="product__thumb__pic set-bg" data-setbg="img/shop-details/thumb-1.png">
+                                <a class="nav-link <?php echo $count == 1  ?  'active' : ''; ?>" data-toggle="tab" href="#tabs-<?php echo $count; ?>" role="tab">
+                                    <div class="product__thumb__pic set-bg" data-setbg="img/product/<?php echo $i['image']; ?>">
                                     </div>
                                 </a>
                             </li>
-                            <li class="nav-item">
+<?php       
+        }     
+?>
+
+                            <!-- <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">
                                     <div class="product__thumb__pic set-bg" data-setbg="img/shop-details/thumb-2.png">
                                     </div>
@@ -42,17 +65,29 @@
                                         <i class="fa fa-play"></i>
                                     </div>
                                 </a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                     <div class="col-lg-6 col-md-9">
                         <div class="tab-content">
-                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+<?php 
+    $image_list = $product->getImgByProductId($id);
+    $count =0;
+    while($i = $image_list->fetch_assoc())
+        {
+            $count++;
+?>
+
+                            <div class="tab-pane <?php echo $count == 1  ?  'active' : ''; ?>" id="tabs-<?php echo $count; ?>" role="tabpanel">
                                 <div class="product__details__pic__item">
-                                    <img src="img/shop-details/product-big-2.png" alt="">
+                                    <img src="img/product/<?php echo $i['image']; ?>" alt="" style='width: 600px;'>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="tabs-2" role="tabpanel">
+<?php       
+            }     
+    ?>
+
+                         <!--    <div class="tab-pane" id="tabs-2" role="tabpanel">
                                 <div class="product__details__pic__item">
                                     <img src="img/shop-details/product-big-3.png" alt="">
                                 </div>
@@ -67,9 +102,11 @@
                                     <img src="img/shop-details/product-big-4.png" alt="">
                                     <a href="https://www.youtube.com/watch?v=8PJ3_p7VqHw&list=RD8PJ3_p7VqHw&start_radio=1" class="video-popup"><i class="fa fa-play"></i></a>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
+
+
                 </div>
             </div>
         </div>

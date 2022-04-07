@@ -13,6 +13,7 @@ spl_autoload_register(function($class){
     $db = new Database();
 	$fm = new Format();
     $user = new user();
+    $product = new product();
 
   header("Cache-Control: no-cache, must-revalidate");
   header("Pragma: no-cache"); 
