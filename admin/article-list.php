@@ -53,15 +53,15 @@
                                 {
                                     while($row = $list_article->fetch_assoc())
                                     {
-                                        
-                                        echo '<tr>';
-                                        echo '<td style="text-align:center; width: fit-content;"><img src="../img/article/'.$row["image"].'" alt="'.$row["image"].'" width = 80px"></td>';
-                                        echo '<td>'.$row["title"].'</td>';
-                                        echo '<td>'.$row["writer"].'</td>';
-                                        echo '<td>'.$row["datetime"].'</td>';
-                                        echo '<td style="text-align:center;"><button class="btn btn-primary" onclick="location.assign(\'article-info.php?id='.$row["id"].'\');">Edit</Button>
-                                         <button class="btn btn-danger" onclick="if(confirm(\'Bạn chắc chắn muốn xóa?\')) location.assign(\'?deleteId='.$row["id"].'\');">Delete</button></td>';
-                                        echo '</tr>';
+                                        echo '
+                                        <tr>
+                                            <td style="text-align:center; width: fit-content;"><img src="../img/article/'.$row["image"].'" alt="'.$row["image"].'" width = 80px"></td>
+                                            <td>'.$row["title"].'</td>
+                                            <td>'.$row["writer"].'</td>
+                                            <td>'.$row["datetime"].'</td>
+                                            <td style="text-align:center; magin:auto"><button class="btn btn-primary" onclick="location.assign(\'article-info.php?id='.$row["id"].'\');">Edit</Button>
+                                                <button class="btn btn-danger" onclick="openDeleteConfirm('.$row["id"].');">Delete</button></td>
+                                        </tr>';
                                     }
                                 }
                             ?>
@@ -73,5 +73,5 @@
     </main>
     
 </div>
-        
+     
 <?php include 'inc_admin/footer.php' ?>
