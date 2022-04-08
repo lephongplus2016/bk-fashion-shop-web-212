@@ -218,7 +218,17 @@ class product
         $query = "SELECT tbl_product.* , tbl_category.categoryName, tbl_brand.brandName FROM tbl_product INNER JOIN tbl_category ON tbl_product.categoryId = tbl_category.categoryId INNER JOIN tbl_brand ON tbl_product.brandId = tbl_brand.brandId WHERE tbl_product.productId =  '$id' ";
         $result = $this->db->select($query);
         return $result;
-        }
+    }
+
+
+    public function search_product($tukhoa){
+        // tìm kiếm thì luôn dùng like rồi
+            $tukhoa = $this->fm->validation($tukhoa);
+            $query = "SELECT * FROM tbl_product WHERE productName LIKE '%$tukhoa%'";
+            $result = $this->db->select($query);
+            return $result;
+
+    }
 
 }
 ?>

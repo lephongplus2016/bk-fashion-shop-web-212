@@ -1,18 +1,25 @@
 <?php
     include 'inc/header.php';
-   
 ?>
+<?php
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+        $tukhoa = $_POST['tukhoa'];
+        $search_product = $product->search_product($tukhoa);
+        
+    }
+?>
+
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-option">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__text">
-                        <h4>Shop</h4>
-                        <div class="breadcrumb__links">
-                            <a href="./index.php">Home</a>
-                            <span>Shop</span>
-                        </div>
+                        <h4>Từ khóa tìm kiếm:   &nbsp; <?php echo $tukhoa ?></h4>
+                        <h4>Tìm thấy:   &nbsp; <?php echo $search_product->num_rows; ?> </h4>
+
+                        
                     </div>
                 </div>
             </div>
@@ -20,16 +27,16 @@
     </section>
     <!-- Breadcrumb Section End -->
 
-    <!-- Shop Section Begin -->
-    <section class="shop spad">
+<section class="shop spad">
         <div class="container">
-            
-<?php
+
+            <!-- begin category and brand -->
+           <?php
     include 'inc/sidebar_in_shoppage.php';
    
 ?>
+         <!--end category and brand -->
 
-            <div class="row">
 
 <?php 
     $getProduct = $product->show_product();
@@ -42,9 +49,7 @@
                     break;
                 }
 ?>
-
-
-                    
+ 
 
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
@@ -91,26 +96,9 @@
 ?>
 
         </div>
+    </div>
+</section>    
 
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="product__pagination">
-                                <a class="active" href="#">1</a>
-                                <a href="#">2</a>
-                                <a href="#">3</a>
-                                <span>...</span>
-                                <a href="#">21</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Shop Section End -->
-
-  <?php
+<?php
     include 'inc/footer.php';
 ?>
-
-   
