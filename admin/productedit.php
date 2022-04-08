@@ -16,7 +16,7 @@
 	$product = new product();
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){ 
          $check = $product->update_product($_POST, $_FILES,$id);
-
+        //  echo '<script>alert("'.$check.'")</script>';
     }
 ?> 
 

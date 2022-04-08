@@ -150,7 +150,6 @@ class product
                 WHERE productId = '$id'" ;
                 $result = $this->db->update($query);
 
-
                 // kiểm tra xem admin có thay đổi ảnh không
                 $file_name = $_FILES["image1"]['name'];
                 if(!empty($file_name)){
