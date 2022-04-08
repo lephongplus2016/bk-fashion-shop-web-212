@@ -4,6 +4,10 @@
            <?php include '../classes/user.php'; 
             $user = new user();
             $result = $user->show_user();
+            if(isset($_GET['deleteid'])  && $_GET['deleteid'] != NULL) {
+                $userId = $_GET['deleteid'];
+                $delUser = $user->delete_user($userId);
+            }
             ?>
             <div id="layoutSidenav_content">
                 <main>
@@ -18,6 +22,7 @@
                                 <th>Address</th>
                                 <th>Phone</th>
                                 <th>Role</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -31,7 +36,23 @@
                                         <td>'.$row['email'].'</td>
                                         <td>'.$row['address'].'</td>
                                         <td>'.$row['phone'].'</td>
-                                        <td>'.$row['role'].'</td>
+                                        <td>
+                                        <select id = "dropdown">';
+                                        if($row['role'] == 'customer'){
+                                            echo '<option value="customer" selected>customer</option>
+                                            <option value="admin">admin</option>';
+                                        } 
+                                        else
+                                        {
+                                            echo '<option value="admin" selected>admin</option>
+                                            <option value="customer">customer</option>';
+                                        }
+                                    echo '</select>
+                                        </td>
+                                        <td>
+                                        <a href="clientEdit.php?userId='.$row['userId'].'">Edit</a> 
+                                        || <a onclick="return confirm('.'"Bạn có chắc chắn xóa?"'.')"  href="?deleteid='.$row['userId'].'">Delete</a>
+                                        </td>
                                         </tr>';
                                         $stt++;
                                     }

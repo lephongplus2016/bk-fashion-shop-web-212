@@ -2,17 +2,6 @@
 
 <?php include 'inc_admin/sidebar.php' ?>
 
-<?php include '../classes/article.php'; 
-	$article = new Article();
-    if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){ 
-        $check = $article->insert_article($_POST, $_FILES);
-        if ( $check === true){
-            echo "<script>alert('Đã đăng tải bài viết!'); window.location ='article-list.php';</script>";
-        }
-        else echo "<script>alert('Đã có lỗi xảy ra! Mã: ".$check."')</script>";
-    }
-?> 
-
 <script type="text/javascript">
     
     function validate_article()
@@ -94,9 +83,8 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="submit" class="col-sm-2 col-form-label"></label>
-                            <div class="col-sm-6">
-                                <button type="submit" class="btn btn-primary" name="submit">Đăng bài</button>
+                            <div class="col-sm-2 offset-4">
+                                <button type="submit" class="btn btn-primary" name="submit" style="width:100%">Đăng bài</button>
                             </div>
                         </div>
                     </form> 
@@ -128,6 +116,19 @@
         });
     });
 
+    action = "Đã đăng tải bài viết!";
+    setNotificationDialog(action);
 </script>
+
+<?php include '../classes/article.php'; 
+	$article = new Article();
+    if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){ 
+        $check = $article->insert_article($_POST, $_FILES);
+        if ( $check === true){
+            echo "<script>openNotification(()=>{window.location ='article-list.php'}); </script>";
+        }
+        else echo "<script>alert('Đã có lỗi xảy ra! Mã: ".$check."')</script>";
+    }
+?> 
         
 <?php include 'inc_admin/footer.php' ?>

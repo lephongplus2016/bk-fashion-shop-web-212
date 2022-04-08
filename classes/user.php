@@ -90,7 +90,48 @@ class user
                 }
             }
         }
+        public function getUserById($id) {
+            $query ="SELECT * FROM tbl_user WHERE userId = '$id' ORDER BY userId DESC";
+            $result = $this->db->select($query);
+            return $result;
+        }
 
+
+        public function update_user($data, $file, $userId){
+            $userName = mysqli_real_escape_string($this->db->link, $data['userName']);
+            $userMail = mysqli_real_escape_string($this->db->link, $data['userMail']);
+            $userAdress = mysqli_real_escape_string($this->db->link, $data['userAdress']);
+            $userPhone = mysqli_real_escape_string($this->db->link, $data['userPhone']);
+            $role = mysqli_real_escape_string($this->db->link, $data['role']);
+            if($userName=="" || $userMail=="" || $userAdress=="" || $userPhone==""){
+                    $alert = "<span class='error'>Các trường không được rỗng</span>";
+                    return $alert;
+            }
+            else{
+                    $query =  "UPDATE `tbl_user` SET 
+                    `name` = '$userName', 
+                    `email`= '$userMail', 
+                    `address` = '$userAdress', 
+                    `phone`= '$userPhone', 
+                    `role` = '$role'
+                    WHERE userId = '$userId'" ;
+                    $result = $this->db->update($query);
+                    $alert = "<span class='success'>Sửa thông tin thành công</span>";
+                    return $alert;
+            }
+            
+        }
+        public function delete_user($userId) {
+            $query = "DELETE FROM tbl_user where userId = '$userId'";
+                $result = $this->db->delete($query);
+                if($result){
+                    $alert = "<span class='success'>Đã xóa người dùng</span>";
+                    return $alert;
+                }else{
+                    $alert = "<span class='error'>Có lỗi, vui lòng xóa lại</span>";
+                    return $alert;
+                }
+        }
 
 
 
