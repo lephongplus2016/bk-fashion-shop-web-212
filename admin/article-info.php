@@ -122,9 +122,11 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="submit" class="col-sm-2 col-form-label"></label>
-                            <div class="col-sm-6">
-                                <button type="submit" class="btn btn-success" name="submit">Cập nhật</button>
+                            <div class="col-sm-2 offset-2">
+                                <button type="submit" class="btn btn-success" name="submit" style="width:100%">Cập nhật</button>
+                            </div>
+                            <div class="col-sm-2 offset-1">
+                                <button type="button" class="btn btn-outline-success" onclick="window.location ='article-list.php'" style="width:100%">Thoát</button>
                             </div>
                         </div>
                     </form> 

@@ -57,8 +57,8 @@
                                             <td>'.$row["title"].'</td>
                                             <td>'.$row["writer"].'</td>
                                             <td>'.$row["datetime"].'</td>
-                                            <td style="text-align:center"><button style="margin:2px auto" class="btn btn-primary" onclick="location.assign(\'article-info.php?id='.$row["id"].'\');">Edit</Button>
-                                                <button style="margin:2px auto" class="btn btn-danger" onclick="openDeleteConfirm(()=>{location.assign(\'?deleteId='.$row["id"].'\')});">Delete</button></td>
+                                            <td style="text-align:center"><button style="margin:2px auto" class="btn btn-outline-primary" onclick="location.assign(\'article-info.php?id='.$row["id"].'\');">Edit</Button>
+                                                <button style="margin:2px auto" class="btn btn-outline-danger" onclick="openDeleteConfirm(()=>{location.assign(\'?deleteId='.$row["id"].'\')});">Delete</button></td>
                                         </tr>';
                                     }
                                 }

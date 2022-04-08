@@ -83,9 +83,8 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="submit" class="col-sm-2 col-form-label"></label>
-                            <div class="col-sm-6">
-                                <button type="submit" class="btn btn-primary" name="submit">Đăng bài</button>
+                            <div class="col-sm-2 offset-4">
+                                <button type="submit" class="btn btn-primary" name="submit" style="width:100%">Đăng bài</button>
                             </div>
                         </div>
                     </form> 
