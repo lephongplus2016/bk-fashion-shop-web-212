@@ -210,8 +210,16 @@ class product
     }
 
 
+    // END ADMIN ==================================================================================================
+    // BEGIN SHOP PAGE   =========================================================================================
 
 
+    public function getProductDetailShopPage($id) {
+
+        $query = "SELECT tbl_product.* , tbl_category.categoryName, tbl_brand.brandName FROM tbl_product INNER JOIN tbl_category ON tbl_product.categoryId = tbl_category.categoryId INNER JOIN tbl_brand ON tbl_product.brandId = tbl_brand.brandId WHERE tbl_product.productId =  '$id' ";
+        $result = $this->db->select($query);
+        return $result;
+        }
 
 }
 ?>
