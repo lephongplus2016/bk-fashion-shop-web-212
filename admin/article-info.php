@@ -12,14 +12,6 @@
     }   
 
 	$article = new Article();
-    if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){ 
-        $check = $article->update_article($_POST, $_FILES, $id);
-        if($check === true){
-            echo "<script>alert('Đã cập nhật bài viết!');window.location ='article-list.php';</script>";
-        }
-        else echo "<script>alert('Đã có lỗi xảy ra! Mã: ".$check."')</script>";
-    }
-
     $getArticle = $article->getArticleById($id);
     if ($getArticle === false){
         echo "<script>alert('Lấy dữ liệu bị lỗi. Trở lại trang chủ'); window.location ='index.php'</script>";
@@ -163,6 +155,18 @@
             img.alt = file.name;
         });
     });
+    action = "Đã cập nhật bài viết!";
+    setNotificationDialog(action);
 </script>
+
+<?php
+    if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){ 
+        $check = $article->update_article($_POST, $_FILES, $id);
+        if($check === true){
+            echo "<script>openNotification(()=>{window.location ='article-list.php'});</script>";
+        }
+        else echo "<script>alert('Đã có lỗi xảy ra! Mã: ".$check."')</script>";
+    }
+?>
         
 <?php include 'inc_admin/footer.php' ?>

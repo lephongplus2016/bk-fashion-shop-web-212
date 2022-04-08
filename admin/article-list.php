@@ -13,8 +13,6 @@
     }
 ?> 
 
-
-
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid px-4">
@@ -59,8 +57,8 @@
                                             <td>'.$row["title"].'</td>
                                             <td>'.$row["writer"].'</td>
                                             <td>'.$row["datetime"].'</td>
-                                            <td style="text-align:center; magin:auto"><button class="btn btn-primary" onclick="location.assign(\'article-info.php?id='.$row["id"].'\');">Edit</Button>
-                                                <button class="btn btn-danger" onclick="openDeleteConfirm('.$row["id"].');">Delete</button></td>
+                                            <td style="text-align:center"><button style="margin:2px auto" class="btn btn-primary" onclick="location.assign(\'article-info.php?id='.$row["id"].'\');">Edit</Button>
+                                                <button style="margin:2px auto" class="btn btn-danger" onclick="openDeleteConfirm(()=>{location.assign(\'?deleteId='.$row["id"].'\')});">Delete</button></td>
                                         </tr>';
                                     }
                                 }
@@ -73,5 +71,11 @@
     </main>
     
 </div>
+
+<script>
+    title = "Delete";
+    message = "Bạn có chắc chắn muốn xóa dòng này?"
+    setConfirmDialog(title, message);
+</script>
      
 <?php include 'inc_admin/footer.php' ?>
