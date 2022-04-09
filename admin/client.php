@@ -13,6 +13,13 @@
                 <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Quản Lý Khách Hàng</h1>
+                                <?php 
+                                if(isset($delUser)){
+                                echo "<script>window.location ='client.php'</script>";
+
+                                echo $delUser;
+                        }
+                    ?>
                         <table id="datatablesSimple">
                             <thead>
                             <tr>
@@ -36,22 +43,10 @@
                                         <td>'.$row['email'].'</td>
                                         <td>'.$row['address'].'</td>
                                         <td>'.$row['phone'].'</td>
-                                        <td>
-                                        <select id = "dropdown">';
-                                        if($row['role'] == 'customer'){
-                                            echo '<option value="customer" selected>customer</option>
-                                            <option value="admin">admin</option>';
-                                        } 
-                                        else
-                                        {
-                                            echo '<option value="admin" selected>admin</option>
-                                            <option value="customer">customer</option>';
-                                        }
-                                    echo '</select>
-                                        </td>
+                                        <td>'.$row['role'].'</td>
                                         <td>
                                         <a href="clientEdit.php?userId='.$row['userId'].'">Edit</a> 
-                                        || <a onclick="return confirm('.'"Bạn có chắc chắn xóa?"'.')"  href="?deleteid='.$row['userId'].'">Delete</a>
+                                        || <a onclick="return confirm(\'Bạn có chắc chắn xóa?\')"  href="?deleteid='.$row['userId'].'">Delete</a>
                                         </td>
                                         </tr>';
                                         $stt++;
