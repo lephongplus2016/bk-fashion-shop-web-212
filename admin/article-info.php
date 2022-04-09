@@ -12,14 +12,6 @@
     }   
 
 	$article = new Article();
-    if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){ 
-        $check = $article->update_article($_POST, $_FILES, $id);
-        if($check === true){
-            echo "<script>alert('Đã cập nhật bài viết!');window.location ='article-list.php';</script>";
-        }
-        else echo "<script>alert('Đã có lỗi xảy ra! Mã: ".$check."')</script>";
-    }
-
     $getArticle = $article->getArticleById($id);
     if ($getArticle === false){
         echo "<script>alert('Lấy dữ liệu bị lỗi. Trở lại trang chủ'); window.location ='index.php'</script>";
@@ -130,9 +122,11 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="submit" class="col-sm-2 col-form-label"></label>
-                            <div class="col-sm-6">
-                                <button type="submit" class="btn btn-success" name="submit">Cập nhật</button>
+                            <div class="col-sm-2 offset-sm-2" style="margin-bottom:0.6em;">
+                                <button type="submit" class="btn btn-success" name="submit" style="width:100%">Cập nhật</button>
+                            </div>
+                            <div class="col-sm-2 offset-sm-1">
+                                <button type="button" class="btn btn-outline-success" onclick="window.location ='article-list.php'" style="width:100%">Thoát</button>
                             </div>
                         </div>
                     </form> 
@@ -163,6 +157,18 @@
             img.alt = file.name;
         });
     });
+    action = "Đã cập nhật bài viết!";
+    setNotificationDialog(action);
 </script>
+
+<?php
+    if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){ 
+        $check = $article->update_article($_POST, $_FILES, $id);
+        if($check === true){
+            echo "<script>openNotification(()=>{window.location ='article-list.php'});</script>";
+        }
+        else echo "<script>alert('Đã có lỗi xảy ra! Mã: ".$check."')</script>";
+    }
+?>
         
 <?php include 'inc_admin/footer.php' ?>
