@@ -2,9 +2,9 @@
 <?php include 'inc_admin/sidebar.php' ?>
 <?php include '../classes/brand.php' ;
 	$brand = new brand();
-	if(isset($_GET['delid'])  && $_GET['delid'] != NULL) {
+	if(isset($_GET['deleteid'])  && $_GET['deleteid'] != NULL) {
 		// lấy query param , không lấy được body parser 
-        $id = $_GET['delid'];
+        $id = $_GET['deleteid'];
         $check = $brand->deleteBrand($id);
     }      
 ?>
