@@ -36,8 +36,8 @@
                             </a>
                             <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne" data-bs-parent="#collapseLayouts2">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.php">Thêm Danh mục</a>
-                                    <a class="nav-link" href="layout-static.php">Danh sách danh mục</a>
+                                    <a class="nav-link" href="categoryadd.php">Thêm Danh mục</a>
+                                    <a class="nav-link" href="categorylist.php">Danh sách danh mục</a>
 
                                 </nav>
                             </div>
@@ -51,8 +51,8 @@
                             </a>
                             <div class="collapse" id="collapseLayouts3" aria-labelledby="headingOne" data-bs-parent="#collapseLayouts3">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.php">Thêm Thương hiệu</a>
-                                    <a class="nav-link" href="layout-static.php">Danh sách thương hiệu</a>
+                                    <a class="nav-link" href="brandadd.php">Thêm Thương hiệu</a>
+                                    <a class="nav-link" href="brandlist.php">Danh sách thương hiệu</a>
 
                                 </nav>
                             </div>
