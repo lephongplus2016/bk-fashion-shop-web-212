@@ -31,14 +31,13 @@ class brand
 // tuy nhiên trong lệnh select này thì ko có vẫn chạy
 // $this->db->link chính là connection db được định nghĩa trong database.php		
 		$name = mysqli_real_escape_string($this->db->link, $name);
-		$id = rand(100000,999999);
 		if(empty($name)){
 			$alert = '<span class="error">Brand name must be filled</span>';
 			return $alert;
 		}
 		else{
 			// php ko cho dùng query có ``
-			$query ="INSERT INTO tbl_brand VALUES ('$id','$name')";
+			$query ="INSERT INTO tbl_brand(brandName) VALUES ('$name')";
 
 			// lệnh insert đã được viết sẵn trong database.php
 				$result = $this->db->insert($query);
