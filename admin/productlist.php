@@ -13,7 +13,6 @@
 		// lấy query param , không lấy được body parser 
         $id = $_GET['deleteid'];
         $delproduct = $product->delete_product($id);
-
     }
 
 ?>
