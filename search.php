@@ -37,11 +37,10 @@
 ?>
          <!--end category and brand -->
 
-
+        <div class="row">
 <?php 
-    $getProduct = $product->show_product();
-    if($getProduct){
-        while($row = $getProduct->fetch_assoc()){
+    if($search_product){
+        while($row = $search_product->fetch_assoc()){
             $image_list = $product->getImgByProductId($row['productId']);
             while($i = $image_list->fetch_assoc())
                 {
@@ -96,6 +95,7 @@
 ?>
 
         </div>
+    </div>
     </div>
 </section>    
 

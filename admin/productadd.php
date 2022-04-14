@@ -2,8 +2,14 @@
 
 <?php include 'inc_admin/sidebar.php' ?>
 
+<?php include '../classes/category.php'; ?>
+
+<?php include '../classes/brand.php'; ?>
+
 <?php include '../classes/product.php' ; 
 	$product = new product();
+	$category = new category();
+    $brand = new brand();
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){ 
         $check = $product->insert_product($_POST, $_FILES);
         // láy tất cả trường id của post, files để lấy hình ảnh
@@ -18,8 +24,8 @@
             <h3 class="mt-4">Thêm sản phẩm</h3>
              <?php 
             if(isset($check)){
-                // echo $check ;
-                var_dump($check);
+                echo $check ;
+                // var_dump($check);
                 }
              ?>
 
@@ -36,8 +42,14 @@
 		          	<div class="col-sm-4">
 		          		<select id="select" name="category"  class="form-control">
 	                            <option>Select Category</option>
-	                            <option value="1" >Áo</option>
-	                            <option value="0">Quần</option>
+	                            <?php $catlist = $category->showCategory(); 
+                                if($catlist != false) { 
+                                    while ($row = $catlist->fetch_assoc()) { ?>
+                                                           
+                            <option value="<?php echo $row['categoryId']; ?>"><?php echo $row['categoryName']; ?></option>
+
+                           <?php    }  ?>   
+                          <?php }   ?>  
 	                        </select>
 		          	</div>
 	           </div>
@@ -47,8 +59,15 @@
 		          	<div class="col-sm-4">
 		          		<select id="select" name="brand"  class="form-control">
 	                            <option>Select Brand</option>
-	                            <option value="1" >Kappa</option>
-	                            <option value="0">Nike</option>
+	                            <?php $brandlist = $brand->showBrand(); 
+                                if($catlist != false) { 
+                                    while ($row = $brandlist->fetch_assoc()) { ?>
+                                                           
+                            <option value="<?php echo $row['brandId']; ?>"><?php echo $row['brandName']; ?></option>
+
+                           <?php    }  ?>   
+                          <?php }   ?>   
+
 	                        </select>
 		          	</div>
 	           </div>
@@ -114,13 +133,26 @@
 	          <div class="form-group row">
 		          	<label for="productname" class="col-sm-2 col-form-label">Image (4 images)</label>
 				    <div class="col-sm-6">
-				      <input type="file" name="image1" />
+				      <input type="file" name="image1" id="image1" />
 				      <br>
-				      <input type="file" name="image2" />
+				      <div style="padding-top: 5px;">
+                                    <img id="upload-img1" style="max-width: 50%">
+                                </div>
+				      <input type="file" name="image2" id="image2"/>
 				      <br>
-				      <input type="file" name="image3" />
+				      <div style="padding-top: 5px;">
+                                    <img id="upload-img2" style="max-width: 50%">
+                                </div>
+				      <input type="file" name="image3" id="image3"/>
 				      <br>
-				      <input type="file" name="image4" />
+				      <div style="padding-top: 5px;">
+                                    <img id="upload-img3" style="max-width: 50%">
+                                </div>
+				      <input type="file" name="image4" id="image4"/>
+				      <br>
+				      <div style="padding-top: 5px;">
+                                    <img id="upload-img4" style="max-width: 50%">
+                                </div>
 				    </div>
 	          </div>
 
@@ -135,6 +167,30 @@
 	</main>
     
 </div>
+
+<script>
+
+for(let i=1;i<5;i++){
+	const fileUploader = document.getElementById(`image${i}`);
+    const reader = new FileReader();
+    fileUploader.addEventListener('change', (event) => {
+        const files = event.target.files;
+        const file = files[0];
+        reader.readAsDataURL(file);
+        
+        reader.addEventListener('load', (event) => {
+            img = document.getElementById(`upload-img${i}`);
+            img.src = event.target.result;
+            img.alt = file.name;
+        });
+    });
+}    
+
+    
+
+   
+</script>
+
 
 <?php include 'inc_admin/footer.php' ?>
 
