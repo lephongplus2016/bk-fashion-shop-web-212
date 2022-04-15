@@ -1,6 +1,18 @@
 <?php
     include 'inc/header.php';
 ?>
+<?php include 'classes/comment.php';
+$comment = new comment();
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
+    // echo '<pre>'; print_r($_FILES); echo '</pre>';
+
+    $check = $comment->insert_comment($_POST, $_FILES, $_GET["productId"]);
+    echo $check;
+}
+
+?>
+
+
 <?php 
 
     if(isset($_GET['productId'])  && $_GET['productId'] != NULL) {
@@ -9,10 +21,10 @@
     else{
         // code mặc định trở về trang web cũ
         echo "<script>window.location ='shop.php'</script>";
-    }   
+    }
+    
 
 ?>
-
     <!-- Shop Details Section Begin -->
     <section class="shop-details">
         <div class="product__details__pic">
@@ -86,7 +98,47 @@
 
 
  ?>
-
+        <style>
+            .container-commented-contented {
+                margin-top: 50px;
+            }
+            .in4-comment-user {
+                display: flex;
+                height: 180px;
+                margin-bottom: 20px;
+                border-bottom: 1px solid rgba(0,0,0,.09);
+            }
+            .img-user-comment {
+                height: 40px;
+                flex-basis: 5%;
+                margin-right: 10px;
+            }
+            .img-user-comment img {
+                border-radius: 50%;
+                width: 40px;
+                height: 100%;
+                object-fit: cover;
+            }
+            .content-main {
+                flex-basis: 75%;
+            }
+            .img-commented img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .date-commented {
+                font-size: 12px;
+            }
+            .comments-from-users {
+                font-size: 18px;
+                background: rgba(0,0,0,.02);
+                color: rgba(0,0,0,.87);
+                padding: 0.875rem;
+                text-transform: capitalize;
+                margin-bottom: 20px;
+            }
+        </style>
         <div class="product__details__content">
             <div class="container">
                 <div class="row d-flex justify-content-center">
@@ -190,7 +242,18 @@
                                     role="tab">Chi tiết</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#tabs-6" role="tab">Đánh giá của khách hàng(5)</a>
+                                                <?php 
+                                                $n = 0;
+                                                    $comments = $comment->getImgByCommentProductId($_GET["productId"]);
+                                                    if($comments != false) {
+                                                    while($i = $comments->fetch_assoc())
+								                		{
+                                                            $n++;
+														}
+                                                    } 	  
+												
+                                    echo '<a class="nav-link" data-toggle="tab" href="#tabs-6" role="tab">Đánh giá của khách hàng('.$n.')</a>';
+                                    ?>
                                 </li>
                                
                             </ul>
@@ -236,10 +299,54 @@
                                             worn all year round.</p>
                                         </div>
                                     </div>
+                                    <form action="" method = "POST" style = "margin-top: 40px;" enctype="multipart/form-data">
+                                    <div class="form-floating">
+                                        <label for="floatingTextarea2">Bình Luận sản phẩm</label>
+                                        <div class="form-floating">
+                                        <textarea class="form-control" placeholder="Bình luận..." id="floatingTextarea2" name = "content" style="height: 100px"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-floating" style = "margin-top: 10px;">
+                                        <label for="productname">Ảnh sản phẩm</label>
+                                        <div class="col-sm-6">
+                                            <input type="file" name="image1" id="image1" />
+                                            <br>
+                                            <div style="padding-top: 5px;">
+                                            <img id="upload-img1" style="max-width: 50%">
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <button style = "margin-top: 10px;" type="submit" name = "submit" class="btn btn-primary">Gửi Bình Luận</button>
+                                    </form>
+                                    <div class="container-commented-contented">
+                                    <h2 class="comments-from-users">Đánh giá sản phẩm</h2>
+                                        <?php 
+                                                    $comments = $comment->getImgByCommentProductId($_GET["productId"]);
+                                                    if($comments != false) {
+                                                    while($i = $comments->fetch_assoc())
+								                		{
+                                                            ?>
+                                                            <div class = "in4-comment-user">
+                                                                <div class = "img-user-comment">
+                                                                <img src="img/avatar.jpg" alt="">
+                                                                </div>
+                                                            <div class = "content-main">
+                                                                <?=Session::get("user_name")?>
+                                                                <p class="date-commented">Vào lúc: <?=$i['dateComment']?></p>
+                                                                <p class="content-commented"><?=$i['content']?></p>
+                                                            </div>
+                                                            <?php if($i['image']!=""){ 
+                                                                echo '<div class="img-commented">
+                                                                    <img src="img/comment/'.$i['image'].'" alt="">
+                                                                    </div>';
+                                                                    }?>
+                                                            </div>
+                                                            <?php
+														}
+                                                    } 	  
+												?>
+                                        </div>
                                 </div>
-                               
-
-
                             </div>
                         </div>
                     </div>
@@ -406,7 +513,26 @@
         </div>
     </section>
     <!-- Related Section End -->
+    <script>
 
+	const fileUploader = document.getElementById(`image1`);
+    const reader = new FileReader();
+    fileUploader.addEventListener('change', (event) => {
+        const files = event.target.files;
+        const file = files[0];
+        reader.readAsDataURL(file);
+        
+        reader.addEventListener('load', (event) => {
+            img = document.getElementById(`upload-img1`);
+            img.src = event.target.result;
+            img.alt = file.name;
+        });
+    });   
+
+    
+
+   
+</script>
 <?php
     include 'inc/footer.php';
 ?>

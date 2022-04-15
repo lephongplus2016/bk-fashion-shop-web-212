@@ -74,7 +74,6 @@ class product
                     $unique_image = substr(md5(time()+$x), 0, 10).'.'.$file_ext;
                     $uploaded_image = "../img/product/".$unique_image;
                     //==============================================================================================
-
                     
                     // uploads to folder
                     move_uploaded_file($file_temp,$uploaded_image);
