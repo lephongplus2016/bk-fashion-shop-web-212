@@ -50,5 +50,10 @@ class comment
         $result = $this->db->select($query);
         return $result;
     }
+    public function getNameUserComment($userId) {
+        $query = "SELECT * FROM `tbl_user` WHERE userId = '$userId'";
+        $result = $this->db->select($query);
+        return $result;
+    }
 }
 ?>

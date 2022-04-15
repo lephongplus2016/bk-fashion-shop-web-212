@@ -248,7 +248,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
                                                     if($comments != false) {
                                                     while($i = $comments->fetch_assoc())
 								                		{
+                                                    $nameUser = $comment->getNameUserComment($i['userId']);
+                                                    if($nameUser!= false){
                                                             $n++;
+                                                            }
 														}
                                                     } 	  
 												
@@ -324,14 +327,20 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
                                                     $comments = $comment->getImgByCommentProductId($_GET["productId"]);
                                                     if($comments != false) {
                                                     while($i = $comments->fetch_assoc())
-								                		{
+								                	{
+                                                    $nameUser = $comment->getNameUserComment($i['userId']);
+                                                    if($nameUser!=false){
                                                             ?>
                                                             <div class = "in4-comment-user">
                                                                 <div class = "img-user-comment">
                                                                 <img src="img/avatar.jpg" alt="">
                                                                 </div>
-                                                            <div class = "content-main">
-                                                                <?=Session::get("user_name")?>
+                                                                <div class = "content-main">
+                                                                <?php
+                                                                while($m = $nameUser->fetch_assoc()){
+                                                                    echo $m['name'];
+                                                                }
+                                                                ?>
                                                                 <p class="date-commented">Vào lúc: <?=$i['dateComment']?></p>
                                                                 <p class="content-commented"><?=$i['content']?></p>
                                                             </div>
@@ -343,7 +352,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
                                                             </div>
                                                             <?php
 														}
-                                                    } 	  
+                                                    }
+                                                } 	  
 												?>
                                         </div>
                                 </div>
