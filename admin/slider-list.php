@@ -55,13 +55,25 @@
                                     {
                                         echo '
                                         <tr>
-                                            <td style="text-align:center; width: fit-content;"><img src="../img/hero/'.$row["sliderImage"].'" alt="'.$row["sliderImage"].'" width = 80px"></td>
+                                            <td class="text-center"><img src="../img/hero/'.$row["sliderImage"].'" alt="'.$row["sliderImage"].'" width = 80px"></td>
                                             <td>'.$row["collectionName"].'</td>
                                             <td>'.$row["sliderName"].'</td>
                                             <td>'.$row["description"].'</td>
-                                            <td>'.$row["status"].'</td>
-                                            <td style="text-align:center"><button style="margin:2px auto" class="btn btn-outline-primary" onclick="location.assign(\'slider-edit.php?id='.$row["id"].'\');">Edit</Button>
-                                                <button style="margin:2px auto" class="btn btn-outline-danger" onclick="openDeleteConfirm(()=>{location.assign(\'?deleteId='.$row["id"].'\')});">Delete</button></td>
+                                            <td class="text-center">
+                                                <div class="form-check form-switch text-center">';
+                                                if ($row["status"]){
+                                                    echo '<input class="form-check-input" type="checkbox" role="switch" id="mode'.$row["id"].'" name="status" checked onchange="switchChange('.$row["id"].', this.checked)">
+                                                    <label class="form-check-label" for="mode" id="labelswitch'.$row["id"].'">Bật</label>';
+                                                }
+                                                else echo '<input class="form-check-input" type="checkbox" role="switch" id="mode'.$row["id"].'" name="status" onchange="switchChange('.$row["id"].', this.checked)">
+                                                    <label class="form-check-label" for="mode" id="labelswitch'.$row["id"].'">Tắt</label>';
+                                        echo '
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                <button class="btn btn-outline-primary my-1" onclick="location.assign(\'slider-edit.php?id='.$row["id"].'\');">Edit</Button>
+                                                <button class="btn btn-outline-danger my-1" onclick="openDeleteConfirm(()=>{location.assign(\'?deleteId='.$row["id"].'\')});">Delete</button>
+                                            </td>
                                         </tr>';
                                     }
                                 }
@@ -79,6 +91,23 @@
     title = "Delete";
     message = "Bạn có chắc chắn muốn xóa dòng này?"
     setConfirmDialog(title, message);
+
+    function switchChange(num, check){
+        $.post('slider-switch.php',
+        {
+            id: num,
+            status: check
+        },
+        function(result){
+            if(Number(result) > 0)
+            {
+                $(`#labelswitch${num}`).text((check)?"Bật":"Tắt");
+            }
+            else {
+                alert("Có lỗi xảy ra!");
+            }
+        });
+    }
 </script>
      
 <?php include 'inc_admin/footer.php' ?>

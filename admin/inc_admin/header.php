@@ -23,6 +23,8 @@
         <!-- add popup -->
         <link rel="stylesheet" href="css/popup.css">
         <script src="js/popup.js"></script>
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
         <style type="text/css">
             span.error

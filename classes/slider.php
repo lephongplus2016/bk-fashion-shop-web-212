@@ -142,4 +142,13 @@ class Slider
         if ($this->db->delete($query) === false) return $this->db->error;
         return true;
     }
+
+    public function changeStatus($id, $status)
+    {   
+        if ($status==="true") $temp = 1;
+        else $temp = 0;
+        $query = "UPDATE `tbl_slider` SET `status`='$temp' WHERE `id` = '$id';";
+        if ($this->db->update($query) === false) return false;
+        return true;
+    }
 }
