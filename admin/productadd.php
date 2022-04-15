@@ -11,6 +11,8 @@
 	$category = new category();
     $brand = new brand();
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){ 
+		// echo '<pre>'; print_r($_FILES); echo '</pre>';
+
         $check = $product->insert_product($_POST, $_FILES);
         // láy tất cả trường id của post, files để lấy hình ảnh
 
