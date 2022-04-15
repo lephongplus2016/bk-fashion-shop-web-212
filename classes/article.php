@@ -22,7 +22,7 @@ class Article
         $content = mysqli_real_escape_string($this->db->link, $data['contents']);
 
         if (trim($title) == "" || trim($author) == ""){
-            return "Để trống các trường bắt buộc";
+            return "Chưa điền các trường bắt buộc";
         }
         if (isset($file["img"]) && $file["img"]['error'] <= 0){
             $file_name = $file["img"]['name'];
@@ -32,7 +32,7 @@ class Article
             $file_ext = strtolower(end($div));
 
             if(in_array($file_ext, $permited) === false){
-                return "Đuôi file không hợp lệ";
+                return "Đuôi file tải lên không hợp lệ";
             }
 
             $unique_image = substr(md5(time()), 0, 10).'.'.$file_ext;
@@ -40,18 +40,18 @@ class Article
 
             move_uploaded_file($file_temp,$uploaded_image);
             $query = "INSERT INTO `tbl_article`(`title`, `content`, `writer`) VALUES ('$title', '$content', '$author');";
-            if ($this->db->insert($query) === false) return "Cơ sở dữ liệu";
+            if ($this->db->insert($query) === false) return $this->db->error;
             $query = "SELECT max(id) AS id FROM tbl_article;";
             $result = $this->db->select($query);
-            if ($result === false) return "Cơ sở dữ liệu";
+            if ($result === false) return $this->db->error;
             $row = $result->fetch_assoc();
             $this_article_id = $row["id"];
             $query = "INSERT INTO `tbl_image_article`(`articleId`, `image`) VALUES ('$this_article_id','$unique_image');";
             $result = $this->db->insert($query);
-            if ($result === false) return "Cơ sở dữ liệu";
+            if ($result === false) return $this->db->error;
             return true;
         }
-        else return "Không chèn ảnh";
+        else return "Không có file tải lên";
     }
 
     public function show_article()

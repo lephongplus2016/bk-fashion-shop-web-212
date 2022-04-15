@@ -75,7 +75,7 @@
                             <label for="img" class="col-sm-2 col-form-label">Ảnh đại diện</label>
                             <div class="col-sm-6">
                                 <input type="file" id="img" name="img" class="form-control" accept=".jpeg, .jpg, .png, .gif" onchange="document.getElementById('alert3').style.display = 'none';document.getElementById('alert4').style.display = 'none';">
-                                <div style="padding-top: 5px;">
+                                <div class="pt-2">
                                     <img id="upload-img" style="max-width: 100%">
                                 </div>
                                 <span class="alertForm" id="alert3" style="font-size: smaller;">Vui lòng chọn ảnh đại diện</span>
