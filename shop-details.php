@@ -7,7 +7,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
     // echo '<pre>'; print_r($_FILES); echo '</pre>';
 
     $check = $comment->insert_comment($_POST, $_FILES, $_GET["productId"]);
-    echo $check;
 }
 
 ?>
