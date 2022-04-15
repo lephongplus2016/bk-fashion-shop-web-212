@@ -36,15 +36,6 @@ CREATE TABLE `tbl_article` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tbl_article`
---
-
-INSERT INTO `tbl_article` (`id`, `title`, `content`, `datetime`, `writer`) VALUES
-(1, 'Săn lùng những đôi sneaker phù hợp với học sinh', '<h2>&nbsp;</h2>\r\n\r\n<h2><strong><img alt=\"Giày nữ đẹp\" src=\"https://salt.tikicdn.com/ts/tmp/4f/e4/f5/d319c41dc5b2b6a177f03c280383fea7.jpg\" style=\"height:250px; width:250px\" /></strong></h2>\r\n\r\n<h2>&nbsp;</h2>\r\n\r\n<h2><strong>Ti&ecirc;u ch&iacute; chọn những đ&ocirc;i gi&agrave;y sneaker ph&ugrave; hợp với học sinh</strong></h2>\r\n\r\n<p>Ng&agrave;y nay, những em học sinh ng&agrave;y nay lu&ocirc;n c&oacute; cơ hội để tiếp x&uacute;c với nhiều xu hướng hiện đại trong đ&oacute; bao gồm phong c&aacute;ch ăn diện thời trang s&agrave;nh điệu. B&ecirc;n cạnh s&aacute;ch vở, quần &aacute;o th&igrave; gi&agrave;y d&eacute;p cũng l&agrave; m&oacute;n đồ kh&ocirc;ng thể thiếu đối với c&aacute;c bạn học sinh khi đến trường. Đ&aacute;p ứng nhu cầu n&agrave;y, tr&ecirc;n thị trường c&oacute; rất nhiều mẫu gi&agrave;y thể thao trendy được ra mắt thu h&uacute;t sự ch&uacute; &yacute; của học sinh. Tuy nhi&ecirc;n, để chọn một&nbsp;<a href=\"https://tintuc.hoang-phuc.com/tag/giay-sneaker\">đ&ocirc;i sneaker</a>&nbsp;ph&ugrave; hợp th&igrave; cần phải lưu &yacute; c&aacute;c ti&ecirc;u ch&iacute; sau:</p>\r\n\r\n<h3><strong>Chọn gi&agrave;y vừa vặn với b&agrave;n ch&acirc;n</strong></h3>\r\n\r\n<p>Điều đầu ti&ecirc;n cần lưu &yacute; khi chọn những đ&ocirc;i sneaker ph&ugrave; hợp với học sinh đ&oacute; l&agrave; phải vừa với đ&ocirc;i ch&acirc;n của m&igrave;nh. Nếu như qu&aacute; chật sẽ khiến ch&acirc;n bị đau hay thậm ch&iacute; l&agrave; sưng phồng, b&ocirc;ng tr&oacute;c da. Nếu đi&nbsp;<a href=\"https://tintuc.hoang-phuc.com/tag/giay\">gi&agrave;y</a>&nbsp;qu&aacute; rộng lỏng lẻo sẽ khiến bạn gặp kh&oacute; khăn, mất tự tin khi di chuyển. V&igrave; thế, h&atilde;y chọn một đ&ocirc;i gi&agrave;y vừa với b&agrave;n ch&acirc;n để c&oacute; thể cảm nhận được sự thoải m&aacute;i nhất nh&eacute;!</p>\r\n\r\n<h3><strong>M&agrave;u sắc trang nh&atilde;</strong></h3>\r\n\r\n<p>L&agrave; một học sinh th&igrave; việc chọn trang phục, gi&agrave;y d&eacute;p, phụ kiện cũng đều phải đảm bảo kh&ocirc;ng được qu&aacute; m&agrave;u m&egrave;, l&ograve;e loẹt v&agrave; cần ch&uacute; trọng về phần thanh lịch v&agrave; nh&atilde; nhặn. Thế n&ecirc;n, h&atilde;y để &yacute; đến việc chọn một đ&ocirc;i gi&agrave;y thiết kế đơn giản, m&agrave;u sắc trung t&iacute;nh hay trắng, đen cơ bản tr&aacute;nh trường hợp trở th&agrave;nh tắc k&egrave; hoa di động.</p>\r\n\r\n<h3><strong>Kiểu d&aacute;ng hợp xu hướng</strong></h3>\r\n\r\n<p>Theo t&acirc;m l&yacute; của nhiều người cũng như c&aacute;c bạn học sinh, việc chọn một đ&ocirc;i gi&agrave;y đang trở th&agrave;nh tr&agrave;o lưu cũng t&aacute;c động đến sự tự tin của họ. Ch&iacute;nh v&igrave; thế m&agrave; c&aacute;c bậc phụ huynh cũng như học sinh đừng qu&ecirc;n cập nhật những mẫu gi&agrave;y trendy để t&igrave;m cho m&igrave;nh một lựa chọn ph&ugrave; hợp đến trường nh&eacute;!</p>\r\n\r\n<h3><strong>Bảo vệ đ&ocirc;i ch&acirc;n</strong></h3>\r\n\r\n<p>Gi&agrave;y sneakers kh&ocirc;ng chỉ cho thấy gu ăn mặc s&agrave;nh điệu của c&aacute;c bạn học sinh m&agrave; đ&oacute; c&ograve;n l&agrave; c&aacute;ch để bảo vệ đ&ocirc;i ch&acirc;n của họ. Đừng nghĩ v&igrave; đẹp, hack d&aacute;ng m&agrave; c&aacute;c bạn nữ sinh thường chọn c&aacute;ch l&ecirc;nh kh&ecirc;nh tr&ecirc;n đ&ocirc;i gi&agrave;y cao g&oacute;t. Một đ&ocirc;i gi&agrave;y với ưu điểm &ecirc;m &aacute;i, thoải m&aacute;i v&agrave; hỗ trợ di chuyển chắc chắn sẽ l&agrave; người bạn đồng h&agrave;nh tuyệt vời đối với học sinh.&nbsp;</p>\r\n\r\n<h3><strong>Gi&aacute; th&agrave;nh ph&ugrave; hợp với t&uacute;i tiền</strong></h3>\r\n\r\n<p>Một ti&ecirc;u ch&iacute; quan trọng kh&ocirc;ng k&eacute;m khi chọn gi&agrave;y cho học sinh đ&oacute; gi&aacute; cả phải chăng v&agrave; ph&ugrave; hợp. Hầu hết c&aacute;c bạn học sinh đều chưa thể l&agrave;m ra tiền, gi&agrave;y c&oacute; thể được ba mẹ mua cho hay tr&iacute;ch ra từ số tiền tiết kiệm m&agrave; m&igrave;nh d&agrave;nh dụm được. D&ugrave; bạn l&agrave; một người sinh ra trong gia đ&igrave;nh c&oacute; điều kiện hay kh&ocirc;ng th&igrave; cũng c&acirc;n nhắc chọn đ&ocirc;i gi&agrave;y ph&ugrave; hợp với ho&agrave;n cảnh kinh tế của gia đ&igrave;nh m&igrave;nh nh&eacute;!</p>\r\n\r\n<h2><strong>Những mẫu gi&agrave;y sneaker ph&ugrave; hợp với học sinh</strong></h2>\r\n\r\n<h3><strong>Gi&agrave;y sneaker vải basic</strong></h3>\r\n\r\n<p>Kh&ocirc;ng ri&ecirc;ng g&igrave; học sinh m&agrave; nhiều người cũng d&agrave;nh t&igrave;nh cảm đặc biệt cho những đ&ocirc;i gi&agrave;y vải. Sở dĩ gi&agrave;y vải thường c&oacute; đặc t&iacute;nh nhẹ với phần th&acirc;n vải tho&aacute;ng m&aacute;t, co gi&atilde;n tốt v&agrave; phần đế cao su &ecirc;m, đ&agrave;n hồi. Đặc biệt, gi&agrave;y sneaker vải đơn giản c&ograve;n rất dễ phối đồ, c&aacute;c bạn học sinh c&oacute; thể diện với &aacute;o d&agrave;i hay quần t&acirc;y &aacute;o sơ mi đều được. Ch&iacute;nh v&igrave; thế m&agrave; d&ugrave; kh&ocirc;ng c&oacute; nhiều kiểu d&aacute;ng nhưng gi&agrave;y thể thao vải vẫn được nhiều bạn trẻ ưa chuộng.</p>\r\n\r\n<h3><strong>Gi&agrave;y sneaker da tổng hợp</strong></h3>\r\n\r\n<p>Kh&ocirc;ng giống với những đ&ocirc;i gi&agrave;y vải, gi&agrave;y thể thao l&agrave;m từ da tổng hợp thường c&oacute; form tương đối cứng. Tuy nhi&ecirc;n, ng&agrave;y nay c&ocirc;ng nghệ ph&aacute;t triển gi&agrave;y sneakers da cũng đảm bảo mang đến sự thoải m&aacute;i v&agrave; &ecirc;m &aacute;i cho người mang. Hơn hết, gi&agrave;y thể thao với chất liệu da tổng hợp c&ograve;n c&oacute; v&ocirc; số mẫu m&atilde; để c&aacute;c bạn học sinh lựa chọn đi học hay đi chơi. B&ecirc;n cạnh đ&oacute;, điểm cộng của gi&agrave;y da l&agrave; dễ vệ sinh, bạn c&oacute; thể l&agrave;m sạch ngay khi lấm bẩn.</p>\r\n', '2022-04-03 14:57:44', 'Chuyên gia sneaker');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tbl_brand`
 --
 
@@ -270,6 +261,8 @@ INSERT INTO `tbl_product` (`productId`, `productName`, `categoryId`, `brandId`, 
 CREATE TABLE `tbl_slider` (
   `id` int(11) NOT NULL,
   `sliderName` varchar(255) NOT NULL,
+  `collectionName` varchar(255) NOT NULL,
+  `description` text NOT NULL,
   `sliderImage` varchar(255) NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -493,6 +486,19 @@ ALTER TABLE `tbl_user`
 --
 ALTER TABLE `tbl_wishlist`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  
+-- --------------------------------------------------------
+
+--
+-- Dumping data for table `tbl_slider`
+--
+
+INSERT INTO `tbl_slider`(`collectionName`,`sliderName`,`description`,`sliderImage`,`status`) VALUES 
+('Summer Collection','Fall - Winter Collections 2030','A specialist label creating luxury essentials. Ethically crafted with an unwavering commitment to exceptional quality.','hero-1.jpg',1),
+('Summer Collection','Fall - Winter Collections 2030','A specialist label creating luxury essentials. Ethically crafted with an unwavering commitment to exceptional quality.','hero-2.jpg',1);
+
+-- --------------------------------------------------------
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

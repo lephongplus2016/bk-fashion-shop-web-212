@@ -77,8 +77,8 @@
                             </a>
                             <div class="collapse" id="collapseLayouts5" aria-labelledby="headingOne" data-bs-parent="#collapseLayouts3">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.php">Thêm slider</a>
-                                    <a class="nav-link" href="layout-static.php">Danh sách slider</a>
+                                    <a class="nav-link" href="slider-add.php">Thêm slider</a>
+                                    <a class="nav-link" href="slider-list.php">Danh sách slider</a>
 
                                 </nav>
                             </div>

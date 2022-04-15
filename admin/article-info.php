@@ -78,22 +78,18 @@
                         <div class="form-group row">
                             <label for="articleTitle" class="col-sm-2 col-form-label">Tiêu đề bài viết</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="articleTitle" name="articleTitle" placeholder="Tên tiêu đề..." onchange="document.getElementById('alert1').style.display = 'none';">
+                                <input type="text" class="form-control" id="articleTitle" name="articleTitle" placeholder="Tên tiêu đề..." onchange="document.getElementById('alert1').style.display = 'none';"
+                                value="<?php echo $data['title'];?>">
                                 <span class="alertForm" id="alert1" style="font-size: smaller;">Vui lòng điền tiêu đề</span>
                             </div>
-                            <?php
-                                echo "<script>document.articleForm.articleTitle.value = '".$data['title']."';</script>";
-                            ?>
                         </div>
                         <div class="form-group row">
                             <label for="author" class="col-sm-2 col-form-label">Tác giả</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="author" name="author" placeholder="Tên người viết..." onchange="document.getElementById('alert2').style.display = 'none';">
+                                <input type="text" class="form-control" id="author" name="author" placeholder="Tên người viết..." onchange="document.getElementById('alert2').style.display = 'none';"
+                                value="<?php echo $data['writer'];?>">
                                 <span class="alertForm" id="alert2" style="font-size: smaller;">Vui lòng điền tên người viết</span>
                             </div>
-                            <?php
-                                echo "<script>document.articleForm.author.value = '".$data['writer']."';</script>";
-                            ?>
                         </div>
                         <div class="form-group row">
                             <label for="content" class="col-sm-2 col-form-label">Nội dung</label>
@@ -112,17 +108,15 @@
                             <label for="img" class="col-sm-2 col-form-label">Ảnh đại diện</label>
                             <div class="col-sm-6">
                                 <input type="file" id="img" name="img" class="form-control" accept=".jpeg, .jpg, .png, .gif" onchange="document.getElementById('alert3').style.display = 'none';document.getElementById('alert4').style.display = 'none';">
-                                <div style="padding-top: 5px;">
-                                    <?php
-                                        echo "<img id=\"upload-img\" style=\"max-width: 100%\" src=\"".$img_url."\" alt=\"".$getImgArticle."\">";
-                                    ?>
+                                <div class="pt-2">
+                                    <img id="upload-img" style="max-width: 100%" src="<?php echo $img_url?>" alt="">
                                 </div>
                                 <span class="alertForm" id="alert3" style="font-size: smaller;">Vui lòng chọn ảnh đại diện</span>
                                 <span class="alertForm" id="alert4" style="font-size: smaller;">Vui lòng chọn file có các định dạng sau .jpeg .jpg .png .gif</span>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-2 offset-sm-2" style="margin-bottom:0.6em;">
+                            <div class="col-sm-2 offset-sm-2 mb-1">
                                 <button type="submit" class="btn btn-success" name="submit" style="width:100%">Cập nhật</button>
                             </div>
                             <div class="col-sm-2 offset-sm-1">
