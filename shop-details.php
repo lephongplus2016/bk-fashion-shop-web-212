@@ -199,7 +199,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
                                         <?php
                                             if(isset($addCart)){
                                                 echo "<br>";
-                                                var_dump($addCart) ;
+                                                echo $addCart ;
                                                 }
                                             ?>  
                                     </div>

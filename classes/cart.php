@@ -2,7 +2,6 @@
 	$filepath = realpath(dirname(__FILE__));
 	include_once ($filepath.'/../lib/database.php');
 	include_once ($filepath.'/../helper/format.php');
-	include "product.php";
 
 class cart
 {
@@ -21,7 +20,7 @@ class cart
 		$productId = mysqli_real_escape_string($this->db->link, $id);
 		$userId = mysqli_real_escape_string($this->db->link, $userId);
 		$size = mysqli_real_escape_string($this->db->link, $data['size']);
-		return $userId;
+		
 
 		// lấy product record đang buy
 		$query = "SELECT * FROM tbl_product WHERE productId = '$productId' ";
@@ -31,17 +30,19 @@ class cart
 		// lấy các trường cần thiết
 		$productName = $result['productName'];
 		$price = $result['price'];
+
 		// lấy hình ảnh sản phẩm
-		$image_list = $product->getImgByProductId($id);
+		$query = "SELECT * FROM `tbl_image_product` WHERE productId = '$productId'";
+		$image_list = $this->db->select($query);
 		while($i = $image_list->fetch_assoc())
         {
         	$image = $i['image'];
         	break;
         }
-		// đang làm ở đây 
+        
 
 		// kiểm tra đã có chưa
-		$queryCheckAdded = "SELECT * FROM tbl_cart WHERE productId = '$id' AND sId = '$sId' ";
+		$queryCheckAdded = "SELECT * FROM tbl_cart WHERE productId = '$productId' AND userId = '$userId' ";
 		$result_queryCheckAdded = $this->db->select($queryCheckAdded);
 		if($result_queryCheckAdded){
 			$msg = "<span class='error'>Sản phẩm đã được thêm vào</span>";
@@ -49,14 +50,13 @@ class cart
 		}
 		// còn chưa thì insert
 		else {
-				$query_insert ="INSERT INTO tbl_cart(productId, sId, productName, price, quantity, image) VALUES ('$id', 
-			'$sId','$productName','$price', '$quantity',  '$image')";
+				$query_insert ="INSERT INTO tbl_cart (productId, userId, productName, price, quantity, image, size) VALUES ('$productId', 
+			'$userId','$productName','$price', '$quantity',  '$image', $size)";
 
-				// lệnh insert đã được viết sẵn trong database.php
 					$result_insert = $this->db->insert($query_insert);
 					if($result_insert){
-						// điều hướng trang - lệnh của php
-						header('Location:cart.php');
+						$msg = "<span class='success'>Sản phẩm đã được thêm vào giỏ hàng</span>";
+						return $msg;
 					}	
 					else{
 						header('Location:404.php');
@@ -66,6 +66,12 @@ class cart
 		
 	}
 
+
+	public function getProductCart($userId){
+		$query = "SELECT * FROM tbl_cart WHERE userId = '$userId'";
+		$result = $this->db->select($query);
+		return $result;
+	}
 	
 
 }
