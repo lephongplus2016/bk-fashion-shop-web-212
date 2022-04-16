@@ -14,6 +14,7 @@ spl_autoload_register(function($class){
 	$fm = new Format();
     $user = new user();
     $product = new product();
+    $cart = new cart();
 
   header("Cache-Control: no-cache, must-revalidate");
   header("Pragma: no-cache"); 
@@ -51,6 +52,7 @@ spl_autoload_register(function($class){
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <style type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>

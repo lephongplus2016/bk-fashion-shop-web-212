@@ -24,6 +24,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
     
 
 ?>
+<?php
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
+    $userId = Session::get('user_id');
+    $addCart = $cart->insert_cart($id,$userId,$_POST);
+}
+
+?>
     <!-- Shop Details Section Begin -->
     <section class="shop-details">
         <div class="product__details__pic">
@@ -38,7 +45,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
                     </div>
                 </div>
                 <div class="row">
-
+<!-- begin image product -->
                     <div class="col-lg-3 col-md-3">
                         <ul class="nav nav-tabs" role="tablist">
 <?php 
@@ -88,7 +95,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
                 </div>
             </div>
         </div>
-
+<!-- end image product -->
+<!-- begin product detail -->
 <?php 
  $getProduct = $product->getProductDetailShopPage($id);
  if($getProduct){
@@ -140,6 +148,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
         </style>
         <div class="product__details__content">
             <div class="container">
+                
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-8">
                         <div class="product__details__text">
@@ -149,70 +158,54 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
                             <span><?php $oldprice = (int)$productRow['price']; echo $fm->format_currency($oldprice*1.5)." VNĐ"; ?></span>
                             </h3>
                            
-                            <div class="product__details__option">
-                                <div class="product__details__option__size">
-                                    <span>Size:</span>
-                                    <!-- <label for="xxl">xxl
-                                        <input type="radio" id="xxl">
-                                    </label>
-                                    <label class="active" for="xl">xl
-                                        <input type="radio" id="xl">
-                                    </label>
-                                    <label for="l">l
-                                        <input type="radio" id="l">
-                                    </label>
-                                    <label for="sm">s
-                                        <input type="radio" id="sm">
-                                    </label> -->
-                                    <label class="active" for="xl"><?php echo$productRow["size"] ?>
-                                        <input type="radio" id="<?php echo $productRow["size"] ?>">
-                                    </label>
+                        <!-- begin add to cart -->
+                           <form action="" method="post">
+                           
+                                    <div class="product__details__option">
+                                        <div class="product__details__option__size">
+                                            <span>Size:</span>
+                                             <label class="active" for="xl" > <?php echo $productRow["size"]; ?>
+                                                <input type="radio" id="x1" name="size" value="<?php echo $productRow["size"] ?>" checked
+                                                />
+                                            </label>
 
-                                    <?php
-                                        for ($x = 1; $x <= 6; $x++) {
-                                            $sizeLoop = (int)$productRow["size"] + $x;
-                                          echo 
-                                          '<label for="xxl">'.$sizeLoop.'
-                                                <input type="radio" id="size'.$sizeLoop.'">
-                                            </label>';
-                                        }
-                                    ?>
-
-                                    
+                                            <?php
+                                                for ($x = 1; $x <= 6; $x++) {
+                                                    $sizeLoop = (int)$productRow["size"] + $x;
+                                                    
+                                                  echo 
+                                                  '<label for="x'.$sizeLoop.'">'.$sizeLoop.'
+                                                        <input type="radio" id="x'.$sizeLoop.'" name="size" value="'.$sizeLoop.'">
+                                                    </label>';
+                                                }
+                                            ?> 
 
 
-                                </div>
-                                <div class="product__details__option__color">
-                            <b><span >Màu sắc: <?php echo $productRow['color']; ?></span></b>
-                                    <!-- <label class="c-1" for="sp-1">
-                                        <input type="radio" id="sp-1">
-                                    </label>
-                                    <label class="c-2" for="sp-2">
-                                        <input type="radio" id="sp-2">
-                                    </label>
-                                    <label class="c-3" for="sp-3">
-                                        <input type="radio" id="sp-3">
-                                    </label>
-                                    <label class="c-4" for="sp-4">
-                                        <input type="radio" id="sp-4">
-                                    </label>
-                                    <label class="c-9" for="sp-9">
-                                        <input type="radio" id="sp-9">
-                                    </label> -->
-
-                                    
-                                </div>
+                                        </div>
+                                        <div class="product__details__option__color">
+                                            <b><span >Màu sắc: <?php echo $productRow['color']; ?></span></b>
+                                            
+                                        </div>
 
 
-                            </div>
-                            <div class="product__details__cart__option">
-                                <div class="quantity">
-                                    <div class="pro-qty">
-                                        <input type="text" value="1">
                                     </div>
-                                </div>
-                                <a href="#" class="primary-btn">Thêm vào giỏ hàng</a>
-                            </div>
+                                    <div class="product__details__cart__option">
+                                        <div class="quantity">
+                                            <div class="pro-qty">
+                                                <input type="text" name="quantity" value="1">
+                                            </div>
+                                        </div>
+                                        <input name="cart" type="submit" class="primary-btn" value="Thêm vào giỏ hàng"/>
+                                        <?php
+                                            if(isset($addCart)){
+                                                echo "<br>";
+                                                var_dump($addCart) ;
+                                                }
+                                            ?>  
+                                    </div>
+                             </form> 
+                            <!-- end add to cart -->
+
                             <div class="product__details__btns__option">
                                 <a href="#"><i class="fa fa-heart"></i> add to wishlist</a>
                                 <a href="#"><i class="fa fa-exchange"></i> Add To Compare</a>
@@ -232,6 +225,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
                         </div>
                     </div>
                 </div>
+               
+<!-- end product detail -->
+
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="product__details__tab">
@@ -262,7 +258,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tabs-5" role="tabpanel">
                                     <div class="product__details__tab__content">
-                                        
+                                        <!-- mô tả sản phẩm -->
                                         <div class="product__details__tab__content__item">
                                             <h5>Mô tả sản phẩm</h5>
                                             <?php echo $productRow['description']; ?>
@@ -272,6 +268,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
                                 </div>
 
 
+                                <!-- begin comment -->
                                 <div class="tab-pane" id="tabs-6" role="tabpanel">
                                     <div class="product__details__tab__content">
                                         <div class="product__details__tab__content__item">
@@ -356,6 +353,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
 												?>
                                         </div>
                                 </div>
+                                                                <!-- end comment -->
+
                             </div>
                         </div>
                     </div>
