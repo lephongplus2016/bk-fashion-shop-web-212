@@ -241,13 +241,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
                                                 $n = 0;
                                                     $comments = $comment->getImgByCommentProductId($_GET["productId"]);
                                                     if($comments != false) {
-                                                    while($i = $comments->fetch_assoc())
-								                		{
-                                                    $nameUser = $comment->getNameUserComment($i['userId']);
-                                                    if($nameUser!= false){
-                                                            $n++;
-                                                            }
-														}
+                                                        $n = mysqli_num_rows($comments);
                                                     } 	  
 												
                                     echo '<a class="nav-link" data-toggle="tab" href="#tabs-6" role="tab">Đánh giá của khách hàng('.$n.')</a>';
@@ -298,7 +292,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
                                             worn all year round.</p>
                                         </div>
                                     </div>
-                                    <form action="" method = "POST" style = "margin-top: 40px;" enctype="multipart/form-data">
+                                    <?php
+                                    $login_check = Session::get('user_login');
+                                    if($login_check == true){
+                                    echo '<form action="" method = "POST" style = "margin-top: 40px;" enctype="multipart/form-data">
                                     <div class="form-floating">
                                         <label for="floatingTextarea2">Bình Luận sản phẩm</label>
                                         <div class="form-floating">
@@ -316,7 +313,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
                                         </div>
                                     </div>
                                         <button style = "margin-top: 10px;" type="submit" name = "submit" class="btn btn-primary">Gửi Bình Luận</button>
-                                    </form>
+                                    </form>';
+                                    }
+                                    ?>
                                     <div class="container-commented-contented">
                                     <h2 class="comments-from-users">Đánh giá sản phẩm</h2>
                                         <?php 
