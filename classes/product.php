@@ -229,5 +229,20 @@ class product
 
     }
 
+    public function show_product_by_pagination() {
+        $number_of_product_per_page = 1;
+            if(!isset($_GET['page'])){
+                $page = 1;
+            }else{
+                $page = $_GET['page'];
+            }
+            $index_page = ($page-1)*$number_of_product_per_page;
+        $query = "SELECT *  FROM tbl_product  ORDER BY productId DESC 
+        LIMIT $index_page,$number_of_product_per_page
+        ";
+        $result = $this->db->select($query);
+        return $result;
+    }
+
 }
 ?>

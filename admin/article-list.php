@@ -53,12 +53,12 @@
                                     {
                                         echo '
                                         <tr>
-                                            <td style="text-align:center; width: fit-content;"><img src="../img/article/'.$row["image"].'" alt="'.$row["image"].'" width = 80px"></td>
+                                            <td class="text-center"><img src="../img/article/'.$row["image"].'" alt="'.$row["image"].'" width = 80px"></td>
                                             <td>'.$row["title"].'</td>
                                             <td>'.$row["writer"].'</td>
                                             <td>'.$row["datetime"].'</td>
-                                            <td style="text-align:center"><button style="margin:2px auto" class="btn btn-outline-primary" onclick="location.assign(\'article-info.php?id='.$row["id"].'\');">Edit</Button>
-                                                <button style="margin:2px auto" class="btn btn-outline-danger" onclick="openDeleteConfirm(()=>{location.assign(\'?deleteId='.$row["id"].'\')});">Delete</button></td>
+                                            <td class="text-center"><button class="btn btn-outline-primary my-1" onclick="location.assign(\'article-info.php?id='.$row["id"].'\');">Edit</Button>
+                                                <button class="btn btn-outline-danger my-1" onclick="openDeleteConfirm(()=>{location.assign(\'?deleteId='.$row["id"].'\')});">Delete</button></td>
                                         </tr>';
                                     }
                                 }
