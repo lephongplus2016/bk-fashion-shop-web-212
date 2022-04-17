@@ -141,8 +141,21 @@ spl_autoload_register(function($class){
                 <div class="col-lg-3 col-md-3">
                     <div class="header__nav__option">
 <!--                         <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a>
- -->                        <a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
-                        <div class="price">$0.00</div>
+ -->                        <a href="shopping-cart.php"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
+                        <div class="price">
+                            <?php
+                                        $check_cart = $cart->check_cart();
+                                        if($check_cart){
+                                            $sum = Session::get("sum");
+                                            $qty = Session::get("qty");
+                                            echo $fm->format_currency($sum).' VNĐ - '.$qty.' sản phẩm';
+                                        }
+                                        else{
+                                            echo '0 VNĐ';
+                                        }
+
+                                    ?>
+                        </div>
                         
 
                         <?php

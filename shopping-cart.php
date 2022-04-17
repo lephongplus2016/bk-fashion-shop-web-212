@@ -2,6 +2,22 @@
     include 'inc/header.php';
 ?>
 
+<?php
+if(isset($_GET['cartId'])  && $_GET['cartId'] != NULL) {
+        // lấy query param , không lấy được body parser 
+        $cartId = $_GET['cartId'];
+        $deleteProductCart = $cart->delete_product_cart($cartId);
+    }
+
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_cart'])){ 
+            // $cardId = $_POST['cartId'];
+            // $quantity = $_POST['quantity'];
+            // $updateQuantityCart = $ct->updateQuantityCart($cardId, $quantity);
+    var_dump($_POST);
+
+        }
+?>
+
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-option">
         <div class="container">
@@ -9,6 +25,16 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb__text">
                         <h4>Shopping Cart</h4>
+                        <?php 
+                            if(isset($updateQuantityCart)){
+                            echo $updateQuantityCart;
+                            }
+                             ?>
+                             <?php 
+                            if(isset($deleteProductCart)){
+                            echo $deleteProductCart;
+                            }
+                             ?>
                         <div class="breadcrumb__links">
                             <a href="./index.php">Home</a>
                             <a href="./shop.php">Shop</a>
@@ -26,6 +52,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
+                    <form action="" method="post">
                     <div class="shopping__cart__table">
                         <table>
                             <thead>
@@ -39,8 +66,7 @@
                             </thead>
                             <tbody>
                                 <?php
-                                     $userId = Session::get('user_id');
-                                     $get_product_cart = $cart->getProductCart($userId);
+                                     $get_product_cart = $cart->getProductCart();
                                      $subTotal =0;
                                      $qty = 0;
 
@@ -62,13 +88,20 @@
                                     <td class="quantity__item">
                                         <div class="quantity">
                                             <div class="pro-qty-2">
-                                                <input type="text" value="<?php echo $row['quantity']; ?>">
+                                                <input type="text" name="quantity_of_cartid_<?php echo $row['cartId']; ?>" value="<?php echo $row['quantity']; ?>">
                                             </div>
                                         </div>
                                     </td>
                                     <td class="cart__price"><?php echo $row['size']; ?></td>
-                                    <td class="cart__price">$ 30.00</td>
-                                    <td class="cart__close"><i class="fa fa-close"></i></td>
+                                    <td class="cart__price">
+                                        <?php
+                                        $total = $row['price'] * $row['quantity'];
+                                        $subTotal += $total;
+                                        $qty += $row['quantity'];
+                                        echo  $fm->format_currency($total)." VND";
+                                        ?>
+                                    </td>
+                                    <td class="cart__close"> <a onclick="return confirm('Bạn có muốn xóa không?');" href="?cartId=<?php echo $row['cartId']; ?>"><i class="fa fa-close"></i></a></td>
                                 </tr>
                                 
                                 <?php
@@ -87,11 +120,12 @@
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="continue__btn update__btn">
-                                <a href="shop.php"><i class="fa fa-spinner"></i> Update cart</a>
+                            <div class="continue__btn update__btn">           
+                                <button type="submit" name="update_cart"/>Update cart <i class="fa fa-spinner"></i></button>
                             </div>
                         </div>
                     </div>
+                    </form>
                 </div>
                 <div class="col-lg-4">
                     <!-- <div class="cart__discount">
@@ -102,10 +136,18 @@
                         </form>
                     </div> -->
                     <div class="cart__total">
-                        <h6>Cart total</h6>
+                        <h6>Thanh toán</h6>
                         <ul>
-                            <li>Subtotal <span>$ 169.50</span></li>
-                            <li>Total <span>$ 169.50</span></li>
+                            <li>Tổng cộng <br> (chưa có VAT) <span><?php echo $fm->format_currency($subTotal)." VND"; ?></span></li>
+                            <li>Có VAT <span><?php echo $fm->format_currency($subTotal*1.1)." VND"; ?></span></li>
+                            <?php
+                            // co cart thi moi dat session
+                            $check_cart = $cart->check_cart();
+                            if($check_cart){
+                                Session::set('sum',$subTotal);
+                                Session::set('qty', $qty);
+                            }
+                            ?>
                         </ul>
                         <a href="#" class="primary-btn">Proceed to checkout</a>
                     </div>
