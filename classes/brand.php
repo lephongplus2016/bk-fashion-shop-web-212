@@ -62,12 +62,20 @@ class brand
 		$result = $this->db->select($query);
 		return $result;
 	}
+	public function showBrandbyName(){
+		// LENH SELECT DA DUOC VIET TRONG DATABASE.PHP
+		$query ="SELECT * FROM tbl_brand ORDER BY brandName ASC";
+		$result = $this->db->select($query);
+		return $result;
+	}
 
 	public function getBrandById($id){
 		$query ="SELECT * FROM tbl_brand WHERE brandId = '$id' ORDER BY brandId DESC";
 		$result = $this->db->select($query);
 		return $result;
 	}
+
+
 
 	public function updateBrand($id,$name){
 		$name = $this->fm->validation($name);
@@ -111,6 +119,12 @@ class brand
 			$alert = '<span class="success">Delete Brand not successfully</span>';
 			return $alert;
 		}
+	}
+
+	public function getNameBrand($ID){
+		$query = "SELECT * FROM tbl_brand WHERE brandId = '$ID'";
+		$result = $this->db->select($query);
+		return $result;
 	}
 }
 ?>

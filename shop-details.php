@@ -98,7 +98,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
 <!-- end image product -->
 <!-- begin product detail -->
 <?php 
- $getProduct = $product->getProductDetailShopPage($id);
+ $getProduct = $product->getProductDetailpPage($id);
  if($getProduct){
         while($productRow = $getProduct->fetch_assoc())
                 {
