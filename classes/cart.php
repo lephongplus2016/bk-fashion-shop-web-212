@@ -104,6 +104,21 @@ class cart
 		}			
 	}
 
+	public function update_quantity_cart_all($data) {
+		// lay so san pham trong cart
+		$userId = Session::get('user_id');
+		$query = "SELECT * FROM tbl_cart WHERE userId = '$userId'";
+		$result = $this->db->select($query);
+		$num_pd_cart = $result->$num_rows;
+		for ($x = 0; $x <= $num_pd_cart; $x++) {
+		  echo $num_pd_cart;
+		}
+
+// query
+		
+	}
+
+
 	public function delete_product_cart($cartId){
 			$query = "DELETE FROM tbl_cart where cartId = '$cartId'";
 			$result = $this->db->delete($query);
