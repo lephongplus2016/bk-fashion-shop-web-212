@@ -12,7 +12,7 @@ if(isset($_GET['cartId'])  && $_GET['cartId'] != NULL) {
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_cart'])){ 
             // $cardId = $_POST['cartId'];
             // $quantity = $_POST['quantity'];
-            // $updateQuantityCart = $ct->updateQuantityCart($cardId, $quantity);
+            $updateQuantityCart = $cart->update_quantity_cart_all($_POST);
     var_dump($_POST);
 
         }
@@ -52,6 +52,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_cart'])){
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
+                    <!-- begin form update quantity of product cart -->
                     <form action="" method="post">
                     <div class="shopping__cart__table">
                         <table>
@@ -89,6 +90,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_cart'])){
                                         <div class="quantity">
                                             <div class="pro-qty-2">
                                                 <input type="text" name="quantity_of_cartid_<?php echo $row['cartId']; ?>" value="<?php echo $row['quantity']; ?>">
+                                                <!-- thẻ này chỉ nhằm lấy cardId -->
+                                                <input type="hidden" name="cartId_<?php echo $row['cartId']; ?>" value="<?php echo $row['cartId']; ?>">         
                                             </div>
                                         </div>
                                     </td>
@@ -120,12 +123,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_cart'])){
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="continue__btn update__btn">           
+                            <div class="continue__btn update__btn">  
                                 <button type="submit" name="update_cart"/>Update cart <i class="fa fa-spinner"></i></button>
                             </div>
                         </div>
                     </div>
                     </form>
+                        <!-- end form update quantity of product cart -->
+
                 </div>
                 <div class="col-lg-4">
                     <!-- <div class="cart__discount">

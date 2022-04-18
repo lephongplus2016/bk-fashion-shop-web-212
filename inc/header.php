@@ -15,6 +15,9 @@ spl_autoload_register(function($class){
     $user = new user();
     $product = new product();
     $cart = new cart();
+    $brand = new brand();
+    $category = new category();
+
 
   header("Cache-Control: no-cache, must-revalidate");
   header("Pragma: no-cache"); 

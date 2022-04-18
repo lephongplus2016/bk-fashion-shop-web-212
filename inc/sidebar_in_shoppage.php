@@ -1,3 +1,4 @@
+
 <div class="row">
                 <div class="col-lg-3">
                     <div class="shop__sidebar">
@@ -16,16 +17,16 @@
                                     <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
                                         <div class="card-body">
                                             <div class="shop__sidebar__categories">
-                                                <ul class="nice-scroll">
-                                                    <li><a href="#">Men (20)</a></li>
-                                                    <li><a href="#">Women (20)</a></li>
-                                                    <li><a href="#">Bags (20)</a></li>
-                                                    <li><a href="#">Clothing (20)</a></li>
-                                                    <li><a href="#">Shoes (20)</a></li>
-                                                    <li><a href="#">Accessories (20)</a></li>
-                                                    <li><a href="#">Kids (20)</a></li>
-                                                    <li><a href="#">Kids (20)</a></li>
-                                                    <li><a href="#">Kids (20)</a></li>
+                                                <ul class="nice-scroll">   
+                                                    <?php 
+                                                         $catlist = $category->showCategorybyName(); 
+                                                        if($catlist != false) { 
+                                                            while ($row = $catlist->fetch_assoc()) { ?>
+                                                                                   
+                                                            <li><a href="productbycat.php?categoryId=<?php echo $row['categoryId']; ?>"><?php echo $row['categoryName']; ?></a></li>
+                        
+                                                    <?php    }  ?>   
+                                                    <?php }   ?>   
                                                 </ul>
                                             </div>
                                         </div>
@@ -39,10 +40,15 @@
                                         <div class="card-body">
                                             <div class="shop__sidebar__brand">
                                                 <ul>
-                                                    <li><a href="#">Louis Vuitton</a></li>
-                                                    <li><a href="#">Chanel</a></li>
-                                                    <li><a href="#">Hermes</a></li>
-                                                    <li><a href="#">Gucci</a></li>
+                                                <?php 
+                                                         $brandlist = $brand->showBrandbyName(); 
+                                                        if($brandlist != false) { 
+                                                            while ($row = $brandlist->fetch_assoc()) { ?>
+                                                                                   
+                                                            <li><a href="productbybrand.php?brandId=<?php echo $row['brandId']; ?>"><?php echo $row['brandName']; ?></a></li>
+                        
+                                                    <?php    }  ?>   
+                                                    <?php }   ?> 
                                                 </ul>
                                             </div>
                                         </div>

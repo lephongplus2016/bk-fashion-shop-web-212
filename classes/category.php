@@ -1,3 +1,4 @@
+
 <?php
 	$filepath = realpath(dirname(__FILE__));
 	include_once ($filepath.'/../lib/database.php');
@@ -64,6 +65,11 @@ class category
 		$result = $this->db->select($query);
 		return $result;
 	}
+	public function showCategorybyName(){
+		$query ="SELECT * FROM tbl_category ORDER BY categoryName ASC";
+		$result = $this->db->select($query);
+		return $result;
+	}
 
 	public function getCatById($id){
 		$query ="SELECT * FROM tbl_category WHERE categoryId = '$id' ORDER BY categoryId DESC";
@@ -119,7 +125,7 @@ class category
 
 	public function showCategoryFontend() {
 		// LENH SELECT DA DUOC VIET TRONG DATABASE.PHP
-		$query ="SELECT * FROM tbl_category ORDER BY categoryId DESC";
+		$query ="SELECteT * FROM tbl_category ORDER BY categoryId DESC";
 		$result = $this->db->select($query);
 		return $result;
 	}

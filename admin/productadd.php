@@ -44,14 +44,14 @@
 		          	<div class="col-sm-4">
 		          		<select id="select" name="category"  class="form-control">
 	                            <option>Select Category</option>
-	                            <?php $catlist = $category->showCategory(); 
+	                            <?php $catlist = $category->showCategorybyName(); 
                                 if($catlist != false) { 
                                     while ($row = $catlist->fetch_assoc()) { ?>
                                                            
                             <option value="<?php echo $row['categoryId']; ?>"><?php echo $row['categoryName']; ?></option>
 
-                           <?php    }  ?>   
-                          <?php }   ?>  
+                           <?php    }    
+                          			 }   ?>  
 	                        </select>
 		          	</div>
 	           </div>
@@ -61,7 +61,7 @@
 		          	<div class="col-sm-4">
 		          		<select id="select" name="brand"  class="form-control">
 	                            <option>Select Brand</option>
-	                            <?php $brandlist = $brand->showBrand(); 
+	                            <?php $brandlist = $brand->showBrandbyName(); 
                                 if($catlist != false) { 
                                     while ($row = $brandlist->fetch_assoc()) { ?>
                                                            
