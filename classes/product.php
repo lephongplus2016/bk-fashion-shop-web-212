@@ -257,5 +257,31 @@ class product
         return $result;
     }
 
+    public function search_product_by_price($pricelv){
+        switch ($pricelv) {
+            case 0:
+                $query = "SELECT * FROM tbl_product WHERE price < 200000 ORDER BY price ASC";
+                break;
+            case 1:
+                $query = "SELECT * FROM tbl_product WHERE price >= 200000 AND price < 500000 ORDER BY price ASC";
+                break;
+            case 2:
+                $query = "SELECT * FROM tbl_product WHERE price >= 500000 AND price < 1000000 ORDER BY price ASC";
+                break;
+            case 3:
+                $query = "SELECT * FROM tbl_product WHERE price >= 1000000 AND price < 2000000 ORDER BY price ASC";
+                break;
+            case 4:
+                $query = "SELECT * FROM tbl_product WHERE price >= 2000000 AND price < 5000000 ORDER BY price ASC";
+                break;
+            case 5:
+                $query = "SELECT * FROM tbl_product WHERE price >= 5000000 ORDER BY price ASC";
+                break;           
+            default: break;              
+          }
+        $result = $this->db->select($query);
+        return $result;
+    }
+
 }
 ?>
