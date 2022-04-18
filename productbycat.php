@@ -24,7 +24,7 @@
                         <div class="breadcrumb__links">
                             <a href="./index.php">Home</a>
                             <a href="./shop.php">Shop</a>
-                            <a href="./shop.php">Category</a>                                                    
+                            <a href="./shop.php">Categories</a>                                                    
                             <span>
                             <?php
 				               $getNameCat = $category->getNameCat($categoryId);
@@ -111,7 +111,7 @@
         }
     }
     else {
-        echo "This category is temporary out of stock!";
+        echo "This category is temporarily out of stock!";
     }
 
 ?>

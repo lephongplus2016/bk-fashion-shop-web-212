@@ -22,7 +22,7 @@
                         <div class="breadcrumb__links">
                             <a href="./index.php">Home</a>
                             <a href="./shop.php">Shop</a>   
-                            <a href="./shop.php">Brand</a> 
+                            <a href="./shop.php">Branding</a> 
                                                                                 
                             <span>
                             <?php
@@ -109,7 +109,7 @@
         }
     }
     else {
-        echo "This brand is temporary out of stock!";
+        echo "This brand is temporarily out of stock!";
     }
 
 ?>
