@@ -55,6 +55,15 @@ class cart
 
 					$result_insert = $this->db->insert($query_insert);
 					if($result_insert){
+						// set cart session
+					    $quantity = $data['quantity'];
+					    $price = $data['price'];
+					    $oldQty = Session::get('qty');
+					    Session::set('qty',$oldQty + $quantity);
+					    $oldPrice = Session::get('sum');
+					    Session::set('sum',$oldPrice + $price*$quantity);
+					    // end cart session
+
 						$msg = "<span class='success'>Sản phẩm đã được thêm vào giỏ hàng</span>";
 						return $msg;
 					}	
@@ -78,6 +87,9 @@ class cart
 // thì mới cho thanh toán
 	public function check_cart(){
 		$userId = Session::get('user_id');
+		if ($userId == ''){
+			return false;
+		}
 		$query = "SELECT * FROM tbl_cart WHERE userId = '$userId'";
 		$result = $this->db->select($query);
 		return $result;
@@ -95,24 +107,34 @@ class cart
 					WHERE cartId = '$cartId'";
 		//  execute
 		$result = $this->db->update($query);
-		if($result){
-			$alert = "<span class='success'>Product quantity Updated Successfully</span>";
-			return $alert;
-		}else{
-			$alert = "<span class='error'>Product quantity Updated Not Success</span>";
-			return $alert;
-		}			
+		return $result;
+		// if($result){
+		// 	$alert = "<span class='success'>Product quantity Updated Successfully</span>";
+		// 	return $alert;
+		// }else{
+		// 	$alert = "<span class='error'>Product quantity Updated Not Success</span>";
+		// 	return $alert;
+		// }			
 	}
 
 	public function update_quantity_cart_all($data) {
 		// lay so san pham trong cart
 		$userId = Session::get('user_id');
 		$query = "SELECT * FROM tbl_cart WHERE userId = '$userId'";
-		$result = $this->db->select($query);
-		$num_pd_cart = $result->$num_rows;
-		for ($x = 0; $x <= $num_pd_cart; $x++) {
-		  echo $num_pd_cart;
+		$getnum = $this->db->select($query);
+		$num_pd_cart = $getnum->num_rows;
+		for ($x = 0; $x < $num_pd_cart; $x++) {
+		  	$cartId = $data['cartId_'.$x];
+		  	$quantity = $data['quantity_'.$x];
+		  	$result = $this->update_quantity_cart($cartId,$quantity);
 		}
+		if($result){
+			$alert = "<span class='success'>Cập nhật số lượng thành công</span>";
+			return $alert;
+		}else{
+			$alert = "<span class='error'>Cập nhật số lượng không thành công</span>";
+			return $alert;
+		}	
 
 // query
 		
@@ -123,11 +145,11 @@ class cart
 			$query = "DELETE FROM tbl_cart where cartId = '$cartId'";
 			$result = $this->db->delete($query);
 			if($result){
-				// $alert = "<span class='success'>Product in cart Deleted Successfully</span>";
-				// return $alert;
-				header('Location:shopping-cart.php');
+				$alert = "<span class='success'>Đã xóa khỏi giỏ hàng</span>";
+				return $alert;
+				// header('Location:shopping-cart.php');
 			}else{
-				$alert = "<span class='error'>Product in cart Deleted Not Success</span>";
+				$alert = "<span class='error'>Chưa xóa khỏi giỏ hàng</span>";
 				return $alert;
 			}
 			
