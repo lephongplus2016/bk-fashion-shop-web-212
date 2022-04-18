@@ -63,10 +63,10 @@
                                                 <div class="form-check form-switch text-center">';
                                                 if ($row["status"]){
                                                     echo '<input class="form-check-input" type="checkbox" role="switch" id="mode'.$row["id"].'" name="status" checked onchange="switchChange('.$row["id"].', this.checked)">
-                                                    <label class="form-check-label" for="mode" id="labelswitch'.$row["id"].'">Bật</label>';
+                                                    <label class="form-check-label fw-bold" for="mode'.$row["id"].'" id="labelswitch'.$row["id"].'">Bật</label>';
                                                 }
                                                 else echo '<input class="form-check-input" type="checkbox" role="switch" id="mode'.$row["id"].'" name="status" onchange="switchChange('.$row["id"].', this.checked)">
-                                                    <label class="form-check-label" for="mode" id="labelswitch'.$row["id"].'">Tắt</label>';
+                                                    <label class="form-check-label" for="mode'.$row["id"].'" id="labelswitch'.$row["id"].'">Tắt</label>';
                                         echo '
                                                 </div>
                                             </td>
@@ -101,7 +101,12 @@
         function(result){
             if(Number(result) > 0)
             {
-                $(`#labelswitch${num}`).text((check)?"Bật":"Tắt");
+                if(check){
+                    $(`#labelswitch${num}`).text("Bật").addClass("fw-bold");
+                }
+                else{
+                    $(`#labelswitch${num}`).text("Tắt").removeClass("fw-bold");
+                }
             }
             else {
                 alert("Có lỗi xảy ra!");

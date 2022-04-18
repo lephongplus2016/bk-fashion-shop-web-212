@@ -61,21 +61,21 @@
                             <label for="collection" class="col-sm-2 col-form-label">Tên bộ sưu tập</label>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control" id="collection" name="collection" placeholder="ex: Summer collection" onchange="document.getElementById('alert1').style.display = 'none';">
-                                <span class="alertForm" id="alert1" style="font-size: smaller;">Vui lòng điền tên bộ sưu tập</span>
+                                <span class="invalid-feedback" id="alert1">Vui lòng điền tên bộ sưu tập</span>
                             </div>   
                         </div>
                         <div class="form-group row">
                             <label for="sliderName" class="col-sm-2 col-form-label">Tiêu đề</label>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control" id="sliderName" name="sliderName" placeholder="Tiêu đề" onchange="document.getElementById('alert2').style.display = 'none';">
-                                <span class="alertForm" id="alert2" style="font-size: smaller;">Vui lòng điền tiêu đề cho slider</span>
+                                <span class="invalid-feedback" id="alert2">Vui lòng điền tiêu đề cho slider</span>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="contents" class="col-sm-2 col-form-label">Mô tả</label>
                             <div class="col-sm-6">
                                 <textarea id="contents" name="contents" class="form-control" placeholder="Mô tả ngắn" style="width:100%;" onchange="document.getElementById('alert3').style.display = 'none';"></textarea>
-                                <span class="alertForm" id="alert3" style="font-size: smaller;">Vui lòng điền mô tả cho slider</span>
+                                <span class="invalid-feedback" id="alert3">Vui lòng điền mô tả cho slider</span>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -85,8 +85,8 @@
                                 <div class="pt-2">
                                     <img id="upload-img" style="max-width: 100%">
                                 </div>
-                                <span class="alertForm" id="alert4" style="font-size: smaller;">Vui lòng chọn ảnh cho slider</span>
-                                <span class="alertForm" id="alert5" style="font-size: smaller;">Vui lòng chọn file có các định dạng sau .jpeg .jpg .png .gif</span>
+                                <span class="invalid-feedback" id="alert4">Vui lòng chọn ảnh cho slider</span>
+                                <span class="invalid-feedback" id="alert5">Vui lòng chọn file có các định dạng sau .jpeg .jpg .png .gif</span>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -111,9 +111,8 @@
 </div>
 
 <script>
-    const x = document.getElementsByClassName("alertForm");
+    const x = document.getElementsByClassName("invalid-feedback");
     for(var i = 0; i < x.length; i++){
-        x[i].style.color = 'red';
         x[i].style.display = 'none';
     }
 
