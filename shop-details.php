@@ -98,7 +98,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
 <!-- end image product -->
 <!-- begin product detail -->
 <?php 
- $getProduct = $product->getProductDetailpPage($id);
+ $getProduct = $product->getProductDetailShopPage($id);
  if($getProduct){
         while($productRow = $getProduct->fetch_assoc())
                 {
@@ -264,7 +264,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
 
                                 <!-- begin comment -->
                                 <div class="tab-pane" id="tabs-6" role="tabpanel">
-                                    <div class="product__details__tab__content">
+                                    <!-- <div class="product__details__tab__content">
                                         <div class="product__details__tab__content__item">
                                             <h5>Đánh giá khách hàng</h5>
                                             <p>A Pocket PC is a handheld computer, which features many of the same
@@ -291,7 +291,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
                                                 breathable. Velvet is a great choice for dinner party jacket and can be
                                             worn all year round.</p>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <?php
                                     $login_check = Session::get('user_login');
                                     if($login_check == true){
@@ -315,9 +315,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
                                         <button style = "margin-top: 10px;" type="submit" name = "submit" class="btn btn-primary">Gửi Bình Luận</button>
                                     </form>';
                                     }
+                                    else {
+                                        echo '<p class="fw-normal" style="margin-top: 20px">Đăng nhập để bình luận <a href = "login.php?productId='.$_GET["productId"].'">Đến đăng nhập</a></p>';
+                                    }
                                     ?>
                                     <div class="container-commented-contented">
-                                    <h2 class="comments-from-users">Đánh giá sản phẩm</h2>
+                                    <h2 class="comments-from-users">Bình luận sản phẩm</h2>
                                         <?php 
                                                     $comments = $comment->getImgByCommentProductId($_GET["productId"]);
                                                     if($comments != false) {

@@ -1,15 +1,16 @@
 <?php
     include 'inc/header.php';
 ?>
-
 <?php
+$productId = "";
+    if(isset($_GET['productId'])){
+        $productId = $_GET['productId'];
+    }
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
         
-        $login_user = $user->login_user($_POST);        
+        $login_user = $user->login_user($_POST, $productId);        
     }
 ?>
-
-
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
