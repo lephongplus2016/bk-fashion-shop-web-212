@@ -90,8 +90,8 @@
                             </a>
                             <div class="collapse" id="collapseLayouts7" aria-labelledby="headingOne" data-bs-parent="#collapseLayouts3">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.php">Thêm Banner</a>
-                                    <a class="nav-link" href="layout-static.php">Danh sách Banner</a>
+                                    <a class="nav-link" href="banner-add.php">Thêm Banner</a>
+                                    <a class="nav-link" href="banner-list.php">Danh sách Banner</a>
 
                                 </nav>
                             </div>

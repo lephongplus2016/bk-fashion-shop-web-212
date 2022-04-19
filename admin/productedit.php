@@ -1,6 +1,9 @@
 <?php  ob_start(); include 'inc_admin/header.php' ?>
 
 <?php include 'inc_admin/sidebar.php' ?>
+<?php include '../classes/category.php'; ?>
+
+<?php include '../classes/brand.php'; ?>
 
 <?php include '../classes/product.php'; 
 
@@ -12,7 +15,8 @@
         echo "<script>window.location ='productlist.php'</script>";
     }   
 
-
+	$category = new category();
+    $brand = new brand();
 	$product = new product();
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){ 
          $check = $product->update_product($_POST, $_FILES,$id);
@@ -54,8 +58,16 @@
 		          	<div class="col-sm-4">
 		          		<select id="select" name="category"  class="form-control">
 	                            <option>Select Category</option>
-	                            <option value="1" selected>Áo</option>
-	                            <option value="0">Quần</option>
+	                            <?php $catlist = $category->showCategorybyName(); 
+                                if($catlist != false) { 
+                                    while ($row = $catlist->fetch_assoc()) { ?>
+                                                           
+                            <option 
+                            <?php if($row['categoryId'] == $productRow['categoryId'])  { echo "selected";} ?>
+                             value="<?php echo $row['categoryId']; ?>"><?php echo $row['categoryName']; ?></option>
+
+                           <?php    }    
+                          			 }   ?>  
 	                        </select>
 		          	</div>
 	           </div>
@@ -65,8 +77,17 @@
 		          	<div class="col-sm-4">
 		          		<select id="select" name="brand"  class="form-control">
 	                            <option>Select Brand</option>
-	                            <option value="1" selected>Kappa</option>
-	                            <option value="0">Nike</option>
+	                            <?php $brandlist = $brand->showBrandbyName(); 
+                                if($catlist != false) { 
+                                    while ($row = $brandlist->fetch_assoc()) { ?>
+                                                           
+                            <option 
+                            <?php if($row['brandId'] == $productRow['brandId'])  { echo "selected";} ?>
+                            value="<?php echo $row['brandId']; ?>"><?php echo $row['brandName']; ?></option>
+
+                           <?php    }  ?>   
+                          <?php }   ?>   
+
 	                        </select>
 		          	</div>
 	           </div>

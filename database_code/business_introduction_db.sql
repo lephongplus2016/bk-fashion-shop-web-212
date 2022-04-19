@@ -313,6 +313,28 @@ INSERT INTO `tbl_slider` (`id`, `sliderName`, `collectionName`, `description`, `
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `tbl_banner`
+--
+
+CREATE TABLE `tbl_banner` (
+  `bannerId` int(11) NOT NULL,
+  `bannerName` varchar(255) NOT NULL,
+  `bannerImage` varchar(255) NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `tbl_banner`
+--
+
+INSERT INTO `tbl_banner` (`bannerId`, `bannerName`, `bannerImage`, `status`) VALUES
+(1, 'Shoes Spring 2030', 'banner-3.jpg', 0),
+(2, 'Accessories', 'banner-2.jpg', 0),
+(3, 'Clothing Collections 2030', 'banner-1.jpg', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `tbl_user`
 --
 
@@ -431,6 +453,12 @@ ALTER TABLE `tbl_slider`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `tbl_banner`
+--
+ALTER TABLE `tbl_banner`
+  ADD PRIMARY KEY (`bannerId`);
+
+--
 -- Chỉ mục cho bảng `tbl_user`
 --
 ALTER TABLE `tbl_user`
@@ -517,6 +545,12 @@ ALTER TABLE `tbl_product`
 --
 ALTER TABLE `tbl_slider`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT cho bảng `tbl_banner`
+--
+ALTER TABLE `tbl_banner`
+  MODIFY `bannerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_user`

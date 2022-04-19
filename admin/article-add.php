@@ -52,14 +52,14 @@
                             <label for="articleTitle" class="col-sm-2 col-form-label">Tiêu đề bài viết</label>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control" id="articleTitle" name="articleTitle" placeholder="Tên tiêu đề..." onchange="document.getElementById('alert1').style.display = 'none';">
-                                <span class="alertForm" id="alert1" style="font-size: smaller;">Vui lòng điền tiêu đề</span>
+                                <span class="invalid-feedback" id="alert1">Vui lòng điền tiêu đề</span>
                             </div>   
                         </div>
                         <div class="form-group row">
                             <label for="author" class="col-sm-2 col-form-label">Tác giả</label>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control" id="author" name="author" placeholder="Tên người viết..." onchange="document.getElementById('alert2').style.display = 'none';">
-                                <span class="alertForm" id="alert2" style="font-size: smaller;">Vui lòng điền tên người viết</span>
+                                <span class="invalid-feedback" id="alert2">Vui lòng điền tên người viết</span>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -78,8 +78,8 @@
                                 <div class="pt-2">
                                     <img id="upload-img" style="max-width: 100%">
                                 </div>
-                                <span class="alertForm" id="alert3" style="font-size: smaller;">Vui lòng chọn ảnh đại diện</span>
-                                <span class="alertForm" id="alert4" style="font-size: smaller;">Vui lòng chọn file có các định dạng sau .jpeg .jpg .png .gif</span>
+                                <span class="invalid-feedback" id="alert3">Vui lòng chọn ảnh đại diện</span>
+                                <span class="invalid-feedback" id="alert4">Vui lòng chọn file có các định dạng sau .jpeg .jpg .png .gif</span>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -96,9 +96,8 @@
 </div>
 
 <script>
-    const x = document.getElementsByClassName("alertForm");
+    const x = document.getElementsByClassName("invalid-feedback");
     for(var i = 0; i < x.length; i++){
-        x[i].style.color = 'red';
         x[i].style.display = 'none';
     }
 
