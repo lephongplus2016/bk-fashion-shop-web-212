@@ -55,7 +55,7 @@
                                     <h6><?php echo $row['productName'] ; ?></h6>
                                     <a href="#" class="add-cart">+ Thêm vào giỏ hàng</a>
                                    
-                                    <h5><?php echo $row['price'] ; ?> VNĐ</h5>
+                                    <h5><?php echo $fm->format_currency($row['price'])  ; ?> VNĐ</h5>
                                     
                                 </div>
                             </div>
@@ -72,7 +72,7 @@
                     <!-- pagination -->
                     <div class="row">
                         <?php
-                                    $number_of_product_per_page = 1;
+                                    $number_of_product_per_page = 3;
                                     if(!isset($_GET['page'])){
                                         $page = 1;
                                     }else{
