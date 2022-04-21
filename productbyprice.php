@@ -24,7 +24,7 @@
                         <div class="breadcrumb__links">
                             <a href="./index.php">Home</a>
                             <a href="./shop.php">Shop</a>
-                            <a href="./shop.php">Price</a>                                                    
+                            <a href="./shop.php">Giá</a>                                                    
                             <span>
                             <?php
 				               if($pricelv == 0){
@@ -151,7 +151,7 @@
                 
 <?php
     }
-    else {
+    else {           // if there is no product match
         echo "This Price is temporarily out of product!";
     }
 

@@ -24,7 +24,7 @@
                         <div class="breadcrumb__links">
                             <a href="./index.php">Home</a>
                             <a href="./shop.php">Shop</a>
-                            <a href="./shop.php">Categories</a>                                                    
+                            <a href="./shop.php">Phân Loại</a>                                                    
                             <span>
                             <?php
 				               $getNameCat = $category->getNameCat($categoryId);
@@ -91,8 +91,7 @@
 <?php             
         }
 ?>
-                </div>
-                    <!-- pagination -->
+                </div> <!-- pagination -->                   
                     <div class="row">
                         <?php
                                     $number_of_product_per_page = 3;
@@ -141,7 +140,7 @@
 
 <?php
     }  
-    else {
+    else {      // if there is no product match
         echo "This category is temporarily out of stock!";
     }
 ?>

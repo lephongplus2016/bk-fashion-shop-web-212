@@ -22,7 +22,7 @@
                         <div class="breadcrumb__links">
                             <a href="./index.php">Home</a>
                             <a href="./shop.php">Shop</a>   
-                            <a href="./shop.php">Branding</a> 
+                            <a href="./shop.php">Thương Hiệu</a> 
                                                                                 
                             <span>
                             <?php
@@ -143,7 +143,7 @@
                <!-- End pagination -->
 <?php
     }
-    else {
+    else {   // if there is no product match
         echo "This brand is temporarily out of stock!";
     }
 
