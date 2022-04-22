@@ -231,7 +231,7 @@ class product
 
 
     public function show_product_by_pagination() {
-        $number_of_product_per_page = 3;
+        $number_of_product_per_page = 9;
             if(!isset($_GET['page'])){
                 $page = 1;
             }else{
