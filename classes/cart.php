@@ -78,7 +78,9 @@ class cart
 
 	public function getProductCart(){
 		$userId = Session::get('user_id');
-		if (empty($user_id)){
+		// if (empty($user_id)){
+		$login_check = Session::get('user_login'); 
+        if($login_check==false){
 			$sId = session_id();
 			$query = "SELECT * FROM tbl_cart_guest WHERE sId = '$sId'";
 			$result = $this->db->select($query);

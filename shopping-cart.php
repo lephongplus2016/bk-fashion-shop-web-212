@@ -132,12 +132,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_cart'])){
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="continue__btn">
-                                <a href="shop.php">Continue Shopping</a>
+                                <a href="shop.php">Quay lại shop</a>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="continue__btn update__btn">  
-                                <button type="submit" name="update_cart"/>Update cart <i class="fa fa-spinner"></i></button>
+                                <button type="submit" name="update_cart"/>Cập nhật giỏ hàng <i class="fa fa-spinner"></i></button>
                             </div>
                         </div>
                     </div>
@@ -167,7 +167,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_cart'])){
                             }
                             ?>
                         </ul>
-                        <a href="#" class="primary-btn">Proceed to checkout</a>
+                        <a href="checkout.php" class="primary-btn">Đặt đơn</a>
                     </div>
                 </div>
             </div>
