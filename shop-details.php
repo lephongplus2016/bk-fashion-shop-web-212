@@ -205,12 +205,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
                                                 <input type="text" name="quantity" value="1">
                                             </div>
                                         </div>
+
+                                        <!-- dành cho price dùng cho post-->
+                                        <input type="hidden" name="price" value="<?php echo $productRow["price"] ?>"  />
                                         <input name="cart" type="submit" class="primary-btn" value="Thêm vào giỏ hàng"/>
                                         <?php
                                             if(isset($addCart)){
                                                 echo "<br>";
                                                  echo $addCart ;
-                                                // var_dump($addCart);
+                                                
                                                 }
                                             ?>  
                                     </div>

@@ -111,15 +111,30 @@ class cart
 		$cartId = mysqli_real_escape_string($this->db->link, $cartId);
 		$quantity = mysqli_real_escape_string($this->db->link, $quantity);
 
-// query
-		$query = "UPDATE tbl_cart SET
+
+		$userId = Session::get('user_id');
+		if (empty($user_id)){
+			$query = "UPDATE tbl_cart_guest SET
 
 					quantity = '$quantity'
 
 					WHERE cartId = '$cartId'";
 		//  execute
 		$result = $this->db->update($query);
-		return $result;
+			return $result;
+		}
+		else {
+			// query
+			$query = "UPDATE tbl_cart SET
+
+						quantity = '$quantity'
+
+						WHERE cartId = '$cartId'";
+			//  execute
+			$result = $this->db->update($query);
+			return $result;
+		}
+
 		// if($result){
 		// 	$alert = "<span class='success'>Product quantity Updated Successfully</span>";
 		// 	return $alert;
@@ -132,7 +147,13 @@ class cart
 	public function update_quantity_cart_all($data) {
 		// lay so san pham trong cart
 		$userId = Session::get('user_id');
-		$query = "SELECT * FROM tbl_cart WHERE userId = '$userId'";
+		if (empty($user_id)){
+			$sId = session_id();
+			$query = "SELECT * FROM tbl_cart_guest WHERE sId = '$sId'";
+		}
+		else{
+			$query = "SELECT * FROM tbl_cart WHERE userId = '$userId'";
+		}
 		$getnum = $this->db->select($query);
 		$num_pd_cart = $getnum->num_rows;
 		for ($x = 0; $x < $num_pd_cart; $x++) {
@@ -154,7 +175,14 @@ class cart
 
 
 	public function delete_product_cart($cartId){
+		$userId = Session::get('user_id');
+		if (empty($user_id)){
+			$query = "DELETE FROM tbl_cart_guest where cartId = '$cartId'";
+		}
+		else {
 			$query = "DELETE FROM tbl_cart where cartId = '$cartId'";
+
+		}
 			$result = $this->db->delete($query);
 			if($result){
 				$alert = "<span class='success'>Đã xóa khỏi giỏ hàng</span>";
@@ -216,7 +244,6 @@ class cart
 					    $oldPrice = Session::get('sum');
 					    Session::set('sum',$oldPrice + $price*$quantity);
 					    // end cart session
-
 						$msg = "<span class='success'>Sản phẩm đã được thêm vào giỏ hàng</span>";
 						return $msg;
 					}	
