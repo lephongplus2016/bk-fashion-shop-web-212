@@ -78,17 +78,29 @@ class cart
 
 	public function getProductCart(){
 		$userId = Session::get('user_id');
-		$query = "SELECT * FROM tbl_cart WHERE userId = '$userId'";
-		$result = $this->db->select($query);
-		return $result;
+		if (empty($user_id)){
+			$sId = session_id();
+			$query = "SELECT * FROM tbl_cart_guest WHERE sId = '$sId'";
+			$result = $this->db->select($query);
+			return $result;
+		}
+		else{
+			$query = "SELECT * FROM tbl_cart WHERE userId = '$userId'";
+			$result = $this->db->select($query);
+			return $result;
+		}
+		
 	}
 	
 // có thì mới hiển thị ở header
 // thì mới cho thanh toán
 	public function check_cart(){
 		$userId = Session::get('user_id');
-		if ($userId == ''){
-			return false;
+		if (empty($user_id)){
+			$sId = session_id();
+			$query = "SELECT * FROM tbl_cart_guest WHERE sId = '$sId'";
+			$result = $this->db->select($query);
+			return $result;
 		}
 		$query = "SELECT * FROM tbl_cart WHERE userId = '$userId'";
 		$result = $this->db->select($query);
@@ -156,6 +168,65 @@ class cart
 		}
 
 
+	// cho khách
+	public function insert_cart_guest($id,$data){
+		$quantity = $this->fm->validation($data['quantity']);
+
+		$productId = mysqli_real_escape_string($this->db->link, $id);
+		$sId = session_id();
+		$size = mysqli_real_escape_string($this->db->link, $data['size']);
+
+		// lấy product record đang buy
+		$query = "SELECT * FROM tbl_product WHERE productId = '$productId' ";
+		$result = $this->db->select($query)->fetch_assoc();
+		// echo print_r($result);
+
+		// lấy các trường cần thiết
+		$productName = $result['productName'];
+		$price = $result['price'];
+
+		// lấy hình ảnh sản phẩm
+		$query = "SELECT * FROM `tbl_image_product` WHERE productId = '$productId'";
+		$image_list = $this->db->select($query);
+		while($i = $image_list->fetch_assoc())
+        {
+        	$image = $i['image'];
+        	break;
+        }
+        
+
+		// kiểm tra đã có chưa
+		$queryCheckAdded = "SELECT * FROM tbl_cart_guest WHERE productId = '$productId' AND sId = '$sId' ";
+		$result_queryCheckAdded = $this->db->select($queryCheckAdded);
+		if($result_queryCheckAdded){
+			$msg = "<span class='error'>Sản phẩm đã có trong giỏ hàng</span>";
+			return $msg;
+		}
+		// còn chưa thì insert
+		else {		
+				$query_insert ="INSERT INTO tbl_cart_guest (productId, sId, productName, price, quantity, image, size) VALUES ('$productId', 
+			'$sId','$productName','$price', '$quantity',  '$image', $size)";
+						$result_insert = $this->db->insert($query_insert);
+					if($result_insert){
+						// set cart session
+					    $quantity = $data['quantity'];
+					    $price = $data['price'];
+					    $oldQty = Session::get('qty');
+					    Session::set('qty',$oldQty + $quantity);
+					    $oldPrice = Session::get('sum');
+					    Session::set('sum',$oldPrice + $price*$quantity);
+					    // end cart session
+
+						$msg = "<span class='success'>Sản phẩm đã được thêm vào giỏ hàng</span>";
+						return $msg;
+					}	
+					else{
+						header('Location:404.php');
+
+					}
+		}
+		
+	}
 
 
 }

@@ -3,13 +3,13 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 19, 2022 at 10:11 AM
+-- Generation Time: Apr 23, 2022 at 11:29 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+00:00";
+SET time_zone = "+07:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -40,7 +40,7 @@ CREATE TABLE `tbl_article` (
 --
 
 INSERT INTO `tbl_article` (`id`, `title`, `content`, `datetime`, `writer`) VALUES
-(2, 'Săn lùng những đôi sneaker phù hợp với học sinh', '<h2><strong>Gia hạn chương tr&igrave;nh Sự kiện hy hữu đến 8/3</strong></h2>\r\n\r\n<p>Nhằm mang đến cho kh&aacute;ch h&agrave;ng cơ hội mua h&agrave;ng hiệu với gi&aacute; tốt nhất, Ho&agrave;ng Ph&uacute;c thực hiện gia hạn chương tr&igrave;nh&nbsp;đến hết ng&agrave;y 08/3/2022. Chương tr&igrave;nh sẽ &aacute;p dụng cho cả hai h&igrave;nh thức: mua h&agrave;ng online v&agrave; mua trực tiếp.</p>\r\n\r\n<h2><strong>C&aacute;c sản phẩm giảm gi&aacute; chỉ từ 299.000đ</strong></h2>\r\n\r\n<h3><strong>&Aacute;o thun đồng gi&aacute; chỉ từ 299.000đ</strong></h3>\r\n\r\n<p>&Aacute;o thun h&agrave;ng hiệu từ 299.000đ:</p>\r\n', '2022-04-15 21:45:53', 'Chuyên gia sneaker');
+(2, 'Săn lùng những đôi sneaker phù hợp với học sinh', '<h2><strong>Gia hạn chương tr&igrave;nh Sự kiện hy hữu đến 8/3</strong></h2>\r\n\r\n<p>Nhằm mang đến cho kh&aacute;ch h&agrave;ng cơ hội mua h&agrave;ng hiệu với gi&aacute; tốt nhất, Ho&agrave;ng Ph&uacute;c thực hiện gia hạn chương tr&igrave;nh&nbsp;đến hết ng&agrave;y 08/3/2022. Chương tr&igrave;nh sẽ &aacute;p dụng cho cả hai h&igrave;nh thức: mua h&agrave;ng online v&agrave; mua trực tiếp.</p>\r\n\r\n<h2><strong>C&aacute;c sản phẩm giảm gi&aacute; chỉ từ 299.000đ</strong></h2>\r\n\r\n<h3><strong>&Aacute;o thun đồng gi&aacute; chỉ từ 299.000đ</strong></h3>\r\n\r\n<p>&Aacute;o thun h&agrave;ng hiệu từ 299.000đ:</p>\r\n', '2022-04-15 14:45:53', 'Chuyên gia sneaker');
 
 -- --------------------------------------------------------
 
@@ -107,9 +107,10 @@ CREATE TABLE `tbl_cart` (
 --
 
 INSERT INTO `tbl_cart` (`cartId`, `productId`, `userId`, `productName`, `price`, `quantity`, `image`, `size`) VALUES
-(1, 22, 6, 'Áo 5', '40000', 1, 'ce484ed1b7.jpg', '20'),
-(2, 15, 6, 'Nón kappa', '390000', 4, '2b8956ff58.jpg', '24'),
-(3, 22, 0, 'Áo 5', '40000', 1, 'ce484ed1b7.jpg', '20');
+(8, 74, 6, 'Kappa ba lô nam/nữ', '399000', 2, '27caa3fa1e.jpg', '3'),
+(9, 73, 6, 'Kappa ba lô nam/nữ', '399000', 3, 'f08a7adaba.jpg', '4'),
+(10, 69, 6, 'Ecko Unltd nón nam', '199000', 1, '32076ad5d3.jpg', '0'),
+(11, 66, 6, 'Replay váy', '2396000', 1, '75291c8d89.jpg', '33');
 
 -- --------------------------------------------------------
 
@@ -119,13 +120,22 @@ INSERT INTO `tbl_cart` (`cartId`, `productId`, `userId`, `productName`, `price`,
 
 CREATE TABLE `tbl_cart_guest` (
   `cartId` int(11) NOT NULL,
-  `productId` int(11) NOT NULL,
-  `sId` int(11) NOT NULL,
+  `productId` varchar(255) NOT NULL,
+  `sId` varchar(255) NOT NULL,
   `productName` varchar(255) NOT NULL,
   `price` varchar(255) NOT NULL,
   `quantity` int(11) NOT NULL,
-  `image` varchar(255) NOT NULL
+  `image` varchar(255) NOT NULL,
+  `size` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_cart_guest`
+--
+
+INSERT INTO `tbl_cart_guest` (`cartId`, `productId`, `sId`, `productName`, `price`, `quantity`, `image`, `size`) VALUES
+(10, '74', '9aae75t7gekfuesvfbb4uh7rtl', 'Kappa ba lô nam/nữ', '399000', 1, '27caa3fa1e.jpg', '0'),
+(11, '73', 'i9gu9h5mhbadl0ton4afp6aevg', 'Kappa ba lô nam/nữ', '399000', 1, 'f08a7adaba.jpg', '0');
 
 -- --------------------------------------------------------
 
@@ -195,9 +205,9 @@ CREATE TABLE `tbl_comment_product` (
 --
 
 INSERT INTO `tbl_comment_product` (`commentId`, `userId`, `productId`, `dateComment`, `content`, `image`) VALUES
-(1, 6, 22, '2022-04-15 21:42:37', 'Áo đẹp lắm', ''),
-(2, 6, 22, '2022-04-15 21:43:26', 'Áo xịn', '8aaedbef97.jpg'),
-(3, 6, 22, '2022-04-15 21:47:17', 'fsdfsdfsd', '');
+(1, 6, 22, '2022-04-15 14:42:37', 'Áo đẹp lắm', ''),
+(2, 6, 22, '2022-04-15 14:43:26', 'Áo xịn', '8aaedbef97.jpg'),
+(3, 6, 22, '2022-04-15 14:47:17', 'fsdfsdfsd', '');
 
 -- --------------------------------------------------------
 
@@ -722,13 +732,13 @@ ALTER TABLE `tbl_brand`
 -- AUTO_INCREMENT for table `tbl_cart`
 --
 ALTER TABLE `tbl_cart`
-  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tbl_cart_guest`
 --
 ALTER TABLE `tbl_cart_guest`
-  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tbl_category`

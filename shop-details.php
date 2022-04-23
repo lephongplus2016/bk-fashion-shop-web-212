@@ -27,7 +27,17 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
 <?php
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
     $userId = Session::get('user_id');
-    $addCart = $cart->insert_cart($id,$userId,$_POST);
+    $login_check = Session::get('user_login'); 
+    
+    // cho user
+    if($login_check==true){
+        $addCart = $cart->insert_cart($id,$userId,$_POST);
+    }
+    // cho khách
+    else{
+        $addCart = $cart->insert_cart_guest($id,$_POST);
+    }
+    header("Refresh:0");
 }
 
 ?>
@@ -199,7 +209,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
                                         <?php
                                             if(isset($addCart)){
                                                 echo "<br>";
-                                                echo $addCart ;
+                                                 echo $addCart ;
+                                                // var_dump($addCart);
                                                 }
                                             ?>  
                                     </div>

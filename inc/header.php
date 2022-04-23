@@ -148,7 +148,8 @@ spl_autoload_register(function($class){
                         <div class="price">
                             <?php
                                         $check_cart = $cart->check_cart();
-                                        if($check_cart){
+                                        // check nếu có cart
+                                        if($check_cart->num_rows>0){
                                             $sum = Session::get("sum");
                                             $qty = Session::get("qty");
                                             echo $fm->format_currency($sum).' VNĐ - '.$qty.' sản phẩm';
