@@ -36,7 +36,7 @@
                         <h2>'.$data["title"].'</h2>
                         <ul>
                             <li>By '.$data["writer"].'</li>
-                            <li>'.date("F j, Y", strtotime($data["datetime"])).'</li>
+                            <li>'.date("d-m-Y", strtotime($data["datetime"])).'</li>
                             <li>8 Comments</li>
                         </ul>';
                         ?>

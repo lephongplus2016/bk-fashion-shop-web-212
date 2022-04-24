@@ -3,9 +3,7 @@
 ?>
 
 <?php include 'classes/article.php'; 
-    include_once('helper/format.php');
     $article = new Article();
-    $fm = new Format();
 	$list_article = $article->show_article();
 
     echo '<script>
@@ -37,7 +35,7 @@
                         <div class="blog__item">
                             <div class="blog__item__pic set-bg" data-setbg="img/article/'.$row["image"].'"></div>
                             <div class="blog__item__text">
-                                <span><img src="img/icon/calendar.png" alt="">'.$fm->formatDate($row["datetime"]).'</span>
+                                <span><img src="img/icon/calendar.png" alt="">'.$fm->formatDate1($row["datetime"]).'</span>
                                 <h5>'.$row["title"].'</h5>
                                 <a href="blog-details.php?id='.$row["id"].'">Read More</a>
                             </div>

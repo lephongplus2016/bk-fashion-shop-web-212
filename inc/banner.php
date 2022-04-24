@@ -22,7 +22,7 @@
                         </div>
                         <div class="banner__item__text">
                             <h2><?php echo $row['bannerName'];?></h2>
-                            <a href="#">Shop now</a>
+                            <a href="#">Mua ngay</a>
                         </div>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                         </div>
                         <div class="banner__item__text">
                             <h2><?php echo $row['bannerName'];?></h2>
-                            <a href="#">Shop now</a>
+                            <a href="#">Mua ngay</a>
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                         </div>
                         <div class="banner__item__text">
                             <h2><?php echo $row['bannerName'];?></h2>
-                            <a href="#">Shop now</a>
+                            <a href="#">Mua ngay</a>
                         </div>
                     </div>
                 </div>
