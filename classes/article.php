@@ -148,4 +148,21 @@ class Article
         $query = "DELETE FROM `tbl_article` WHERE `id` = '$id';";
         return $this->db->delete($query);
     }
+
+    public function show_article_by_pagination() {
+        $number_of_article_per_page = 6;
+            if(!isset($_GET['page'])){
+                $page = 1;
+            }else{
+                $page = $_GET['page'];
+            }
+            $index_page = ($page-1)*$number_of_article_per_page;
+
+            $query = "SELECT `tbl_article`.* , `tbl_image_article`.`image`
+            FROM `tbl_article` JOIN `tbl_image_article` ON `tbl_article`.`id` =`tbl_image_article`.`articleId`
+            ORDER BY `tbl_article`.`id` DESC
+            LIMIT $index_page,$number_of_article_per_page";
+        $result = $this->db->select($query);
+        return $result;
+    }
 }
