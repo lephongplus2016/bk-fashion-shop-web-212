@@ -77,7 +77,7 @@ class cart
 
 
 	public function getProductCart(){
-		$userId = Session::get('user_id');
+		$user_id = Session::get('user_id');
 		// if (empty($user_id)){
 		$login_check = Session::get('user_login'); 
         if($login_check==false){
@@ -87,7 +87,7 @@ class cart
 			return $result;
 		}
 		else{
-			$query = "SELECT * FROM tbl_cart WHERE userId = '$userId'";
+			$query = "SELECT * FROM tbl_cart WHERE userId = '$user_id'";
 			$result = $this->db->select($query);
 			return $result;
 		}
@@ -97,14 +97,14 @@ class cart
 // có thì mới hiển thị ở header
 // thì mới cho thanh toán
 	public function check_cart(){
-		$userId = Session::get('user_id');
+		$user_id = Session::get('user_id');
 		if (empty($user_id)){
 			$sId = session_id();
 			$query = "SELECT * FROM tbl_cart_guest WHERE sId = '$sId'";
 			$result = $this->db->select($query);
 			return $result;
 		}
-		$query = "SELECT * FROM tbl_cart WHERE userId = '$userId'";
+		$query = "SELECT * FROM tbl_cart WHERE userId = '$user_id'";
 		$result = $this->db->select($query);
 		return $result;
 	}	
@@ -114,7 +114,7 @@ class cart
 		$quantity = mysqli_real_escape_string($this->db->link, $quantity);
 
 
-		$userId = Session::get('user_id');
+		$user_id = Session::get('user_id');
 		if (empty($user_id)){
 			$query = "UPDATE tbl_cart_guest SET
 
@@ -148,13 +148,13 @@ class cart
 
 	public function update_quantity_cart_all($data) {
 		// lay so san pham trong cart
-		$userId = Session::get('user_id');
+		$user_id = Session::get('user_id');
 		if (empty($user_id)){
 			$sId = session_id();
 			$query = "SELECT * FROM tbl_cart_guest WHERE sId = '$sId'";
 		}
 		else{
-			$query = "SELECT * FROM tbl_cart WHERE userId = '$userId'";
+			$query = "SELECT * FROM tbl_cart WHERE userId = '$user_id'";
 		}
 		$getnum = $this->db->select($query);
 		$num_pd_cart = $getnum->num_rows;
@@ -177,7 +177,7 @@ class cart
 
 
 	public function delete_product_cart($cartId){
-		$userId = Session::get('user_id');
+		$user_id = Session::get('user_id');
 		if (empty($user_id)){
 			$query = "DELETE FROM tbl_cart_guest where cartId = '$cartId'";
 		}

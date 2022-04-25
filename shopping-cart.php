@@ -40,7 +40,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_cart'])){
                             <a href="./shop.php">Shop</a>
                             <span>Shopping Cart</span>
                             <?php
-                            $userId = Session::get('user_id');
+                            $user_id = Session::get('user_id');
                             if (empty($user_id)){
                                 echo "<br>Quý khách vui lòng đăng nhập để mua hàng!";
                             }
