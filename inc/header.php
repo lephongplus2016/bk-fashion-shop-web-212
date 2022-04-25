@@ -56,6 +56,9 @@ spl_autoload_register(function($class){
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>-->
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <style type="text/css">
         span.error
         {
@@ -123,7 +126,8 @@ spl_autoload_register(function($class){
                 <div class="col-lg-6 col-md-6">
                     <nav class="header__menu mobile-menu">
                         <ul>
-                            <li class="active"><a href="./index.php">Home</a></li>
+                            <!--<li class="active"><a href="./index.php">Home</a></li>-->
+                            <li><a href="./index.php">Home</a></li>
                             <li><a href="./shop.php">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
@@ -147,7 +151,7 @@ spl_autoload_register(function($class){
                             <?php
                                         $check_cart = $cart->check_cart();
                                         // check nếu có cart
-                                        if($check_cart){
+                                        if($check_cart !== false){
                                             $sum = Session::get("sum");
                                             $qty = Session::get("qty");
                                             echo $fm->format_currency($sum).' VNĐ - '.$qty.' sản phẩm';
@@ -168,23 +172,21 @@ spl_autoload_register(function($class){
                                 ?>
                                 
                                 <div class="header__top__hover">
-                                <span><i class="fa fa-user fa-fw"></i> <i class="arrow_carrot-down"></i></span>
+                                <span><i class="fa fa-user fa-fw"></i><i class="arrow_carrot-down"></i></span>
                                 <ul>
-                                    <li>Hello<li>
-                                    <li><a href="#!">Settings</a></li>
-                                    <li><a href="#!">Activity Log</a></li>
+                                    <li><a href="user-info.php">Hồ sơ của tôi</a></li>
+                                    <?php
+                                    // quyền admin
+                                    $isAdmin = Session::get('user_role');
+                                    if ($isAdmin == 'admin') {
+                                        echo '<li><a href="admin/index.php">Trang admin</a></li> ';
+                                    } 
+                                    ?>
+                                    <hr class="dropdown-divider"/>
                                     <li><a href="?user_id=<?php echo Session::get('user_id')?>">Đăng xuất</a></li>
                                 </ul>
                             </div>
-                                <?php
-                                echo '<br/>Xin chào '.Session::get("user_name");
-                                
-                            } 
-
-                            // quyền admin
-                            $isAdmin = Session::get('user_role');
-                            if ($isAdmin == 'admin') {
-                                echo '<br/><a href="admin/index.php" class="btn btn-info">Admin page</a>';
+                        <?php 
                             } 
                         ?>
 

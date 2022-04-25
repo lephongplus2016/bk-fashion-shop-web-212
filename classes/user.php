@@ -1,6 +1,7 @@
 <?php
 	$filepath = realpath(dirname(__FILE__));
 	include_once ($filepath.'/../lib/database.php');
+    include_once ($filepath.'/../lib/session.php');
 	include_once ($filepath.'/../helper/format.php');
 
 /**
@@ -139,12 +140,25 @@ class user
                 }
         }
 
+        public function profile_edit($userId, $name, $email, $address, $phone){
+            $query = "UPDATE `tbl_user` SET 
+            `name` = '$name', 
+            `email`= '$email', 
+            `address` = '$address', 
+            `phone`= '$phone'
+            WHERE userId = '$userId'" ;
+            if ($this->db->update($query)){
+                Session::set('user_name', $name);
+                return true;
+            }
+            else return false;
+        }
 
-
-
-
-
-
+        public function profile_check_unique_email($id, $email){
+            $check_email = "SELECT * FROM tbl_user WHERE email='$email' and userId != $id";
+            if ($this->db->select($check_email) === false) return true;
+            else return false;
+        }
 
 
 }
