@@ -13,6 +13,25 @@
     $userId = Session::get('user_id');
     $get_customers = $user->getUserById($userId);
     ?>
+
+<!-- order -->
+<?php
+
+    if(isset($_GET['orderid']) && $_GET['orderid']=='order'){
+       $userId = Session::get('user_id');
+       $insertOrder = $cart->insertOrder($customer_id);
+       // xóa cart sau khi insert
+       $delCart = $cart->del_all_data_cart();
+       // xóa hiển thị cart ở header
+       Session::set('sum',0);
+       Session::set('qty', 0);
+       header('Location:success.php');
+
+    }
+    
+
+ 
+?>
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-option">
         <div class="container">
@@ -72,7 +91,7 @@
                                     <input value="<?php echo $result['phone'] ?>" type="text" placeholder="Street Address" class="checkout__input__add" readonly>
                                 </div>
                                  <div class="checkout__input">
-                                    <a href="#" type="button" class="site-btn">Sửa thông tin profile</a>
+                                    <a href="user-info.php" type="button" class="site-btn">Sửa thông tin profile</a>
                                 </div>
                                 
                                 <div class="checkout__input">
@@ -158,12 +177,19 @@
                                       </label>
                                     </div>
 
-                                <button type="submit" class="site-btn" <?php
+                                <!-- <button type="submit" class="site-btn" <?php
                                         if(!$get_product_cart){
                                             echo "disabled";
                                         }
                                 ?>
-                                >PLACE ORDER</button>
+                                >PLACE ORDER</button> -->
+                                <a href="?orderid=order" class="site-btn"
+                                <?php
+                                        if(!$get_product_cart){
+                                            echo "disabled";
+                                        }
+                                ?>
+                                 ><center>Đặt hàng</center></a>
                             </div>
                         </div>
                     </div>

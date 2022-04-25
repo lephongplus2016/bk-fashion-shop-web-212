@@ -258,5 +258,34 @@ class cart
 	}
 
 
+	// begin handle order============================================================================
+	public function insertOrder($customer_id){
+			$user_id = Session::get('user_id');
+			$query = "SELECT * FROM tbl_cart WHERE userID = '$user_id'";
+			$get_product = $this->db->select($query);
+			if($get_product){
+				while($result = $get_product->fetch_assoc()){
+					$productid = $result['productId'];
+					$productName = $result['productName'];
+					$quantity = $result['quantity'];
+					$price = $result['price'] * $quantity;
+					$image = $result['image'];
+					$user_id = $user_id;
+					$query_order = "INSERT INTO tbl_order(productId,productName,quantity,price,image,userId) VALUES('$productid','$productName','$quantity','$price','$image','$user_id')";
+					$insert_order = $this->db->insert($query_order);
+				}
+			}
+
+
+		}
+	public function del_all_data_cart(){
+		$user_id = Session::get('user_id');
+		$query = "DELETE FROM tbl_cart WHERE userId = '$user_id'";
+		$result = $this->db->delete($query);
+		
+
+	}
+	// end handle order============================================================================
+
 }
 ?>

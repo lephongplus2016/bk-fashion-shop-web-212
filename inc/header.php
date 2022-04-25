@@ -140,6 +140,7 @@ spl_autoload_register(function($class){
                             </li>
                             <li><a href="./blog.php">Blog</a></li>
                             <li><a href="./contact.php">Contacts</a></li>
+                            <li><a href="./orderdetail.php">Đơn hàng</a></li>
                         </ul>
                     </nav>
                 </div>

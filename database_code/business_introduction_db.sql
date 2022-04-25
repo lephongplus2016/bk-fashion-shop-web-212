@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 24, 2022 at 06:53 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Generation Time: Apr 25, 2022 at 10:17 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -127,9 +127,8 @@ CREATE TABLE `tbl_cart` (
 --
 
 INSERT INTO `tbl_cart` (`cartId`, `productId`, `userId`, `productName`, `price`, `quantity`, `image`, `size`) VALUES
-(1, 22, 6, 'Áo 5', '40000', 1, 'ce484ed1b7.jpg', '20'),
-(2, 15, 6, 'Nón kappa', '390000', 4, '2b8956ff58.jpg', '24'),
-(3, 22, 0, 'Áo 5', '40000', 1, 'ce484ed1b7.jpg', '20');
+(5, 74, 6, 'Kappa ba lô nam/nữ', '399000', 3, '27caa3fa1e.jpg', '5'),
+(6, 72, 6, 'Kappa túi nam/nữ ', '249000', 2, 'bd6be3dbb1.jpg', '2');
 
 -- --------------------------------------------------------
 
@@ -140,12 +139,21 @@ INSERT INTO `tbl_cart` (`cartId`, `productId`, `userId`, `productName`, `price`,
 CREATE TABLE `tbl_cart_guest` (
   `cartId` int(11) NOT NULL,
   `productId` int(11) NOT NULL,
-  `sId` int(11) NOT NULL,
+  `sId` varchar(255) NOT NULL,
   `productName` varchar(255) NOT NULL,
   `price` varchar(255) NOT NULL,
   `quantity` int(11) NOT NULL,
-  `image` varchar(255) NOT NULL
+  `image` varchar(255) NOT NULL,
+  `size` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_cart_guest`
+--
+
+INSERT INTO `tbl_cart_guest` (`cartId`, `productId`, `sId`, `productName`, `price`, `quantity`, `image`, `size`) VALUES
+(6, 74, '25v1plkv3l9', 'Kappa ba lô nam/nữ', '399000', 1, '27caa3fa1e.jpg', '0'),
+(7, 74, '25v1plkv3l94sfc89b5i2tmmui', 'Kappa ba lô nam/nữ', '399000', 1, '27caa3fa1e.jpg', '0');
 
 -- --------------------------------------------------------
 
@@ -622,7 +630,7 @@ INSERT INTO `tbl_user` (`userId`, `name`, `email`, `address`, `phone`, `password
 (3, 'Phong', 'phong@gmail.com', 'Thu Duc, Ho Chi Minh city', '0123', '202cb962ac59075b964b07152d234b70', 'customer'),
 (4, 'Phong', 'phong1@gmail.com', 'Thu Duc, Ho Chi Minh city', '0123', '202cb962ac59075b964b07152d234b70', 'customer'),
 (5, 'Phong', 'phong2@gmail.com', 'Thu Duc, Ho Chi Minh city', '0123', '202cb962ac59075b964b07152d234b70', 'customer'),
-(6, 'Phong', 'a@gmail.com', 'Thu Duc, Ho Chi Minh city', '0123', '202cb962ac59075b964b07152d234b70', 'admin'),
+(6, 'Phong', 'a@gmail.com', 'Thu Duc, Ho Chi Minh city', '0123456789', '202cb962ac59075b964b07152d234b70', 'admin'),
 (7, 'Phong 3', 'phong3@gmail.com', 'Dong Hoa, Di An, Binh Duong', '0123', '202cb962ac59075b964b07152d234b70', 'customer'),
 (8, 'Phong 4 ', 'phong4@gmail.com', 'Dong Hoa, Di An, Binh Duong', '0123', '202cb962ac59075b964b07152d234b70', 'customer');
 
@@ -761,13 +769,13 @@ ALTER TABLE `tbl_brand`
 -- AUTO_INCREMENT for table `tbl_cart`
 --
 ALTER TABLE `tbl_cart`
-  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_cart_guest`
 --
 ALTER TABLE `tbl_cart_guest`
-  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_category`
