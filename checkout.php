@@ -17,9 +17,8 @@
 <!-- order -->
 <?php
 
-    if(isset($_GET['orderid']) && $_GET['orderid']=='order'){
-       $userId = Session::get('user_id');
-       $insertOrder = $cart->insertOrder($customer_id);
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])){        
+       $insertOrder = $cart->insertOrder($_POST);
        // xóa cart sau khi insert
        $delCart = $cart->del_all_data_cart();
        // xóa hiển thị cart ở header
@@ -55,7 +54,7 @@
     <section class="checkout spad">
         <div class="container">
             <div class="checkout__form">
-                <form action="#">
+                <form action="" method="post">
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
                             <!-- <h6 class="coupon__code"><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click
@@ -165,31 +164,25 @@
                                 </ul>
                                 
                                 <div class="form-check">
-                                      <input class="form-check-input" type="radio" name="payment" id="payment1" value="payment1" checked>
+                                      <input class="form-check-input" type="radio" name="payment" id="payment1" value="COD" checked>
                                       <label class="form-check-label" for="payment1">
                                         Thanh toán COD
                                       </label>
                                     </div>
                                     <div class="form-check">
-                                      <input class="form-check-input" type="radio" name="payment" id="payment2"  value="payment2">
+                                      <input class="form-check-input" type="radio" name="payment" id="payment2"  value="Online">
                                       <label class="form-check-label" for="payment2">
                                         Thanh toán online
                                       </label>
                                     </div>
 
-                                <!-- <button type="submit" class="site-btn" <?php
-                                        if(!$get_product_cart){
-                                            echo "disabled";
-                                        }
-                                ?>
-                                >PLACE ORDER</button> -->
-                                <a href="?orderid=order" class="site-btn"
+                                <button type="submit" name="checkout" class="site-btn"
                                 <?php
                                         if(!$get_product_cart){
                                             echo "disabled";
                                         }
                                 ?>
-                                 ><center>Đặt hàng</center></a>
+                                 ><center>Đặt hàng</center></button>
                             </div>
                         </div>
                     </div>

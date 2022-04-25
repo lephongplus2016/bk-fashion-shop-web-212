@@ -1,22 +1,15 @@
 <?php
     include 'inc/header.php';
 ?>
-
-<?php
-if(isset($_GET['cartId'])  && $_GET['cartId'] != NULL) {
-        // lấy query param , không lấy được body parser 
-        $cartId = $_GET['cartId'];
-        $deleteProductCart = $cart->delete_product_cart($cartId);
+ <?php
+    $login_check = Session::get('user_login'); 
+    if($login_check==false){
+        header('Location:login.php');
     }
+    
+    
+?> 
 
-if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_cart'])){ 
-            // $cardId = $_POST['cartId'];
-            // $quantity = $_POST['quantity'];
-            $updateQuantityCart = $cart->update_quantity_cart_all($_POST);
-    // var_dump($_POST);
-
-        }
-?>
 
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-option">
@@ -24,27 +17,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_cart'])){
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__text">
-                        <h4>Shopping Cart</h4>
-                        <?php 
-                            if(isset($updateQuantityCart)){
-                            echo $updateQuantityCart;
-                            }
-                             ?>
-                             <?php 
-                            if(isset($deleteProductCart)){
-                            echo $deleteProductCart;
-                            }
-                             ?>
+                        <h4>Chi tiết đơn hàng</h4>
+                        
                         <div class="breadcrumb__links">
                             <a href="./index.php">Home</a>
                             <a href="./shop.php">Shop</a>
-                            <span>Shopping Cart</span>
-                            <?php
-                            $user_id = Session::get('user_id');
-                            if (empty($user_id)){
-                                echo "<br>Quý khách vui lòng đăng nhập để mua hàng!";
-                            }
-                            ?>
+                            <span>Đơn hàng</span>
                         </div>
                     </div>
                 </div>
@@ -57,67 +35,84 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_cart'])){
     <section class="shopping-cart spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col-lg-12">
                     <!-- begin form update quantity of product cart -->
                     <form action="" method="post">
                     <div class="shopping__cart__table">
                         <table>
                             <thead>
                                 <tr>
+                                    <th>Mã đơn hàng</th>
                                     <th>Sản phẩm</th>
-                                    <th>Số lượng</th>
-                                    <th>Size</th>
+                                    <th>note</th>
+                                    <th>Kiểu thanh toán</th>
                                     <th>Tổng cộng</th>
-                                    <th></th>
+                                    <th>Thời gian</th>
+                                    <th>Trạng thái</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                     $get_product_cart = $cart->getProductCart();
-                                     $subTotal =0;
-                                     $qty = 0;
-                                     $count = -1;
-                                     if($get_product_cart){
-                                        while($row = $get_product_cart->fetch_assoc())
-                                        {
-                                            $count++;
-                                     ?>       
+                                     $user_id = Session::get('user_id');
+                                    $get_cart_ordered = $cart->get_cart_ordered($user_id);
+                                     if($get_cart_ordered){
+                                    $i = 0;
+                                    $qty = 0;
+                                    $total = 0;
+                                    while($row = $get_cart_ordered->fetch_assoc()){
+                                        $i++;
+                                        $total = $row['price']*$row['quantity'];
+                                ?>   
                                     
                                 <tr>
+                                    <td class="cart__price"><?php echo $row['orderId']; ?></td>
                                     <td class="product__cart__item">
                                         <div class="product__cart__item__pic">
                                             <img width="100px" src="img/product/<?php echo $row['image']; ?>" alt="">
                                         </div>
                                         <div class="product__cart__item__text">
                                             <h6><?php echo $row['productName']; ?></h6>
-                                            <h5><?php echo $row['price']; ?></h5>
-                                        </div>
-                                    </td>
-                                    <td class="quantity__item">
-                                        <!-- <div class="quantity">
-                                            <div class="pro-qty-2">
-                                                <input type="text" name="quantity_<?php echo $count; ?>" value="<?php echo $row['quantity']; ?>" >
-                                                      
-                                            </div>
-                                        </div> -->
-                                        <div >
-                                            <!-- set min = 1 -->
-                                            <input style="width: 80px" type="number" min=1 name="quantity_<?php echo $count; ?>" value="<?php echo $row['quantity']; ?>" >
-                                        </div>
+                                            <h5>Đơn giá: <?php echo $fm->format_currency($row['price'])." VND"; ?></h5>
+                                            <h5>Số lượng: <?php echo $row['quantity']; ?></h5>
+                                            <h5>Size: <?php echo $row['size']; ?></h5>
 
+                                        </div>
                                     </td>
-                                    <!-- thẻ này chỉ nhằm lấy cardId - tách riêng với quantity tag-->
-                                                <input type="hidden" name="cartId_<?php echo $count;; ?>" value="<?php echo $row['cartId']; ?>">   
-                                    <td class="cart__price"><?php echo $row['size']; ?></td>
+                                    <td class="cart__price"><?php echo $row['note']; ?></td>
+                                     
+                                    <td class="cart__price">Thanh toán <?php echo $row['paymentType']; ?></td>
                                     <td class="cart__price">
                                         <?php
-                                        $total = $row['price'] * $row['quantity'];
-                                        $subTotal += $total;
-                                        $qty += $row['quantity'];
                                         echo  $fm->format_currency($total)." VND";
                                         ?>
                                     </td>
-                                    <td class="cart__close"> <a onclick="return confirm('Bạn có muốn xóa không?');" href="?cartId=<?php echo $row['cartId']; ?>"><i class="fa fa-close"></i></a></td>
+                                    <td class="cart__price">
+                                        <?php
+                                        echo  $fm->formatDate($row['datetime']);
+                                        ?>
+                                    </td>
+                                    <!-- begin status order -->
+                                    <td class="cart__close"> 
+                                        <?php
+                                            if($row['status']=='0'){
+                                        ?>
+                                                <?php echo 'Chờ xử lý';?>
+                                        <?php
+                                            // khi admin xử lý
+                                            }elseif($row['status']=='1'){
+                                            
+                                        ?>
+                                                <a href="?confirmid=<?php echo $customer_id ?>&price=<?php echo $result['price'] ?>&time=<?php echo $result['dateOrder'] ?>">Đang vận chuyển</a>
+                                        <?php
+                                            }else{
+                                        ?>
+                                           <?php echo 'Đã giao hàng'; ?>
+                                        <?php
+                                            }   
+                                        ?>
+                                    </td>
+                               <!-- end status order -->
+
                                 </tr>
                                 
                                 <?php
@@ -135,41 +130,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_cart'])){
                                 <a href="shop.php">Quay lại shop</a>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="continue__btn update__btn">  
-                                <button type="submit" name="update_cart"/>Cập nhật giỏ hàng <i class="fa fa-spinner"></i></button>
-                            </div>
-                        </div>
+                       
                     </div>
                     </form>
                         <!-- end form update quantity of product cart -->
 
                 </div>
-                <div class="col-lg-4">
-                    <!-- <div class="cart__discount">
-                        <h6>Discount codes</h6>
-                        <form action="#">
-                            <input type="text" placeholder="Coupon code">
-                            <button type="submit">Apply</button>
-                        </form>
-                    </div> -->
-                    <div class="cart__total">
-                        <h6>Thanh toán</h6>
-                        <ul>
-                            <li>Tổng cộng <br> (chưa có VAT) <span><?php echo $fm->format_currency($subTotal)." VND"; ?></span></li>
-                            <li>Có VAT <span><?php echo $fm->format_currency($subTotal*1.1)." VND"; ?></span></li>
-                            <?php
-                            // co cart thi moi dat session
-                            $check_cart = $cart->check_cart();
-                            if($check_cart){
-                                Session::set('sum',$subTotal);
-                                Session::set('qty', $qty);
-                            }
-                            ?>
-                        </ul>
-                        <a href="checkout.php" class="primary-btn">Đặt đơn</a>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </section>

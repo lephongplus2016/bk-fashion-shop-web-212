@@ -53,7 +53,7 @@
                                 </div>
                                 <div class="product__item__text">
                                     <h6><?php echo $row['productName'] ; ?></h6>
-                                    <a href="#" class="add-cart">+ Thêm vào giỏ hàng</a>
+                                    <a href="shop-details.php?productId=<?php echo $row["productId"] ?>" class="add-cart">+ Thêm vào giỏ hàng</a>
                                    
                                     <h5><?php echo $fm->format_currency($row['price'])  ; ?> VNĐ</h5>
                                     

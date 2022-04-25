@@ -259,7 +259,7 @@ class cart
 
 
 	// begin handle order============================================================================
-	public function insertOrder($customer_id){
+	public function insertOrder($data){
 			$user_id = Session::get('user_id');
 			$query = "SELECT * FROM tbl_cart WHERE userID = '$user_id'";
 			$get_product = $this->db->select($query);
@@ -270,8 +270,11 @@ class cart
 					$quantity = $result['quantity'];
 					$price = $result['price'] * $quantity;
 					$image = $result['image'];
+					$size = $result['size'];
 					$user_id = $user_id;
-					$query_order = "INSERT INTO tbl_order(productId,productName,quantity,price,image,userId) VALUES('$productid','$productName','$quantity','$price','$image','$user_id')";
+					$note = $data['note'];
+					$paymentType = $data['payment'];
+					$query_order = "INSERT INTO tbl_order(productId,productName,quantity,price,image,userId,size,note,paymentType) VALUES('$productid','$productName','$quantity','$price','$image','$user_id','$size','$note','$paymentType')";
 					$insert_order = $this->db->insert($query_order);
 				}
 			}
@@ -284,6 +287,12 @@ class cart
 		$result = $this->db->delete($query);
 		
 
+	}
+
+	public function get_cart_ordered($user_id){
+			$query = "SELECT * FROM tbl_order WHERE userId = '$user_id' ORDER BY orderId DESC";
+			$get_cart_ordered = $this->db->select($query);
+			return $get_cart_ordered;
 	}
 	// end handle order============================================================================
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2022 at 10:17 AM
+-- Generation Time: Apr 25, 2022 at 12:13 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -122,14 +122,6 @@ CREATE TABLE `tbl_cart` (
   `size` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `tbl_cart`
---
-
-INSERT INTO `tbl_cart` (`cartId`, `productId`, `userId`, `productName`, `price`, `quantity`, `image`, `size`) VALUES
-(5, 74, 6, 'Kappa ba lô nam/nữ', '399000', 3, '27caa3fa1e.jpg', '5'),
-(6, 72, 6, 'Kappa túi nam/nữ ', '249000', 2, 'bd6be3dbb1.jpg', '2');
-
 -- --------------------------------------------------------
 
 --
@@ -153,7 +145,7 @@ CREATE TABLE `tbl_cart_guest` (
 
 INSERT INTO `tbl_cart_guest` (`cartId`, `productId`, `sId`, `productName`, `price`, `quantity`, `image`, `size`) VALUES
 (6, 74, '25v1plkv3l9', 'Kappa ba lô nam/nữ', '399000', 1, '27caa3fa1e.jpg', '0'),
-(7, 74, '25v1plkv3l94sfc89b5i2tmmui', 'Kappa ba lô nam/nữ', '399000', 1, '27caa3fa1e.jpg', '0');
+(7, 74, '25v1plkv3l94sfc89b5i2tmmui', 'Kappa ba lô nam/nữ', '399000', 2, '27caa3fa1e.jpg', '0');
 
 -- --------------------------------------------------------
 
@@ -500,10 +492,24 @@ CREATE TABLE `tbl_order` (
   `userId` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
   `price` varchar(255) NOT NULL,
-  `image` int(255) NOT NULL,
+  `image` varchar(255) NOT NULL,
   `datetime` timestamp NULL DEFAULT current_timestamp(),
-  `status` int(11) NOT NULL
+  `status` int(11) NOT NULL,
+  `size` varchar(255) NOT NULL,
+  `note` text NOT NULL,
+  `paymentType` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_order`
+--
+
+INSERT INTO `tbl_order` (`orderId`, `productId`, `productName`, `userId`, `quantity`, `price`, `image`, `datetime`, `status`, `size`, `note`, `paymentType`) VALUES
+(9, '73', 'Kappa ba lô nam/nữ', 6, 1, '399000', 'f08a7adaba.jpg', '2022-04-25 09:24:23', 0, '', '', ''),
+(10, '73', 'Kappa ba lô nam/nữ', 6, 1, '399000', 'f08a7adaba.jpg', '2022-04-25 09:42:41', 0, '0', '', 'COD'),
+(11, '73', 'Kappa ba lô nam/nữ', 6, 1, '399000', 'f08a7adaba.jpg', '2022-04-25 09:43:00', 0, '0', 'okay shoop', 'Online'),
+(12, '73', 'Kappa ba lô nam/nữ', 6, 1, '399000', 'f08a7adaba.jpg', '2022-04-25 09:43:18', 0, '0', '', 'COD'),
+(13, '70', 'Kappa túi nam/nữ', 6, 2, '498000', 'f8b4b392ea.jpg', '2022-04-25 10:05:08', 0, '3', '', 'COD');
 
 -- --------------------------------------------------------
 
@@ -769,7 +775,7 @@ ALTER TABLE `tbl_brand`
 -- AUTO_INCREMENT for table `tbl_cart`
 --
 ALTER TABLE `tbl_cart`
-  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tbl_cart_guest`
@@ -811,7 +817,7 @@ ALTER TABLE `tbl_image_product`
 -- AUTO_INCREMENT for table `tbl_order`
 --
 ALTER TABLE `tbl_order`
-  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tbl_product`
