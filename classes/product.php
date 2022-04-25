@@ -251,7 +251,7 @@ class product
         return $result;
     }
     public function show_product_category_by_pagination($categoryID){
-        $number_of_product_per_page = 3;
+        $number_of_product_per_page = 9;
             if(!isset($_GET['page'])){
                 $page = 1;
             }else{
@@ -272,7 +272,7 @@ class product
     }
 
     public function show_product_brand_by_pagination($brandID){
-        $number_of_product_per_page = 3;
+        $number_of_product_per_page = 9;
             if(!isset($_GET['page'])){
                 $page = 1;
             }else{
@@ -313,7 +313,7 @@ class product
     }
 
     public function show_product_price_by_pagination($pricelv){
-        $number_of_product_per_page = 3;
+        $number_of_product_per_page = 9;
             if(!isset($_GET['page'])){
                 $page = 1;
             }else{
