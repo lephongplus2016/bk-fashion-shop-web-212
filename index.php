@@ -36,7 +36,7 @@
                     $image_product = $img['image'];
                 }
 ?>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6">
                     <div class="product__item">
                         <div class="product__item__pic set-bg" data-setbg="img/product/<?php echo $image_product ; ?>">
                             <ul class="product__hover">

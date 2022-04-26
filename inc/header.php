@@ -59,6 +59,7 @@ spl_autoload_register(function($class){
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
     <style type="text/css">
         span.error
         {
@@ -172,22 +173,23 @@ spl_autoload_register(function($class){
                                 echo '<a href="login.php" class="btn btn-info">Login</a>';
                             }else{
                                 ?>
-                                
-                                <div class="header__top__hover">
-                                <span><i class="fa fa-user fa-fw"></i><i class="arrow_carrot-down"></i></span>
-                                <ul>
-                                    <li><a href="user-info.php">Hồ sơ của tôi</a></li>
+                                <div class="btn-group">
+                                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-user fa-fw"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="user-info.php">Hồ sơ của tôi</a>
                                     <?php
-                                    // quyền admin
-                                    $isAdmin = Session::get('user_role');
-                                    if ($isAdmin == 'admin') {
-                                        echo '<li><a href="admin/index.php">Trang admin</a></li> ';
-                                    } 
+                                        // quyền admin
+                                        $isAdmin = Session::get('user_role');
+                                        if ($isAdmin == 'admin') {
+                                            echo '<a class="dropdown-item" href="admin/index.php">Trang admin</a> ';
+                                        } 
                                     ?>
-                                    <hr class="dropdown-divider"/>
-                                    <li><a href="?user_id=<?php echo Session::get('user_id')?>">Đăng xuất</a></li>
-                                </ul>
-                            </div>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="?user_id=<?php echo Session::get('user_id')?>">Đăng xuất</a>
+                                </div>
+                                </div>
                         <?php 
                             } 
                         ?>
