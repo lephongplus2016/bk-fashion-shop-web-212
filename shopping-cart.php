@@ -13,7 +13,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_cart'])){
             // $cardId = $_POST['cartId'];
             // $quantity = $_POST['quantity'];
             $updateQuantityCart = $cart->update_quantity_cart_all($_POST);
-    var_dump($_POST);
+    // var_dump($_POST);
 
         }
 ?>
@@ -39,6 +39,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_cart'])){
                             <a href="./index.php">Home</a>
                             <a href="./shop.php">Shop</a>
                             <span>Shopping Cart</span>
+                            <?php
+                            $user_id = Session::get('user_id');
+                            if (empty($user_id)){
+                                echo "<br>Quý khách vui lòng đăng nhập để mua hàng!";
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -70,10 +76,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_cart'])){
                                      $get_product_cart = $cart->getProductCart();
                                      $subTotal =0;
                                      $qty = 0;
-
+                                     $count = -1;
                                      if($get_product_cart){
                                         while($row = $get_product_cart->fetch_assoc())
                                         {
+                                            $count++;
                                      ?>       
                                     
                                 <tr>
@@ -87,14 +94,20 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_cart'])){
                                         </div>
                                     </td>
                                     <td class="quantity__item">
-                                        <div class="quantity">
+                                        <!-- <div class="quantity">
                                             <div class="pro-qty-2">
-                                                <input type="text" name="quantity_of_cartid_<?php echo $row['cartId']; ?>" value="<?php echo $row['quantity']; ?>">
-                                                <!-- thẻ này chỉ nhằm lấy cardId -->
-                                                <input type="hidden" name="cartId_<?php echo $row['cartId']; ?>" value="<?php echo $row['cartId']; ?>">         
+                                                <input type="text" name="quantity_<?php echo $count; ?>" value="<?php echo $row['quantity']; ?>" >
+                                                      
                                             </div>
+                                        </div> -->
+                                        <div >
+                                            <!-- set min = 1 -->
+                                            <input style="width: 80px" type="number" min=1 name="quantity_<?php echo $count; ?>" value="<?php echo $row['quantity']; ?>" >
                                         </div>
+
                                     </td>
+                                    <!-- thẻ này chỉ nhằm lấy cardId - tách riêng với quantity tag-->
+                                                <input type="hidden" name="cartId_<?php echo $count;; ?>" value="<?php echo $row['cartId']; ?>">   
                                     <td class="cart__price"><?php echo $row['size']; ?></td>
                                     <td class="cart__price">
                                         <?php
@@ -119,12 +132,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_cart'])){
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="continue__btn">
-                                <a href="shop.php">Continue Shopping</a>
+                                <a href="shop.php">Quay lại shop</a>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="continue__btn update__btn">  
-                                <button type="submit" name="update_cart"/>Update cart <i class="fa fa-spinner"></i></button>
+                                <button type="submit" name="update_cart"/>Cập nhật giỏ hàng <i class="fa fa-spinner"></i></button>
                             </div>
                         </div>
                     </div>
@@ -154,7 +167,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_cart'])){
                             }
                             ?>
                         </ul>
-                        <a href="#" class="primary-btn">Proceed to checkout</a>
+                        <a href="checkout.php" class="primary-btn">Đặt đơn</a>
                     </div>
                 </div>
             </div>

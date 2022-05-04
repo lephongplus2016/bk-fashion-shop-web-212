@@ -27,7 +27,17 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
 <?php
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
     $userId = Session::get('user_id');
-    $addCart = $cart->insert_cart($id,$userId,$_POST);
+    $login_check = Session::get('user_login'); 
+    
+    // cho user
+    if($login_check==true){
+        $addCart = $cart->insert_cart($id,$userId,$_POST);
+    }
+    // cho khách
+    else{
+        $addCart = $cart->insert_cart_guest($id,$_POST);
+    }
+    header("Refresh:0");
 }
 
 ?>
@@ -195,11 +205,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
                                                 <input type="text" name="quantity" value="1">
                                             </div>
                                         </div>
+
+                                        <!-- dành cho price dùng cho post-->
+                                        <input type="hidden" name="price" value="<?php echo $productRow["price"] ?>"  />
                                         <input name="cart" type="submit" class="primary-btn" value="Thêm vào giỏ hàng"/>
                                         <?php
                                             if(isset($addCart)){
                                                 echo "<br>";
-                                                echo $addCart ;
+                                                 echo $addCart ;
+                                                
                                                 }
                                             ?>  
                                     </div>

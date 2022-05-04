@@ -231,7 +231,7 @@ class product
 
 
     public function show_product_by_pagination() {
-        $number_of_product_per_page = 1;
+        $number_of_product_per_page = 9;
             if(!isset($_GET['page'])){
                 $page = 1;
             }else{
@@ -250,9 +250,38 @@ class product
         $result = $this->db->select($query);
         return $result;
     }
+    public function show_product_category_by_pagination($categoryID){
+        $number_of_product_per_page = 9;
+            if(!isset($_GET['page'])){
+                $page = 1;
+            }else{
+                $page = $_GET['page'];
+            }
+            $index_page = ($page-1)*$number_of_product_per_page;
+        $query = "SELECT *  FROM tbl_product WHERE categoryId = '$categoryID' ORDER BY productName ASC
+        LIMIT $index_page,$number_of_product_per_page
+        ";
+        $result = $this->db->select($query);
+        return $result;
+    }
 
     public function search_product_by_brand($brandID){
         $query = "SELECT * FROM tbl_product WHERE brandId = '$brandID' ORDER BY productName ASC";
+        $result = $this->db->select($query);
+        return $result;
+    }
+
+    public function show_product_brand_by_pagination($brandID){
+        $number_of_product_per_page = 9;
+            if(!isset($_GET['page'])){
+                $page = 1;
+            }else{
+                $page = $_GET['page'];
+            }
+            $index_page = ($page-1)*$number_of_product_per_page;
+        $query = "SELECT *  FROM tbl_product WHERE brandId = '$brandID' ORDER BY productName ASC
+        LIMIT $index_page,$number_of_product_per_page
+        ";
         $result = $this->db->select($query);
         return $result;
     }
@@ -279,6 +308,40 @@ class product
                 break;           
             default: break;              
           }
+        $result = $this->db->select($query);
+        return $result;
+    }
+
+    public function show_product_price_by_pagination($pricelv){
+        $number_of_product_per_page = 9;
+            if(!isset($_GET['page'])){
+                $page = 1;
+            }else{
+                $page = $_GET['page'];
+            }
+            $index_page = ($page-1)*$number_of_product_per_page;
+
+            switch ($pricelv) {
+                case 0:
+                    $query = "SELECT * FROM tbl_product WHERE price < 200000 ORDER BY price ASC LIMIT $index_page,$number_of_product_per_page";
+                    break;
+                case 1:
+                    $query = "SELECT * FROM tbl_product WHERE price >= 200000 AND price < 500000 ORDER BY price ASC LIMIT $index_page,$number_of_product_per_page";
+                    break;
+                case 2:
+                    $query = "SELECT * FROM tbl_product WHERE price >= 500000 AND price < 1000000 ORDER BY price ASC LIMIT $index_page,$number_of_product_per_page";
+                    break;
+                case 3:
+                    $query = "SELECT * FROM tbl_product WHERE price >= 1000000 AND price < 2000000 ORDER BY price ASC LIMIT $index_page,$number_of_product_per_page";
+                    break;
+                case 4:
+                    $query = "SELECT * FROM tbl_product WHERE price >= 2000000 AND price < 5000000 ORDER BY price ASC LIMIT $index_page,$number_of_product_per_page";
+                    break;
+                case 5:
+                    $query = "SELECT * FROM tbl_product WHERE price >= 5000000 ORDER BY price ASC LIMIT $index_page,$number_of_product_per_page";
+                    break;           
+                default: break;              
+              }
         $result = $this->db->select($query);
         return $result;
     }

@@ -77,20 +77,34 @@ class cart
 
 
 	public function getProductCart(){
-		$userId = Session::get('user_id');
-		$query = "SELECT * FROM tbl_cart WHERE userId = '$userId'";
-		$result = $this->db->select($query);
-		return $result;
+		$user_id = Session::get('user_id');
+		// if (empty($user_id)){
+		$login_check = Session::get('user_login'); 
+        if($login_check==false){
+			$sId = session_id();
+			$query = "SELECT * FROM tbl_cart_guest WHERE sId = '$sId'";
+			$result = $this->db->select($query);
+			return $result;
+		}
+		else{
+			$query = "SELECT * FROM tbl_cart WHERE userId = '$user_id'";
+			$result = $this->db->select($query);
+			return $result;
+		}
+		
 	}
 	
 // có thì mới hiển thị ở header
 // thì mới cho thanh toán
 	public function check_cart(){
-		$userId = Session::get('user_id');
-		if ($userId == ''){
-			return false;
+		$user_id = Session::get('user_id');
+		if (empty($user_id)){
+			$sId = session_id();
+			$query = "SELECT * FROM tbl_cart_guest WHERE sId = '$sId'";
+			$result = $this->db->select($query);
+			return $result;
 		}
-		$query = "SELECT * FROM tbl_cart WHERE userId = '$userId'";
+		$query = "SELECT * FROM tbl_cart WHERE userId = '$user_id'";
 		$result = $this->db->select($query);
 		return $result;
 	}	
@@ -99,15 +113,30 @@ class cart
 		$cartId = mysqli_real_escape_string($this->db->link, $cartId);
 		$quantity = mysqli_real_escape_string($this->db->link, $quantity);
 
-// query
-		$query = "UPDATE tbl_cart SET
+
+		$user_id = Session::get('user_id');
+		if (empty($user_id)){
+			$query = "UPDATE tbl_cart_guest SET
 
 					quantity = '$quantity'
 
 					WHERE cartId = '$cartId'";
 		//  execute
 		$result = $this->db->update($query);
-		return $result;
+			return $result;
+		}
+		else {
+			// query
+			$query = "UPDATE tbl_cart SET
+
+						quantity = '$quantity'
+
+						WHERE cartId = '$cartId'";
+			//  execute
+			$result = $this->db->update($query);
+			return $result;
+		}
+
 		// if($result){
 		// 	$alert = "<span class='success'>Product quantity Updated Successfully</span>";
 		// 	return $alert;
@@ -119,8 +148,14 @@ class cart
 
 	public function update_quantity_cart_all($data) {
 		// lay so san pham trong cart
-		$userId = Session::get('user_id');
-		$query = "SELECT * FROM tbl_cart WHERE userId = '$userId'";
+		$user_id = Session::get('user_id');
+		if (empty($user_id)){
+			$sId = session_id();
+			$query = "SELECT * FROM tbl_cart_guest WHERE sId = '$sId'";
+		}
+		else{
+			$query = "SELECT * FROM tbl_cart WHERE userId = '$user_id'";
+		}
 		$getnum = $this->db->select($query);
 		$num_pd_cart = $getnum->num_rows;
 		for ($x = 0; $x < $num_pd_cart; $x++) {
@@ -142,7 +177,14 @@ class cart
 
 
 	public function delete_product_cart($cartId){
+		$user_id = Session::get('user_id');
+		if (empty($user_id)){
+			$query = "DELETE FROM tbl_cart_guest where cartId = '$cartId'";
+		}
+		else {
 			$query = "DELETE FROM tbl_cart where cartId = '$cartId'";
+
+		}
 			$result = $this->db->delete($query);
 			if($result){
 				$alert = "<span class='success'>Đã xóa khỏi giỏ hàng</span>";
@@ -156,7 +198,103 @@ class cart
 		}
 
 
+	// cho khách
+	public function insert_cart_guest($id,$data){
+		$quantity = $this->fm->validation($data['quantity']);
 
+		$productId = mysqli_real_escape_string($this->db->link, $id);
+		$sId = session_id();
+		$size = mysqli_real_escape_string($this->db->link, $data['size']);
+
+		// lấy product record đang buy
+		$query = "SELECT * FROM tbl_product WHERE productId = '$productId' ";
+		$result = $this->db->select($query)->fetch_assoc();
+		// echo print_r($result);
+
+		// lấy các trường cần thiết
+		$productName = $result['productName'];
+		$price = $result['price'];
+
+		// lấy hình ảnh sản phẩm
+		$query = "SELECT * FROM `tbl_image_product` WHERE productId = '$productId'";
+		$image_list = $this->db->select($query);
+		while($i = $image_list->fetch_assoc())
+        {
+        	$image = $i['image'];
+        	break;
+        }
+        
+
+		// kiểm tra đã có chưa
+		$queryCheckAdded = "SELECT * FROM tbl_cart_guest WHERE productId = '$productId' AND sId = '$sId' ";
+		$result_queryCheckAdded = $this->db->select($queryCheckAdded);
+		if($result_queryCheckAdded){
+			$msg = "<span class='error'>Sản phẩm đã có trong giỏ hàng</span>";
+			return $msg;
+		}
+		// còn chưa thì insert
+		else {		
+				$query_insert ="INSERT INTO tbl_cart_guest (productId, sId, productName, price, quantity, image, size) VALUES ('$productId', 
+			'$sId','$productName','$price', '$quantity',  '$image', $size)";
+						$result_insert = $this->db->insert($query_insert);
+					if($result_insert){
+						// set cart session
+					    $quantity = $data['quantity'];
+					    $price = $data['price'];
+					    $oldQty = Session::get('qty');
+					    Session::set('qty',$oldQty + $quantity);
+					    $oldPrice = Session::get('sum');
+					    Session::set('sum',$oldPrice + $price*$quantity);
+					    // end cart session
+						$msg = "<span class='success'>Sản phẩm đã được thêm vào giỏ hàng</span>";
+						return $msg;
+					}	
+					else{
+						header('Location:404.php');
+
+					}
+		}
+		
+	}
+
+
+	// begin handle order============================================================================
+	public function insertOrder($data){
+			$user_id = Session::get('user_id');
+			$query = "SELECT * FROM tbl_cart WHERE userID = '$user_id'";
+			$get_product = $this->db->select($query);
+			if($get_product){
+				while($result = $get_product->fetch_assoc()){
+					$productid = $result['productId'];
+					$productName = $result['productName'];
+					$quantity = $result['quantity'];
+					$price = $result['price'] * $quantity;
+					$image = $result['image'];
+					$size = $result['size'];
+					$user_id = $user_id;
+					$note = $data['note'];
+					$paymentType = $data['payment'];
+					$query_order = "INSERT INTO tbl_order(productId,productName,quantity,price,image,userId,size,note,paymentType) VALUES('$productid','$productName','$quantity','$price','$image','$user_id','$size','$note','$paymentType')";
+					$insert_order = $this->db->insert($query_order);
+				}
+			}
+
+
+		}
+	public function del_all_data_cart(){
+		$user_id = Session::get('user_id');
+		$query = "DELETE FROM tbl_cart WHERE userId = '$user_id'";
+		$result = $this->db->delete($query);
+		
+
+	}
+
+	public function get_cart_ordered($user_id){
+			$query = "SELECT * FROM tbl_order WHERE userId = '$user_id' ORDER BY orderId DESC";
+			$get_cart_ordered = $this->db->select($query);
+			return $get_cart_ordered;
+	}
+	// end handle order============================================================================
 
 }
 ?>

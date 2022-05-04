@@ -12,7 +12,7 @@
                             <div class="accordion" id="accordionExample">
                                 <div class="card">
                                     <div class="card-heading">
-                                        <a data-toggle="collapse" data-target="#collapseOne">Categories</a>
+                                        <a data-toggle="collapse" data-target="#collapseOne">Phân Loại</a>
                                     </div>
                                     <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
                                         <div class="card-body">
@@ -21,9 +21,18 @@
                                                     <?php 
                                                          $catlist = $category->showCategorybyName(); 
                                                         if($catlist != false) { 
-                                                            while ($row = $catlist->fetch_assoc()) { ?>
+                                                            while ($row = $catlist->fetch_assoc()) { 
+                                                                $product_by_category = $product->search_product_by_category($row['categoryId']);
+                                                                if($product_by_category != false){
+                                                                    $num = mysqli_num_rows($product_by_category);
+                                                                }
+                                                                else{
+                                                                    $num = 0;
+                                                                }
+                                                                
+                                                                ?>
                                                                                    
-                                                            <li><a href="productbycat.php?categoryId=<?php echo $row['categoryId']; ?>"><?php echo $row['categoryName']; ?></a></li>
+                                                            <li><a href="productbycat.php?categoryId=<?php echo $row['categoryId']; ?>"><?php echo $row['categoryName'];   echo " ($num)";?> </a></li>
                         
                                                     <?php    }  ?>   
                                                     <?php }   ?>   
@@ -34,7 +43,7 @@
                                 </div>
                                 <div class="card">
                                     <div class="card-heading">
-                                        <a data-toggle="collapse" data-target="#collapseTwo">Branding</a>
+                                        <a data-toggle="collapse" data-target="#collapseTwo">Thương Hiệu</a>
                                     </div>
                                     <div id="collapseTwo" class="collapse show" data-parent="#accordionExample">
                                         <div class="card-body">
@@ -43,9 +52,20 @@
                                                 <?php 
                                                          $brandlist = $brand->showBrandbyName(); 
                                                         if($brandlist != false) { 
-                                                            while ($row = $brandlist->fetch_assoc()) { ?>
+                                                            while ($row = $brandlist->fetch_assoc()) { 
+                                                                $product_by_brand = $product->search_product_by_brand($row['brandId']);
+                                                                if($product_by_brand != false){
+                                                                    $num = mysqli_num_rows($product_by_brand);
+                                                                }
+                                                                else{
+                                                                    $num = 0;
+                                                                }
+                                                                
+                                                                
+                                                                
+                                                                ?>
                                                                                    
-                                                            <li><a href="productbybrand.php?brandId=<?php echo $row['brandId']; ?>"><?php echo $row['brandName']; ?></a></li>
+                                                            <li><a href="productbybrand.php?brandId=<?php echo $row['brandId']; ?>"><?php echo $row['brandName']; echo " ($num)";?></a></li>
                         
                                                     <?php    }  ?>   
                                                     <?php }   ?> 
@@ -56,7 +76,7 @@
                                 </div>
                                 <div class="card">
                                     <div class="card-heading">
-                                        <a data-toggle="collapse" data-target="#collapseThree">Filter Price</a>
+                                        <a data-toggle="collapse" data-target="#collapseThree">Lọc Theo Giá</a>
                                     </div>
                                     <div id="collapseThree" class="collapse show" data-parent="#accordionExample">
                                         <div class="card-body">
