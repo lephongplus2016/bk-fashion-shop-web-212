@@ -64,7 +64,7 @@ class user
         }
     }
 
-    public function login_user($data, $productId){
+    public function login_user($data, $productId,$index){
 
             $email = mysqli_real_escape_string($this->db->link, $data['email']);
             $password = mysqli_real_escape_string($this->db->link, md5($data['password']));
@@ -82,12 +82,16 @@ class user
                     Session::set('user_id',$value['userId']);
                     Session::set('user_name',$value['name']);
                     Session::set('user_role',$value['role']);
-                    if($productId == ""){
-                    $alert = "<span class='success'>Đăng nhập thành công <a href='shopping-cart.php'>Đến trang thanh toán</a></span>";
+                    if($index== 2){
+                    $alert = "<span class='success'>Đăng nhập thành công <a href='shop-details.php?productId=$productId'>Quay lại sản phẩm</a></span>";
                         return $alert;
                     }
+                    if($index== 1){
+                        $alert = "<span class='success'>Đăng nhập thành công <a href='blog-details.php?id=$productId'>Quay lại bài báo</a></span>";
+                            return $alert;
+                        }
                     else {
-                        $alert = "<span class='success'>Đăng nhập thành công <a href='shop-details.php?productId=$productId'>Quay lại sản phẩm</a></span>";
+                        $alert = "<span class='success'>Đăng nhập thành công <a href='shopping-cart.php'>Đến trang thanh toán</a></span>";
                         return $alert;
                     }
                 }else{

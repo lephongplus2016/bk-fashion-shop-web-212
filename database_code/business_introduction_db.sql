@@ -167,9 +167,9 @@ INSERT INTO `tbl_category` (`categoryId`, `categoryName`) VALUES
 --
 
 CREATE TABLE `tbl_comment_article` (
-  `commentArticle` int(11) NOT NULL,
+  `commentId` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
-  `productId` int(11) NOT NULL,
+  `articalId` int(11) NOT NULL,
   `datetime` timestamp NULL DEFAULT current_timestamp(),
   `content` text NOT NULL,
   `image` varchar(255) NOT NULL

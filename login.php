@@ -2,13 +2,19 @@
     include 'inc/header.php';
 ?>
 <?php
-$productId = "";
+$id = "";
+$index = 0;
+    if(isset($_GET['id'])){
+        $id = $_GET['id'];
+        $index = 1;
+    }
     if(isset($_GET['productId'])){
-        $productId = $_GET['productId'];
+        $id = $_GET['productId'];
+        $index = 2;
     }
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
         
-        $login_user = $user->login_user($_POST, $productId);        
+        $login_user = $user->login_user($_POST, $id,$index);        
     }
 ?>
         <div id="layoutAuthentication">

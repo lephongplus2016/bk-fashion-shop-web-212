@@ -1,6 +1,15 @@
 <?php
     include 'inc/header.php';
 ?>
+<?php include 'classes/commentArticle.php';
+$commentArticle = new commentArticle();
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
+    // echo '<pre>'; print_r($_FILES); echo '</pre>';
+
+    $check = $commentArticle->insert_commentArticle($_POST, $_FILES, $_GET["id"]);
+}
+
+?>
 
 <?php include 'classes/article.php';
     if(isset($_GET['id'])  && $_GET['id'] != NULL) {
@@ -24,7 +33,47 @@
         temp[0].innerHTML = "'.$data["title"].' - BK Fashion Shop";
         </script>';
 ?>
-
+        <style>
+            .container-commented-contented {
+                margin-top: 50px;
+            }
+            .in4-comment-user {
+                display: flex;
+                height: 180px;
+                margin-bottom: 20px;
+                border-bottom: 1px solid rgba(0,0,0,.09);
+            }
+            .img-user-comment {
+                height: 40px;
+                flex-basis: 5%;
+                margin-right: 10px;
+            }
+            .img-user-comment img {
+                border-radius: 50%;
+                width: 40px;
+                height: 100%;
+                object-fit: cover;
+            }
+            .content-main {
+                flex-basis: 75%;
+            }
+            .img-commented img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .date-commented {
+                font-size: 12px;
+            }
+            .comments-from-users {
+                font-size: 18px;
+                background: rgba(0,0,0,.02);
+                color: rgba(0,0,0,.87);
+                padding: 0.875rem;
+                text-transform: capitalize;
+                margin-bottom: 20px;
+            }
+        </style>
     <!-- Blog Details Hero Begin -->
     <section class="blog-hero spad">
         <div class="container">
@@ -113,31 +162,111 @@
                         </div>
                         <div class="blog__details__comment">
                             <h4>Leave A Comment</h4>
-                            <form action="#">
+                            <form action="" method = "POST" enctype="multipart/form-data">
                                 <div class="row">
-                                    <div class="col-lg-4 col-md-4">
-                                        <input type="text" placeholder="Name">
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <input type="text" placeholder="Email">
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <input type="text" placeholder="Phone">
-                                    </div>
                                     <div class="col-lg-12 text-center">
-                                        <textarea placeholder="Comment"></textarea>
-                                        <button type="submit" class="site-btn">Post Comment</button>
+                                        <textarea placeholder="Comment" name = 'content'></textarea>
                                     </div>
                                 </div>
+                                <div class="mb-3">
+                                    <label for="formFile" class="form-label">Ảnh liên quan</label>
+                                    <input class="form-control" type="file" name = "image1" id="formFile">
+                                    <div style="padding-top: 5px;">
+                                            <img id="upload-img1" style="max-width: 50%">
+                                            </div>
+                                    </div>
+                                <?php
+                                    $login_check = Session::get('user_login');
+                                    if($login_check == true){
+                                        echo '<button type="submit" class="site-btn" name = "submit">Post Comment</button>';
+                                    }
+                                    else {
+                                        echo '<button type="button" class="site-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        Post Comment
+                                      </button>';
+                                        }
+                                    ?>
+                                    </div>
                             </form>
                         </div>
+                        <div class="container-commented-contented">
+                                    <h2 class="comments-from-users">Bình luận bài báo</h2>
+                                        <?php 
+                                                    $commentArticles = $commentArticle->getImgByCommentArticlerticleId($_GET["id"]);
+                                                    if($commentArticles != false) {
+                                                    while($i = $commentArticles->fetch_assoc())
+								                	{
+                                                            ?>
+                                                            <div class = "in4-comment-user">
+                                                                <div class = "img-user-comment">
+                                                                <img src="img/avatar.jpg" alt="">
+                                                                </div>
+                                                                <div class = "content-main">
+                                                                <?php
+                                                                $nameUser = $commentArticle->getNameUserCommentArticle($i['userId']);
+                                                                if($nameUser!=false){
+                                                                while($m = $nameUser->fetch_assoc()){
+                                                                    echo $m['name'];
+                                                                }
+                                                            }
+                                                                ?>
+                                                                <p class="date-commented">Vào lúc: <?=$i['datetime']?></p>
+                                                                <p class="content-commented"><?=$i['content']?></p>
+                                                            </div>
+                                                            <?php if($i['image']!=""){ 
+                                                                echo '<div class="img-commented">
+                                                                    <img src="img/commentArticle/'.$i['image'].'" alt="">
+                                                                    </div>';
+                                                                    }?>
+                                                            </div>
+                                                            <?php
+                                                    }
+                                                } 	  
+												?>
+                                        </div>
+                                </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- Blog Details Section End -->
+ <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
+        <button type="button" class="fa fa-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Vui lòng <a href="login.php?id=<?=$_GET['id']?>">Đăng nhập</a> để bình luận
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
 
+const fileUploader = document.getElementById(`formFile`);
+const reader = new FileReader();
+fileUploader.addEventListener('change', (event) => {
+    const files = event.target.files;
+    const file = files[0];
+    reader.readAsDataURL(file);
+    
+    reader.addEventListener('load', (event) => {
+        img = document.getElementById(`upload-img1`);
+        img.src = event.target.result;
+        img.alt = file.name;
+    });
+});   
+
+
+
+
+</script>
 <?php
     include 'inc/footer.php';
 ?>
