@@ -52,6 +52,7 @@
                                             <th>Ghi chú</th>
                                             <th>Kiểu thanh toán</th>
                                             <th>Thời gian</th>
+                                            <th>Trạng thái</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -80,13 +81,27 @@
                                             <td><?php echo $row['note']; ?></td>
                                             <td><?php echo $row['paymentType']; ?></td>
                                             <td><?php echo $row['datetime']; ?></td>
+                                            <td><?php $status = $row['status']; 
+                                                if($status == 0) {
+                                                    echo "Chờ xử lý";
+                                                }
+                                                else if ($status == 1){
+                                                    echo "Đang vận chuyển";
+                                                }
+                                                else{
+                                                    echo "Đã giao hàng";
+                                                }
+                                            ?>
+                                                
+
+                                            </td>
                                             
 
                                             	
 
 
 											<td>
-												<a href="orderlist.php?orderId=<?php echo $row['orderId'] ;?>">Edit</a> 
+												<a href="orderedit.php?orderId=<?php echo $row['orderId'] ;?>">Edit</a> 
 						|| <a onclick="return confirm('Bạn có chắc chắn xóa?')"  href="orderlist.php?orderId=<?php echo $row['orderId'] ;?>&datetime=<?php echo $row['datetime'] ;?>&productId=<?php echo $row['productId'] ;?>">Delete</a>
 											</td>
 

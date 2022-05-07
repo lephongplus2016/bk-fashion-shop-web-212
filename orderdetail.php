@@ -6,6 +6,14 @@
     if($login_check==false){
         header('Location:login.php');
     }
+
+    // update -> đã nhận hàng
+    if(isset($_GET['confirmid'])  && $_GET['confirmid'] != NULL) {
+        $id = $_GET['confirmid'];
+        $status = 2;
+        $update = $cart->set_status_order($id,$status);
+        echo "<script>window.location ='orderdetail.php'</script>";
+    }
     
     
 ?> 
@@ -102,7 +110,7 @@
                                             }elseif($row['status']=='1'){
                                             
                                         ?>
-                                                <a href="?confirmid=<?php echo $customer_id ?>&price=<?php echo $result['price'] ?>&time=<?php echo $result['dateOrder'] ?>">Đang vận chuyển</a>
+                                                <a href="?confirmid=<?php echo $row['orderId']?>">Đang vận chuyển</a>
                                         <?php
                                             }else{
                                         ?>

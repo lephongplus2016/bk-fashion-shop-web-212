@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2022 at 12:13 PM
+-- Generation Time: May 07, 2022 at 11:46 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -121,6 +121,13 @@ CREATE TABLE `tbl_cart` (
   `image` varchar(255) NOT NULL,
   `size` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_cart`
+--
+
+INSERT INTO `tbl_cart` (`cartId`, `productId`, `userId`, `productName`, `price`, `quantity`, `image`, `size`) VALUES
+(1, 72, 6, 'Kappa túi nam/nữ ', '249000', 3, 'bd6be3dbb1.jpg', '3');
 
 -- --------------------------------------------------------
 
@@ -505,11 +512,9 @@ CREATE TABLE `tbl_order` (
 --
 
 INSERT INTO `tbl_order` (`orderId`, `productId`, `productName`, `userId`, `quantity`, `price`, `image`, `datetime`, `status`, `size`, `note`, `paymentType`) VALUES
-(9, '73', 'Kappa ba lô nam/nữ', 6, 1, '399000', 'f08a7adaba.jpg', '2022-04-25 09:24:23', 0, '', '', ''),
+(1, '74', 'Kappa ba lô nam/nữ', 6, 2, '798000', '27caa3fa1e.jpg', '2022-05-07 09:38:45', 0, '3', '', 'COD'),
 (10, '73', 'Kappa ba lô nam/nữ', 6, 1, '399000', 'f08a7adaba.jpg', '2022-04-25 09:42:41', 0, '0', '', 'COD'),
-(11, '73', 'Kappa ba lô nam/nữ', 6, 1, '399000', 'f08a7adaba.jpg', '2022-04-25 09:43:00', 0, '0', 'okay shoop', 'Online'),
-(12, '73', 'Kappa ba lô nam/nữ', 6, 1, '399000', 'f08a7adaba.jpg', '2022-04-25 09:43:18', 0, '0', '', 'COD'),
-(13, '70', 'Kappa túi nam/nữ', 6, 2, '498000', 'f8b4b392ea.jpg', '2022-04-25 10:05:08', 0, '3', '', 'COD');
+(11, '73', 'Kappa ba lô nam/nữ', 6, 1, '399000', 'f08a7adaba.jpg', '2022-04-25 09:43:00', 0, '0', 'okay shoop', 'Online');
 
 -- --------------------------------------------------------
 
@@ -696,12 +701,6 @@ ALTER TABLE `tbl_category`
   ADD PRIMARY KEY (`categoryId`);
 
 --
--- Indexes for table `tbl_comment_article`
---
-ALTER TABLE `tbl_comment_article`
-  ADD PRIMARY KEY (`commentArticle`);
-
---
 -- Indexes for table `tbl_comment_product`
 --
 ALTER TABLE `tbl_comment_product`
@@ -760,22 +759,10 @@ ALTER TABLE `tbl_article`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT for table `tbl_banner`
---
-ALTER TABLE `tbl_banner`
-  MODIFY `bannerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `tbl_brand`
---
-ALTER TABLE `tbl_brand`
-  MODIFY `brandId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
 -- AUTO_INCREMENT for table `tbl_cart`
 --
 ALTER TABLE `tbl_cart`
-  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_cart_guest`
@@ -784,64 +771,10 @@ ALTER TABLE `tbl_cart_guest`
   MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `tbl_category`
---
-ALTER TABLE `tbl_category`
-  MODIFY `categoryId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
---
--- AUTO_INCREMENT for table `tbl_comment_article`
---
-ALTER TABLE `tbl_comment_article`
-  MODIFY `commentArticle` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tbl_comment_product`
---
-ALTER TABLE `tbl_comment_product`
-  MODIFY `commentId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `tbl_image_article`
---
-ALTER TABLE `tbl_image_article`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
---
--- AUTO_INCREMENT for table `tbl_image_product`
---
-ALTER TABLE `tbl_image_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=272;
-
---
 -- AUTO_INCREMENT for table `tbl_order`
 --
 ALTER TABLE `tbl_order`
-  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
---
--- AUTO_INCREMENT for table `tbl_product`
---
-ALTER TABLE `tbl_product`
-  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
-
---
--- AUTO_INCREMENT for table `tbl_slider`
---
-ALTER TABLE `tbl_slider`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `tbl_user`
---
-ALTER TABLE `tbl_user`
-  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `tbl_wishlist`
---
-ALTER TABLE `tbl_wishlist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

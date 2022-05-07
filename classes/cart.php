@@ -317,6 +317,27 @@ class cart
 				return $msg;
 			}
 		}
+
+	public function get_order_by_id($id){
+		$id = mysqli_real_escape_string($this->db->link, $id);
+		$query = "SELECT * FROM tbl_order WHERE orderId = '$id'";
+		$result = $this->db->select($query);
+		return $result;
+	}
+
+	public function set_status_order($id, $status){
+			$id = mysqli_real_escape_string($this->db->link, $id);
+			$status = mysqli_real_escape_string($this->db->link, $status);
+			
+			$query = "UPDATE tbl_order SET
+
+					status = '$status'
+
+					WHERE orderId = '$id'";
+
+			$result = $this->db->update($query);
+			return $query;
+		}
 	// end handle order============================================================================
 
 }
