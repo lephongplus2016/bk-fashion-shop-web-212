@@ -99,13 +99,16 @@
 
 
 
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts6" aria-expanded="false" aria-controls="collapseLayouts">
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts61" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>  
                                 Order  
                            
                             </a>
-                            <div class="collapse" id="collapseLayouts5" aria-labelledby="headingOne" data-bs-parent="#collapseLayouts3">
-                                
+                            <div class="collapse" id="collapseLayouts61" aria-labelledby="headingOne" data-bs-parent="#collapseLayouts3">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="orderlist.php">Danh sách order</a>
+
+                                </nav>
                             </div>
 
 

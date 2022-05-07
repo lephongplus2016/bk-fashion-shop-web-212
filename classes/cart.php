@@ -288,12 +288,35 @@ class cart
 		
 
 	}
-
+	
 	public function get_cart_ordered($user_id){
 			$query = "SELECT * FROM tbl_order WHERE userId = '$user_id' ORDER BY orderId DESC";
 			$get_cart_ordered = $this->db->select($query);
 			return $get_cart_ordered;
 	}
+
+	// xu ly cho order admin
+	public function get_all_order(){
+			$query = "SELECT * FROM tbl_order ORDER BY datetime DESC";
+			$get_cart_ordered = $this->db->select($query);
+			return $get_cart_ordered;
+	}
+
+	public function delete_order($id,$time,$productId){
+			$id = mysqli_real_escape_string($this->db->link, $id);
+			$time = mysqli_real_escape_string($this->db->link, $time);
+			$productId = mysqli_real_escape_string($this->db->link, $productId);
+			$query = "DELETE FROM tbl_order 
+					WHERE orderId = '$id' AND datetime='$time' AND productId ='$productId'";
+			$result = $this->db->update($query);
+			if($result){
+				$msg = "<span class='success'>Xóa order thành công</span>";
+				return $msg;
+			}else{
+				$msg = "<span class='error'>Xóa order thất bại</span>";
+				return $msg;
+			}
+		}
 	// end handle order============================================================================
 
 }
