@@ -55,5 +55,16 @@ class comment
         $result = $this->db->select($query);
         return $result;
     }
+    public function delete_comment($CommentId) {
+        $query = "DELETE FROM tbl_comment_product where commentId = '$CommentId'";
+        $result = $this->db->delete($query);
+        if($result){
+            $alert = "<span class='success'>Đã xóa bình luận</span>";
+            return $alert;
+        }else{
+            $alert = "<span class='error'>Có lỗi, vui lòng xóa lại</span>";
+            return $alert;
+        }
+    }
 }
 ?>

@@ -8,12 +8,17 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
 
     $check = $comment->insert_comment($_POST, $_FILES, $_GET["productId"]);
 }
+else if(isset($_GET['deleteCommentId'])){
+    $CommentId = $_GET['deleteCommentId'];
+    $delUser = $comment->delete_comment($CommentId);
+    $id = $_GET['productId'];
+    echo "<script>window.location ='shop-details.php?productId=$id'</script>";
+}
 
 ?>
 
 
 <?php 
-
     if(isset($_GET['productId'])  && $_GET['productId'] != NULL) {
         $id = $_GET['productId'];
     }
@@ -123,7 +128,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
                 display: flex;
                 height: 180px;
                 margin-bottom: 20px;
-                border-bottom: 1px solid rgba(0,0,0,.09);
+                /* border-bottom: 1px solid rgba(0,0,0,.09); */
             }
             .img-user-comment {
                 height: 40px;
@@ -138,10 +143,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
             }
             .content-main {
                 flex-basis: 75%;
+                position: relative;
+                border-bottom: 1px solid rgba(0,0,0,.09);
+            }
+            .content-main:hover .container-btn-ellip {
+                color: #000;
             }
             .img-commented img{
                 width: 100%;
-                height: 100%;
+                height: 90%;
                 object-fit: cover;
             }
             .date-commented {
@@ -154,6 +164,41 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
                 padding: 0.875rem;
                 text-transform: capitalize;
                 margin-bottom: 20px;
+                width: 100%;
+            }
+            .container-btn-ellip {
+                background: transparent;
+                border: transparent;
+                position: absolute;
+                top: 0;
+                right: 0;
+                padding: 8px 16px;
+                z-index: 999;
+                color: #fff;
+                transition: all 0.3s ease;
+            }
+            .att-comment {
+                position: absolute;
+                top: 30px;
+                right: 0;
+                box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%), 0 3px 1px -2px rgb(0 0 0 / 20%);
+                visibility: hidden;
+                z-index: -999;
+            }
+            .att-comment a:hover {
+                background: #ccc;
+            }
+            .att-comment a {
+                padding: 5px 30px;
+                color: black;
+                display: block;
+            }
+            .show-att-coment {
+                visibility: visible;
+                z-index: 999;
+            }
+            .text-black {
+                color: black !important;
             }
         </style>
         <div class="product__details__content">
@@ -355,6 +400,19 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
                                                                 ?>
                                                                 <p class="date-commented">Vào lúc: <?=$i['dateComment']?></p>
                                                                 <p class="content-commented"><?=$i['content']?></p>
+                                                                <button class = "container-btn-ellip"><i class="fa fa-ellipsis-v"></i></button>
+                                                                <div class="att-comment">
+                                                                <?php
+                                                                    $isAdmin = Session::get('user_role');
+                                                                    $userId = Session::get('user_id');
+                                                                    if ($isAdmin == 'admin' || $userId == $i['userId']) {
+                                                                        echo '<a href="?deleteCommentId='.$i['commentId'].'&productId='.$id.'">Xóa</a>';
+                                                                    }
+                                                                    else {
+                                                                        echo '<a href="">Báo cáo</a>';
+                                                                    }
+                                                                    ?>
+                                                                </div>
                                                             </div>
                                                             <?php if($i['image']!=""){ 
                                                                 echo '<div class="img-commented">
@@ -552,7 +610,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
             img.alt = file.name;
         });
     });   
-
+    const btnEllips = document.querySelectorAll('.container-btn-ellip');
+    btnEllips.forEach((btnEllip)=>{
+        const attComment = btnEllip.parentNode.querySelector('.att-comment');
+        btnEllip.addEventListener('click', () => {
+            btnEllip.classList.toggle('text-black');
+            attComment.classList.toggle('show-att-coment');
+        });
+    });
     
 
    

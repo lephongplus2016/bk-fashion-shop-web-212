@@ -17,7 +17,7 @@ class commentArticle
 		$this->db = new Database();
 		$this->fm = new Format();
 	}
-	public function insert_commentArticle($data, $file, $articleId){
+	public function insert_commentArticle($data, $file, $articalId){
         $content = mysqli_real_escape_string($this->db->link, $data['content']);
         $userId = Session::get('user_id');
         $unique_image = "";
@@ -37,7 +37,7 @@ class commentArticle
                 return $alert;
         }
         else{
-                $query =  "INSERT INTO `tbl_comment_article` (`userId`, `articleId`, `content`, `image`) VALUES ( '$userId', '$articleId', '$content', '$unique_image');";
+                $query =  "INSERT INTO `tbl_comment_article` (`userId`, `articalId`, `content`, `image`) VALUES ( '$userId', '$articalId', '$content', '$unique_image');";
                 $result = $this->db->insert($query);
 
                 $alert = "<span class='success'>Đã bình luận thành công</span>";
@@ -46,7 +46,7 @@ class commentArticle
 
     }
     public function getImgByCommentArticlerticleId($id) {
-        $query = "SELECT * FROM `tbl_comment_article` WHERE articleId = '$id' ORDER BY commentId DESC";
+        $query = "SELECT * FROM `tbl_comment_article` WHERE articalId = '$id' ORDER BY commentId DESC";
         $result = $this->db->select($query);
         return $result;
     }
@@ -54,6 +54,17 @@ class commentArticle
         $query = "SELECT * FROM `tbl_user` WHERE userId = '$userId'";
         $result = $this->db->select($query);
         return $result;
+    }
+    public function delete_comment($CommentId) {
+        $query = "DELETE FROM tbl_comment_article where commentId = '$CommentId'";
+        $result = $this->db->delete($query);
+        if($result){
+            $alert = "<span class='success'>Đã xóa bình luận</span>";
+            return $alert;
+        }else{
+            $alert = "<span class='error'>Có lỗi, vui lòng xóa lại</span>";
+            return $alert;
+        }
     }
 }
 ?>
