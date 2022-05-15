@@ -12,11 +12,32 @@ $index = 0;
         $id = $_GET['productId'];
         $index = 2;
     }
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['loginForm'])) {
         
         $login_user = $user->login_user($_POST, $id,$index);        
     }
 ?>
+
+<script type="text/javascript">
+function validate_login() {
+    let email = document.loginForm.inputEmail.value;
+    if (email.trim() == ''){
+        document.getElementById('alert1').style.display = 'flex';
+        document.loginForm.inputEmail.focus();
+        return false;
+    }
+
+    let password = document.loginForm.inputPassword.value;
+    if (password.trim() == ''){
+        document.getElementById('alert2').style.display = 'flex';
+        document.loginForm.inputPassword.focus();
+        return false;
+    }
+    return true;
+            
+}
+</script>
+
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
@@ -31,14 +52,16 @@ $index = 0;
                                            <?php } ?>
                                     </div>
                                     <div class="card-body">
-                                        <form action="" method="post">
+                                        <form name="loginForm" onsubmit="return validate_login();" action="" method="post">
                                             <div class="form-floating mb-3">
                                                 <label for="inputEmail">Email address</label>
-                                                <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" name="email" />   
+                                                <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" name="email" onchange="document.getElementById('alert1').style.display = 'none';"/>   
+                                                <span class="invalid-feedback" id="alert1">Vui lòng nhập email</span>
                                             </div>
                                             <div class="form-floating mb-3">
                                                 <label for="inputPassword">Password</label>
-                                                <input class="form-control" id="inputPassword" type="password" placeholder="Password" name="password" />
+                                                <input class="form-control" id="inputPassword" type="password" placeholder="Password" name="password" onchange="document.getElementById('alert2').style.display = 'none';"/>
+                                                <span class="invalid-feedback" id="alert2">Vui lòng nhập password</span>
                                                 <br>
                                                 <input type="checkbox" onclick="hideShowPassword()">Show Password
                                             </div>
@@ -48,7 +71,7 @@ $index = 0;
                                             </div> -->
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 <a class="small" href="password.php">Forgot Password?</a>
-                                                <input type="submit" name="login" class="btn btn-primary" value="Login">
+                                                <input type="submit" name="loginForm" class="btn btn-primary" value="Login">
                                             </div>
                                         </form>
                                     </div>
