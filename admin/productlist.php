@@ -90,6 +90,7 @@
 
                                             	<!-- lấy 1 hình đại diện cho sản phẩm thôi -->
                                             	<?php 
+
                                             		$image_list = $product->getImgByProductId($row['productId']);
 	                                            	while($i = $image_list->fetch_assoc())
 								                		{

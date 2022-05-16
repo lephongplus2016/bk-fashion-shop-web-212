@@ -12,7 +12,21 @@ include '../classes/category.php';
 
 ?>
 
+<script type="text/javascript">
+    function validate_category()
+    {
+        
+        let catname = document.categoryForm.catname.value;
+        if (catname.trim() == '')
+        {
+            document.getElementById("alert1").style.display = "flex";
+            document.categoryForm.catname.focus();
+            return false;
+        }
 
+        return true;
+    }
+</script>
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid px-4">
@@ -25,11 +39,12 @@ include '../classes/category.php';
                  ?>
                 
             </span>            
-                 <form action="categoryadd.php" method="post" enctype="multipart/form-data">
+                 <form action="categoryadd.php" method="post" enctype="multipart/form-data" name="categoryForm" onsubmit="return validate_category();">
                  <div class="form-group row">
 		          	<label for="catnem" class="col-sm-2 col-form-label">Tên Danh mục</label>
 				    <div class="col-sm-6">
-                        <input type="text" id="catname" placeholder="Enter Category Name..." class="form-control" name='name' />
+                        <input type="text" id="catname" placeholder="Enter Category Name..." class="form-control" name='name' onchange="document.getElementById('alert1').style.display = 'none';"/>
+                        <span class="invalid-feedback" id="alert1">Vui lòng nhập danh mục</span>
 				    </div>
 	            </div>
                 <div  style="padding:10px">

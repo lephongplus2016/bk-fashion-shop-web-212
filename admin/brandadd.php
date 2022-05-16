@@ -12,6 +12,21 @@ include '../classes/brand.php';
 
 ?>
 
+<script type="text/javascript">
+    function validate_brand()
+    {
+        
+        let brandname = document.brandForm.brandname.value;
+        if (brandname.trim() == '')
+        {
+            document.getElementById("alert1").style.display = "flex";
+            document.brandForm.brandname.focus();
+            return false;
+        }
+
+        return true;
+    }
+</script>
 
 <div id="layoutSidenav_content">
     <main>
@@ -25,11 +40,12 @@ include '../classes/brand.php';
                  ?>
                 
             </span>            
-            <form action="brandadd.php" method="post" enctype="multipart/form-data">
+            <form action="brandadd.php" method="post" enctype="multipart/form-data" name="brandForm" onsubmit="return validate_brand();">
                  <div class="form-group row">
 		          	<label for="brandnem" class="col-sm-2 col-form-label">Tên Thương hiệu</label>
 				    <div class="col-sm-6">
-                        <input type="text" id="brandname" placeholder="Enter Brand Name..." class="form-control" name='name' />
+                        <input type="text" id="brandname" placeholder="Enter Brand Name..." class="form-control" name='name' onchange="document.getElementById('alert1').style.display = 'none';"/>
+                        <span class="invalid-feedback" id="alert1">Vui lòng nhập thương hiệu</span>
 				    </div>
 	            </div>
                 <div  style="padding:10px">

@@ -321,54 +321,57 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
                                 </div>
 
 
+<script type="text/javascript">
+    
+    function validate_cmt()
+    {
+        var content = document.cmtForm.content.value;
+        if (content.trim() == '')
+        {
+            document.getElementById("alert1").style.display = "flex";
+            document.cmtForm.content.focus();
+            return false;
+        }
+
+        var image = document.cmtForm.image1.value;
+        if(image != '')
+        {
+           if (image.indexOf('.jpeg') == -1 && image.indexOf('.jpg') == -1 && image.indexOf('.png') == -1 && image.indexOf('.gif') == -1)
+            {
+                document.getElementById("alert2").style.display = "flex";
+                document.cmtForm.image1.focus();
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+</script>
+
                                 <!-- begin comment -->
                                 <div class="tab-pane" id="tabs-6" role="tabpanel">
-                                    <!-- <div class="product__details__tab__content">
-                                        <div class="product__details__tab__content__item">
-                                            <h5>Đánh giá khách hàng</h5>
-                                            <p>A Pocket PC is a handheld computer, which features many of the same
-                                                capabilities as a modern PC. These handy little devices allow
-                                                individuals to retrieve and store e-mail messages, create a contact
-                                                file, coordinate appointments, surf the internet, exchange text messages
-                                                and more. Every product that is labeled as a Pocket PC must be
-                                                accompanied with specific software to operate the unit and must feature
-                                            a touchscreen and touchpad.</p>
-                                            <p>As is the case with any new technology product, the cost of a Pocket PC
-                                                was substantial during it’s early release. For approximately $700.00,
-                                                consumers could purchase one of top-of-the-line Pocket PCs in 2003.
-                                                These days, customers are finding that prices have become much more
-                                                reasonable now that the newness is wearing off. For approximately
-                                            $350.00, a new Pocket PC can now be purchased.</p>
-                                        </div>
-                                        <div class="product__details__tab__content__item">
-                                            <h5>Material used</h5>
-                                            <p>Polyester is deemed lower quality due to its none natural quality’s. Made
-                                                from synthetic materials, not natural like wool. Polyester suits become
-                                                creased easily and are known for not being breathable. Polyester suits
-                                                tend to have a shine to them compared to wool and cotton suits, this can
-                                                make the suit look cheap. The texture of velvet is luxurious and
-                                                breathable. Velvet is a great choice for dinner party jacket and can be
-                                            worn all year round.</p>
-                                        </div>
-                                    </div> -->
+                                    
                                     <?php
                                     $login_check = Session::get('user_login');
                                     if($login_check == true){
-                                    echo '<form action="" method = "POST" style = "margin-top: 40px;" enctype="multipart/form-data">
+                                    echo '<form action="" method = "POST" style = "margin-top: 40px;" enctype="multipart/form-data" name="cmtForm" onsubmit="return validate_cmt();">
                                     <div class="form-floating">
-                                        <label for="floatingTextarea2">Bình Luận sản phẩm</label>
+                                        <label for="content">Bình Luận sản phẩm</label>
                                         <div class="form-floating">
-                                        <textarea class="form-control" placeholder="Bình luận..." id="floatingTextarea2" name = "content" style="height: 100px"></textarea>
+                                        <textarea class="form-control" placeholder="Bình luận..." id="content" name = "content" style="height: 100px"></textarea>
+                                            <span class="invalid-feedback" id="alert1">Vui lòng nhập nội dung</span>
                                         </div>
                                     </div>
                                     <div class="form-floating" style = "margin-top: 10px;">
                                         <label for="productname">Ảnh sản phẩm</label>
                                         <div class="col-sm-6">
-                                            <input type="file" name="image1" id="image1" />
+                                            <input type="file" name="image1" id="image1" accept=".jpeg, .jpg, .png, .gif"/>
                                             <br>
                                             <div style="padding-top: 5px;">
                                             <img id="upload-img1" style="max-width: 50%">
                                             </div>
+                                            <span class="invalid-feedback" id="alert2">Vui lòng chọn file có các định dạng sau .jpeg .jpg .png .gif</span>
                                         </div>
                                     </div>
                                         <button style = "margin-top: 10px;" type="submit" name = "submit" class="btn btn-primary">Gửi Bình Luận</button>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2022 at 11:46 AM
+-- Generation Time: May 16, 2022 at 12:31 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -80,9 +80,9 @@ CREATE TABLE `tbl_banner` (
 --
 
 INSERT INTO `tbl_banner` (`bannerId`, `bannerName`, `bannerImage`, `status`) VALUES
-(1, 'Shoes Spring 2030', 'banner-3.jpg', 0),
-(2, 'Accessories', 'banner-2.jpg', 0),
-(3, 'Clothing Collections 2030', 'banner-1.jpg', 0);
+(1, 'Shoes Spring 2030', 'banner-3.jpg', 1),
+(2, 'Accessories', 'banner-2.jpg', 1),
+(3, 'Clothing Collections 2030', 'banner-1.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -121,13 +121,6 @@ CREATE TABLE `tbl_cart` (
   `image` varchar(255) NOT NULL,
   `size` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tbl_cart`
---
-
-INSERT INTO `tbl_cart` (`cartId`, `productId`, `userId`, `productName`, `price`, `quantity`, `image`, `size`) VALUES
-(1, 72, 6, 'Kappa túi nam/nữ ', '249000', 3, 'bd6be3dbb1.jpg', '3');
 
 -- --------------------------------------------------------
 
@@ -202,6 +195,15 @@ CREATE TABLE `tbl_comment_article` (
   `image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tbl_comment_article`
+--
+
+INSERT INTO `tbl_comment_article` (`commentId`, `userId`, `articalId`, `datetime`, `content`, `image`) VALUES
+(1, 6, 21, '2022-05-16 10:24:58', 'abc', ''),
+(2, 6, 21, '2022-05-16 10:29:37', 'abcd', ''),
+(3, 6, 21, '2022-05-16 10:29:57', 'abc', 'db7098cbe3.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -224,7 +226,8 @@ CREATE TABLE `tbl_comment_product` (
 INSERT INTO `tbl_comment_product` (`commentId`, `userId`, `productId`, `dateComment`, `content`, `image`) VALUES
 (1, 6, 22, '2022-04-15 21:42:37', 'Áo đẹp lắm', ''),
 (2, 6, 22, '2022-04-15 21:43:26', 'Áo xịn', '8aaedbef97.jpg'),
-(3, 6, 22, '2022-04-15 21:47:17', 'fsdfsdfsd', '');
+(3, 6, 22, '2022-04-15 21:47:17', 'fsdfsdfsd', ''),
+(5, 6, 74, '2022-05-16 10:24:20', 'abc', '5d03ef9d00.jpg');
 
 -- --------------------------------------------------------
 
@@ -484,7 +487,15 @@ INSERT INTO `tbl_image_product` (`id`, `productId`, `image`) VALUES
 (268, 74, '27caa3fa1e.jpg'),
 (269, 74, '2c401d0729.jpg'),
 (270, 74, '6b01ab72e4.jpg'),
-(271, 74, '7e512873d1.jpg');
+(271, 74, '7e512873d1.jpg'),
+(272, 78, 'ca07121623.jpg'),
+(273, 78, '8346fc339f.jpg'),
+(274, 78, 'd5b239226c.jpg'),
+(275, 78, 'a528bae9cc.jpg'),
+(276, 79, '8617d7f730.jpg'),
+(277, 79, '27d4d4ab2f.jpg'),
+(278, 79, '08fec484a1.jpg'),
+(279, 79, '7d3ae2e221.jpg');
 
 -- --------------------------------------------------------
 
@@ -512,9 +523,10 @@ CREATE TABLE `tbl_order` (
 --
 
 INSERT INTO `tbl_order` (`orderId`, `productId`, `productName`, `userId`, `quantity`, `price`, `image`, `datetime`, `status`, `size`, `note`, `paymentType`) VALUES
-(1, '74', 'Kappa ba lô nam/nữ', 6, 2, '798000', '27caa3fa1e.jpg', '2022-05-07 09:38:45', 0, '3', '', 'COD'),
-(10, '73', 'Kappa ba lô nam/nữ', 6, 1, '399000', 'f08a7adaba.jpg', '2022-04-25 09:42:41', 0, '0', '', 'COD'),
-(11, '73', 'Kappa ba lô nam/nữ', 6, 1, '399000', 'f08a7adaba.jpg', '2022-04-25 09:43:00', 0, '0', 'okay shoop', 'Online');
+(1, '74', 'Kappa ba lô nam/nữ', 6, 2, '798000', '27caa3fa1e.jpg', '2022-05-07 09:38:45', 2, '3', '', 'COD'),
+(11, '73', 'Kappa ba lô nam/nữ', 6, 1, '399000', 'f08a7adaba.jpg', '2022-04-25 09:43:00', 0, '0', 'okay shoop', 'Online'),
+(12, '72', 'Kappa túi nam/nữ ', 6, 3, '747000', 'bd6be3dbb1.jpg', '2022-05-07 09:49:16', 0, '3', 'good job', 'COD'),
+(13, '67', 'Kappa nón nam/nữ ', 6, 1, '249000', '5f9bc8052c.jpg', '2022-05-07 09:49:16', 2, '0', 'good job', 'COD');
 
 -- --------------------------------------------------------
 
@@ -541,6 +553,7 @@ CREATE TABLE `tbl_product` (
 --
 
 INSERT INTO `tbl_product` (`productId`, `productName`, `categoryId`, `brandId`, `price`, `color`, `size`, `model`, `gender`, `season`, `description`) VALUES
+(1, 'Nón kappa', 8, 3, '20000', 'đỏ', '34', 'A1', 'male', '2022', '<p>dsfsdfsdf</p>\r\n'),
 (24, 'Staple áo thun tay ngắn nam', 2, 2, '499000', 'While', '20', '2202C6865', 'male', 'SS22', '<p>► Thiết kế thời trang, trẻ trung, c&aacute; t&iacute;nh.</p>\r\n\r\n<p>►&nbsp;Điểm nhấn ch&iacute;nh l&agrave; d&ograve;ng chữ &ldquo;Staple&rdquo; v&agrave; họa tiết chim bồ c&acirc;u c&aacute;ch điệu in v&ocirc; c&ugrave;ng nổi bật ở mặt trước của &aacute;o.</p>\r\n\r\n<p>►&nbsp;Diện đẹp khi phối c&ugrave;ng nhiều outfits kh&aacute;c nhau.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n'),
 (25, 'Kappa áo thun tay ngắn nam', 2, 1, '299000', 'A02', '20', '35146KW', 'male', 'SS22', '<p>&Aacute;o Thun Tay Ngắn Nam Kappa 35146KW A02 chắc chắn sẽ chinh phục được c&aacute;c anh ch&agrave;ng th&iacute;ch sự đơn giản nhưng vẫn l&agrave;m bật l&ecirc;n được n&eacute;t c&aacute; t&iacute;nh ri&ecirc;ng. Với form &aacute;o su&ocirc;ng, em &aacute;o nam&nbsp;n&agrave;y sẽ mang đến cảm gi&aacute;c thoải m&aacute;i v&agrave; dễ chịu cho người mặc.</p>\r\n\r\n<p>&Aacute;o Thun Tay Ngắn Nam Kappa 35146KW A02 d&ugrave; đơn giản nhưng kh&ocirc;ng hề đơn điệu khi m&agrave; sự tinh tế được thể hiện qua kiểu d&aacute;ng, chất vải, đường may đến cả d&atilde;y banda tr&ecirc;n tay &aacute;o. Em &aacute;o n&agrave;y sẽ mang đến cho người mặc trải nghiệm tuyệt vời bởi độ thấm si&ecirc;u việt từ chất liệu cotton.&nbsp;</p>\r\n\r\n<p>C&ograve;n về phần phối đồ th&igrave; bạn kh&ocirc;ng cần phải lăn tăn, bởi &aacute;o c&oacute; thể đi đ&ocirc;i với tất cả mọi kiểu quần thời trang. Đồng thời, t&iacute;nh ứng dụng của một chiếc &aacute;o basic th&igrave; kh&ocirc;ng c&oacute; g&igrave; để b&agrave;n c&atilde;i. Bạn c&oacute; thể mặc để đi l&agrave;m, đi học, đi chơi đều kh&iacute; chất v&agrave; nam t&iacute;nh.</p>\r\n'),
 (26, 'Staple áo thun tay ngắn nam', 2, 2, '390000', 'White', '20', '2202C6815 ', 'male', 'SS22', '<p>► Thiết kế thời trang, trẻ trung, c&aacute; t&iacute;nh.</p>\r\n\r\n<p>► Điểm nhấn ch&iacute;nh l&agrave; d&ograve;ng chữ &ldquo;Staple&rdquo; v&agrave; họa tiết chim bồ c&acirc;u c&aacute;ch điệu in v&ocirc; c&ugrave;ng nổi bật ở mặt trước của &aacute;o.</p>\r\n\r\n<p>► Diện đẹp khi phối c&ugrave;ng nhiều outfits kh&aacute;c nhau.</p>\r\n'),
@@ -637,6 +650,7 @@ CREATE TABLE `tbl_user` (
 --
 
 INSERT INTO `tbl_user` (`userId`, `name`, `email`, `address`, `phone`, `password`, `role`) VALUES
+(1, 'jack', 'jack@gmail.com', 'Thu Duc, Ho Chi Minh city', '0123', '202cb962ac59075b964b07152d234b70', 'customer'),
 (2, 'name', 'email', 'address', 'phone', 'password', 'customer'),
 (3, 'Phong', 'phong@gmail.com', 'Thu Duc, Ho Chi Minh city', '0123', '202cb962ac59075b964b07152d234b70', 'customer'),
 (4, 'Phong', 'phong1@gmail.com', 'Thu Duc, Ho Chi Minh city', '0123', '202cb962ac59075b964b07152d234b70', 'customer'),
@@ -701,6 +715,12 @@ ALTER TABLE `tbl_category`
   ADD PRIMARY KEY (`categoryId`);
 
 --
+-- Indexes for table `tbl_comment_article`
+--
+ALTER TABLE `tbl_comment_article`
+  ADD PRIMARY KEY (`commentId`);
+
+--
 -- Indexes for table `tbl_comment_product`
 --
 ALTER TABLE `tbl_comment_product`
@@ -759,10 +779,22 @@ ALTER TABLE `tbl_article`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
+-- AUTO_INCREMENT for table `tbl_banner`
+--
+ALTER TABLE `tbl_banner`
+  MODIFY `bannerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tbl_brand`
+--
+ALTER TABLE `tbl_brand`
+  MODIFY `brandId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `tbl_cart`
 --
 ALTER TABLE `tbl_cart`
-  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_cart_guest`
@@ -771,10 +803,64 @@ ALTER TABLE `tbl_cart_guest`
   MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `tbl_category`
+--
+ALTER TABLE `tbl_category`
+  MODIFY `categoryId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `tbl_comment_article`
+--
+ALTER TABLE `tbl_comment_article`
+  MODIFY `commentId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tbl_comment_product`
+--
+ALTER TABLE `tbl_comment_product`
+  MODIFY `commentId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `tbl_image_article`
+--
+ALTER TABLE `tbl_image_article`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `tbl_image_product`
+--
+ALTER TABLE `tbl_image_product`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=280;
+
+--
 -- AUTO_INCREMENT for table `tbl_order`
 --
 ALTER TABLE `tbl_order`
-  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `tbl_product`
+--
+ALTER TABLE `tbl_product`
+  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+
+--
+-- AUTO_INCREMENT for table `tbl_slider`
+--
+ALTER TABLE `tbl_slider`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tbl_user`
+--
+ALTER TABLE `tbl_user`
+  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `tbl_wishlist`
+--
+ALTER TABLE `tbl_wishlist`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

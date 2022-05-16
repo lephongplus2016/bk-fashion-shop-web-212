@@ -24,6 +24,97 @@
     }
 ?> 
 
+
+<script type="text/javascript">
+	function validate_add()
+	{
+		
+		let productname = document.addForm.productname.value;
+        if (productname.trim() == '')
+        {
+            document.getElementById("alert1").style.display = "flex";
+            document.addForm.productname.focus();
+            return false;
+        }
+
+        let category = document.addForm.category.value;
+        if (category.trim() == '')
+        {
+            document.getElementById("alert2").style.display = "flex";
+            document.addForm.category.focus();
+            return false;
+        }
+
+        let brand = document.addForm.brand.value;
+        if (brand.trim() == '')
+        {
+            document.getElementById("alert3").style.display = "flex";
+            document.addForm.brand.focus();
+            return false;
+        }
+
+        let price = document.addForm.price.value;
+        if (price.trim() == '')
+        {
+            document.getElementById("alert4").style.display = "flex";
+            document.addForm.price.focus();
+            return false;
+        }
+
+        let color = document.addForm.color.value;
+        if (color.trim() == '')
+        {
+            document.getElementById("alert5").style.display = "flex";
+            document.addForm.color.focus();
+            return false;
+        }
+
+        let size = document.addForm.size.value;
+        if (size.trim() == '')
+        {
+            document.getElementById("alert6").style.display = "flex";
+            document.addForm.size.focus();
+            return false;
+        }
+
+        let model = document.addForm.model.value;
+        if (model.trim() == '')
+        {
+            document.getElementById("alert7").style.display = "flex";
+            document.addForm.model.focus();
+            return false;
+        }
+
+        let gender = document.addForm.gender.value;
+        if (gender.trim() == '')
+        {
+            document.getElementById("alert8").style.display = "flex";
+            document.addForm.gender.focus();
+            return false;
+        }
+
+        let season = document.addForm.season.value;
+        if (season.trim() == '')
+        {
+            document.getElementById("alert9").style.display = "flex";
+            document.addForm.season.focus();
+            return false;
+        }
+
+        // let productdes = document.addForm.productdes.value;
+        let productdes = CKEDITOR.instances.productdes.getData();
+        if (productdes.trim() == '')
+        {
+            document.getElementById("alert10").style.display = "flex";
+            document.addForm.productdes.focus();
+            return false;
+        }
+
+
+        return true;
+	}
+</script>
+
 <div id="layoutSidenav_content">
 
     <main>
@@ -45,19 +136,20 @@
 
              ?>
 
-            <form action="" method="post" enctype="multipart/form-data">
+            <form action="" method="post" enctype="multipart/form-data" name="addForm" onsubmit="return validate_add();">
 	          <div class="form-group row">
 		          	<label for="productname" class="col-sm-2 col-form-label">Product name</label>
 				    <div class="col-sm-6">
-				      <input type="text" class="form-control" id="productname" name="productname" placeholder="Product name.." value="<?php echo $productRow['productName']; ?>">
+				      <input type="text" class="form-control" id="productname" name="productname" placeholder="Product name.." value="<?php echo $productRow['productName']; ?>" onchange="document.getElementById('alert1').style.display = 'none';">
+				      <span class="invalid-feedback" id="alert1">Vui lòng nhập tên sản phẩm</span>
 				    </div>
 	          </div>
 
 	          <div class="form-group row">
 		          	<label for="select" class="col-sm-2 col-form-label">Category</label>
 		          	<div class="col-sm-4">
-		          		<select id="select" name="category"  class="form-control">
-	                            <option>Select Category</option>
+		          		<select id="category" name="category"  class="form-control">
+	                            <option value="">Select Category</option>
 	                            <?php $catlist = $category->showCategorybyName(); 
                                 if($catlist != false) { 
                                     while ($row = $catlist->fetch_assoc()) { ?>
@@ -69,14 +161,15 @@
                            <?php    }    
                           			 }   ?>  
 	                        </select>
+	                        <span class="invalid-feedback" id="alert2">Vui lòng chọn category</span>
 		          	</div>
 	           </div>
 
 	          <div class="form-group row">
 		          	<label for="select" class="col-sm-2 col-form-label">Brand</label>
 		          	<div class="col-sm-4">
-		          		<select id="select" name="brand"  class="form-control">
-	                            <option>Select Brand</option>
+		          		<select id="brand" name="brand"  class="form-control">
+	                            <option value="">Select Brand</option>
 	                            <?php $brandlist = $brand->showBrandbyName(); 
                                 if($catlist != false) { 
                                     while ($row = $brandlist->fetch_assoc()) { ?>
@@ -89,34 +182,39 @@
                           <?php }   ?>   
 
 	                        </select>
+	                        <span class="invalid-feedback" id="alert3">Vui lòng chọn brand</span>
 		          	</div>
 	           </div>
 
 	          <div class="form-group row">
 		          	<label for="price" class="col-sm-2 col-form-label">Price</label>
 				    <div class="col-sm-6">
-				      <input type="text" class="form-control" id="price" name="price" placeholder="price.." value="<?php echo $productRow['price']; ?>">
+				      <input type="text" class="form-control" id="price" name="price" placeholder="price.." value="<?php echo $productRow['price']; ?>" onchange="document.getElementById('alert4').style.display = 'none';">
+				      <span class="invalid-feedback" id="alert4">Vui lòng nhập giá</span>
 				    </div>
 	          </div>
 
 	          <div class="form-group row">
 		          	<label for="productname" class="col-sm-2 col-form-label">Color</label>
 				    <div class="col-sm-6">
-				      <input type="text" class="form-control" id="productname" name="color" placeholder="color.." value="<?php echo $productRow['color']; ?>">
+				      <input type="text" class="form-control" id="color" name="color" placeholder="color.." value="<?php echo $productRow['color']; ?>" onchange="document.getElementById('alert5').style.display = 'none';">
+				       <span class="invalid-feedback" id="alert5">Vui lòng chọn màu sắc</span>
 				    </div>
 	          </div>
 
 	          <div class="form-group row">
 		          	<label for="productname" class="col-sm-2 col-form-label">Size</label>
 				    <div class="col-sm-6">
-				      <input type="number" class="form-control" id="productname" name="size" placeholder="size.." value="<?php echo $productRow['size']; ?>">
+				      <input type="number" class="form-control" id="size" name="size" placeholder="size.." value="<?php echo $productRow['size']; ?>" onchange="document.getElementById('alert6').style.display = 'none';"> 
+				      <span class="invalid-feedback" id="alert6">Vui lòng chọn kích thước</span>
 				    </div>
 	          </div>
 
 	          <div class="form-group row">
 		          	<label for="productname" class="col-sm-2 col-form-label">Model</label>
 				    <div class="col-sm-6">
-				      <input type="text" class="form-control" id="productname" name="model" placeholder="model.." value="<?php echo $productRow['model']; ?>">
+				      <input type="text" class="form-control" id="model" name="model" placeholder="model.." value="<?php echo $productRow['model']; ?>" onchange="document.getElementById('alert7').style.display = 'none';">
+				      <span class="invalid-feedback" id="alert7">Vui lòng chọn model</span>
 				    </div>
 	          </div>
 
@@ -125,7 +223,7 @@
 		          	<label for="select" class="col-sm-2 col-form-label">Gender</label>
 		          	<div class="col-sm-4">
 		          		<select id="select" name="gender"  class="form-control">
-	                            <option>Select Gender</option>
+	                            <option value="">Select Gender</option>
 	                            <?php 
 	                            if ($productRow['gender'] == 'male') 
 	                            {
@@ -154,13 +252,15 @@
 	                            
 	                            
 	                        </select>
+	                        <span class="invalid-feedback" id="alert8">Vui lòng chọn giới tính</span>
 		          	</div>
 	           </div>
 
 	          <div class="form-group row">
 		          	<label for="season" class="col-sm-2 col-form-label">Season</label>
 				    <div class="col-sm-6">
-				      <input type="text" class="form-control" id="season" name="season" placeholder="season.." value="<?php echo $productRow['season']; ?>">
+				      <input type="text" class="form-control" id="season" name="season" placeholder="season.." value="<?php echo $productRow['season']; ?>" onchange="document.getElementById('alert9').style.display = 'none';">
+				      <span class="invalid-feedback" id="alert9">Vui lòng chọn mùa</span>
 				    </div>
 	          </div>
 
@@ -171,6 +271,7 @@
 		                <script>
 		                        CKEDITOR.replace( 'productdes' );
 		                </script>
+		                <span class="invalid-feedback" id="alert10">Vui lòng nhập chi tiết sản phẩm</span>
 				    </div>
 	          </div>
 

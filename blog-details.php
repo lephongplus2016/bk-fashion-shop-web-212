@@ -209,21 +209,52 @@ else if(isset($_GET['deleteCommentId'])){
                                 </div>
                             </div>
                         </div>
+
+<script type="text/javascript">
+    
+    function validate_cmt()
+    {
+        var content = document.cmtForm.content.value;
+        if (content.trim() == '')
+        {
+            document.getElementById("alert1").style.display = "flex";
+            document.cmtForm.content.focus();
+            return false;
+        }
+
+        var image = document.cmtForm.image1.value;
+        if(image != '')
+        {
+           if (image.indexOf('.jpeg') == -1 && image.indexOf('.jpg') == -1 && image.indexOf('.png') == -1 && image.indexOf('.gif') == -1)
+            {
+                document.getElementById("alert2").style.display = "flex";
+                document.cmtForm.image1.focus();
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+</script>
+                        
                         <div class="blog__details__comment">
                             <h4>Leave A Comment</h4>
-                            <form action="" method = "POST" enctype="multipart/form-data">
+                            <form action="" method = "POST" enctype="multipart/form-data" name="cmtForm" onsubmit="return validate_cmt();">
                                 <div class="row">
                                     <div class="col-lg-12 text-center">
-                                        <textarea placeholder="Comment" name = 'content'></textarea>
+                                        <textarea placeholder="Comment" id = 'content' name = 'content'></textarea>
+                                        <span class="invalid-feedback" id="alert1">Vui lòng nhập nội dung</span>
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="formFile" class="form-label">Ảnh liên quan</label>
-                                    <input class="form-control" type="file" name = "image1" id="formFile">
+                                    <label for="image1" class="form-label">Ảnh liên quan</label>
+                                    <input class="form-control" type="file" name = "image1" id="image1" accept=".jpeg, .jpg, .png, .gif">
                                     <div style="padding-top: 5px;">
                                             <img id="upload-img1" style="max-width: 50%">
                                             </div>
                                     </div>
+                                    <span class="invalid-feedback" id="alert2">Vui lòng chọn file có các định dạng sau .jpeg .jpg .png .gif</span>
                                 <?php
                                     $login_check = Session::get('user_login');
                                     if($login_check == true){
