@@ -119,33 +119,48 @@ spl_autoload_register(function($class){
         </div> -->
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-3">
+                <div class="col-lg-3 col-md-3"> <!-- 25%-->
                     <div class="header__logo">
                         <a href="./index.php"><img src="img/logobk.jpg" height="70px" alt=""></a>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6">
+                <div class="col-lg-6 col-md-6"> <!-- 50%-->
                     <nav class="header__menu mobile-menu">
                         <ul>
                             <!--<li class="active"><a href="./index.php">Home</a></li>-->
                             <li><a href="./index.php">Home</a></li>
-                            <li><a href="./shop.php">Shop</a></li>
-                            <li><a href="#">Pages</a>
+                            <li><a href="./shop.php">Sản Phẩm</a></li>
+                            <li><a href="#">Phân loại</a>
                                 <ul class="dropdown">
-                                    <li><a href="./about.php">About Us</a></li>
+                        <!--        <li><a href="./about.php">About Us</a></li>
                                     <li><a href="./shop-details.php">Shop Details</a></li>
                                     <li><a href="./shopping-cart.php">Shopping Cart</a></li>
                                     <li><a href="./checkout.php">Check Out</a></li>
-                                    <li><a href="./blog-details.php">Blog Details</a></li>
+                                    <li><a href="./blog-details.php">Blog Details</a></li> -->
+                                    <?php 
+                                        $catlist = $category->showCategorybyName(); 
+                                        if($catlist != false) { 
+                                            while ($row = $catlist->fetch_assoc()) { 
+                                                $product_by_category = $product->search_product_by_category($row['categoryId']);
+                                                if($product_by_category != false){
+                                                    $num = mysqli_num_rows($product_by_category);
+                                                }
+                                                else{
+                                                    $num = 0;
+                                                }                                                                
+                                    ?>                                                                                   
+                                                <li><a href="cat.php?Id=<?php echo $row['categoryId']; ?>"><?php echo $row['categoryName'];   echo " ($num)";?> </a></li>
+                                    <?php    }  ?>   
+                                    <?php }   ?>
                                 </ul>
                             </li>
                             <li><a href="./blog.php">Blog</a></li>
-                            <li><a href="./contact.php">Contacts</a></li>
+                            <li><a href="./contact.php">Liên Hệ</a></li>
                             <li><a href="./orderdetail.php">Đơn hàng</a></li>
                         </ul>
                     </nav>
                 </div>
-                <div class="col-lg-3 col-md-3">
+                <div class="col-lg-3 col-md-3"> <!-- 25%-->
                     <div class="header__nav__option">
 <!--                    <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a>-->                        
                         <a href="shopping-cart.php"><img src="img/icon/cart.png" alt=""> <span>0</span></a>

@@ -4,8 +4,8 @@
 
 
 <?php   //get brand ID
-	if(isset($_GET['brandId'])  && $_GET['brandId'] != NULL) {
-        $brandId = $_GET['brandId'];
+	if(isset($_GET['id'])  && $_GET['id'] != NULL) {
+        $brandId = $_GET['id'];
     }
     else{
         // code mặc định trở về trang web cũ
@@ -57,10 +57,10 @@
         <div class="row">
 <?php 
     //get product that match brand ID
-    $getProductbybrand = $product->show_product_brand_by_pagination($brandId);
+    $getbrand = $product->show_product_brand_by_pagination($brandId);
 
-    if($getProductbybrand){
-        while($row = $getProductbybrand->fetch_assoc()){
+    if($getbrand){
+        while($row = $getbrand->fetch_assoc()){
             $image_list = $product->getImgByProductId($row['productId']);
             while($i = $image_list->fetch_assoc())
                 {
@@ -119,19 +119,19 @@
                         <div class="col-lg-6">
                             <div class="product__pagination">
                                 <!-- trang trước -->
-                                <a href="productbybrand.php?brandId=<?php echo $brandId?>&page=<?php if($page>1) {echo $page-1;}  else {echo $page;}?>" ><</a>
+                                <a href="brand.php?id=<?php echo $brandId?>&page=<?php if($page>1) {echo $page-1;}  else {echo $page;}?>" ><</a>
                                 <?php
                                     // số trang hiển thị ra màn hình tối đa hiện tại là 3
                                     $start = $page> 1? $page -1: $page;
                                     $end = $page < $num_of_page? $page +1: $num_of_page;
                                     for($i=$start;$i<=$end;$i++){
                                         ?>
-                                        <a <?php if($i == $page) { echo 'class="active"';} ?> href="productbybrand.php?brandId=<?php echo $brandId?>&page=<?php echo $i ?>"><?php echo $i ?></a>
+                                        <a <?php if($i == $page) { echo 'class="active"';} ?> href="brand.php?id=<?php echo $brandId?>&page=<?php echo $i ?>"><?php echo $i ?></a>
                                     <?php
                                     }
                                 ?>
                                 <!-- trang sau -->
-                                <a href="productbybrand.php?brandId=<?php echo $brandId?>&page=<?php if($page<$num_of_page) {echo $page+1;}  else {echo $num_of_page;}?>" >></a>
+                                <a href="brand.php?id=<?php echo $brandId?>&page=<?php if($page<$num_of_page) {echo $page+1;}  else {echo $num_of_page;}?>" >></a>
                             </div>
                         </div>
                     </div>

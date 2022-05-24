@@ -32,7 +32,7 @@
                                                                 
                                                                 ?>
                                                                                    
-                                                            <li><a href="productbycat.php?categoryId=<?php echo $row['categoryId']; ?>"><?php echo $row['categoryName'];   echo " ($num)";?> </a></li>
+                                                            <li><a href="cat.php?Id=<?php echo $row['categoryId']; ?>"><?php echo $row['categoryName'];   echo " ($num)";?> </a></li>
                         
                                                     <?php    }  ?>   
                                                     <?php }   ?>   
@@ -65,7 +65,7 @@
                                                                 
                                                                 ?>
                                                                                    
-                                                            <li><a href="productbybrand.php?brandId=<?php echo $row['brandId']; ?>"><?php echo $row['brandName']; echo " ($num)";?></a></li>
+                                                            <li><a href="brand.php?id=<?php echo $row['brandId']; ?>"><?php echo $row['brandName']; echo " ($num)";?></a></li>
                         
                                                     <?php    }  ?>   
                                                     <?php }   ?> 
@@ -82,12 +82,12 @@
                                         <div class="card-body">
                                             <div class="shop__sidebar__price">
                                                 <ul>
-                                                    <li><a href="productbyprice.php?pricelv=0"> 0 - 200.000</a></li>
-                                                    <li><a href="productbyprice.php?pricelv=1"> 200.000 - 500.000</a></li>
-                                                    <li><a href="productbyprice.php?pricelv=2">500.000 - 1.000.000</a></li>
-                                                    <li><a href="productbyprice.php?pricelv=3">1.000.000 - 2.000.000</a></li>
-                                                    <li><a href="productbyprice.php?pricelv=4">2.000.000 - 5.000.000</a></li>
-                                                    <li><a href="productbyprice.php?pricelv=5">5.000.000+</a></li>
+                                                    <li><a href="price.php?pricelv=0"> 0 - 200.000</a></li>
+                                                    <li><a href="price.php?pricelv=1"> 200.000 - 500.000</a></li>
+                                                    <li><a href="price.php?pricelv=2">500.000 - 1.000.000</a></li>
+                                                    <li><a href="price.php?pricelv=3">1.000.000 - 2.000.000</a></li>
+                                                    <li><a href="price.php?pricelv=4">2.000.000 - 5.000.000</a></li>
+                                                    <li><a href="price.php?pricelv=5">5.000.000+</a></li>
                                                 </ul>
                                             </div>
                                         </div>
