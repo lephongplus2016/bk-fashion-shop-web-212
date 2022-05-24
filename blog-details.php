@@ -342,7 +342,7 @@ else if(isset($_GET['deleteCommentId'])){
 </div>
 <script>
 
-const fileUploader = document.getElementById(`formFile`);
+const fileUploader = document.getElementById(`image1`);
 const reader = new FileReader();
 fileUploader.addEventListener('change', (event) => {
     const files = event.target.files;
