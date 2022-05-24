@@ -6,8 +6,8 @@
 
 
 <?php   //get category ID
-	if(isset($_GET['categoryId'])  && $_GET['categoryId'] != NULL) {
-        $categoryId = $_GET['categoryId'];
+	if(isset($_GET['Id'])  && $_GET['Id'] != NULL) {
+        $categoryId = $_GET['Id'];
     }
     else{
         // code mặc định trở về trang web cũ
@@ -57,10 +57,10 @@
         <div class="row">
 <?php 
     //get product that match category ID and show pagination
-    $getProductbyCat = $product->show_product_category_by_pagination($categoryId);
+    $getcat = $product->show_product_category_by_pagination($categoryId);
     
-    if($getProductbyCat){
-        while($row = $getProductbyCat->fetch_assoc()){
+    if($getcat){
+        while($row = $getcat->fetch_assoc()){
             $image_list = $product->getImgByProductId($row['productId']);
             while($i = $image_list->fetch_assoc())
                 {
@@ -117,19 +117,19 @@
                         <div class="col-lg-6">
                             <div class="product__pagination">
                                 <!-- trang trước -->
-                                <a href="productbycat.php?categoryId=<?php echo $categoryId?>&page=<?php if($page>1) {echo $page-1;}  else {echo $page;}?>" ><</a>
+                                <a href="cat.php?Id=<?php echo $categoryId?>&page=<?php if($page>1) {echo $page-1;}  else {echo $page;}?>" ><</a>
                                 <?php
                                     // số trang hiển thị ra màn hình tối đa hiện tại là 3
                                     $start = $page> 1? $page -1: $page;
                                     $end = $page < $num_of_page? $page +1: $num_of_page;
                                     for($i=$start;$i<=$end;$i++){
                                         ?>
-                                        <a <?php if($i == $page) { echo 'class="active"';} ?> href="productbycat.php?categoryId=<?php echo $categoryId?>&page=<?php echo $i ?>"><?php echo $i ?></a>
+                                        <a <?php if($i == $page) { echo 'class="active"';} ?> href="cat.php?Id=<?php echo $categoryId?>&page=<?php echo $i ?>"><?php echo $i ?></a>
                                     <?php
                                     }
                                 ?>
                                 <!-- trang sau -->
-                                <a href="productbycat.php?categoryId=<?php echo $categoryId?>&page=<?php if($page<$num_of_page) {echo $page+1;}  else {echo $num_of_page;}?>" >></a>
+                                <a href="cat.php?Id=<?php echo $categoryId?>&page=<?php if($page<$num_of_page) {echo $page+1;}  else {echo $num_of_page;}?>" >></a>
                             </div>
                         </div>
                     </div>
