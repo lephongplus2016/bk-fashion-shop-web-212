@@ -70,11 +70,11 @@
         <div class="row">
 <?php 
     //get product that match category ID
-    $getProductbyPrice = $product->show_product_price_by_pagination($pricelv);
+    $getprice = $product->show_product_price_by_pagination($pricelv);
 
-   // $getProductbyPrice  = 
-    if($getProductbyPrice){
-        while($row = $getProductbyPrice->fetch_assoc()){
+   // $getprice  = 
+    if($getprice){
+        while($row = $getprice->fetch_assoc()){
             $image_list = $product->getImgByProductId($row['productId']);
             while($i = $image_list->fetch_assoc())
                 {
@@ -129,19 +129,19 @@
                         <div class="col-lg-6">
                             <div class="product__pagination">
                                 <!-- trang trước -->
-                                <a href="productbyprice.php?pricelv=<?php echo $pricelv?>&page=<?php if($page>1) {echo $page-1;}  else {echo $page;}?>" ><</a>
+                                <a href="price.php?pricelv=<?php echo $pricelv?>&page=<?php if($page>1) {echo $page-1;}  else {echo $page;}?>" ><</a>
                                 <?php
                                     // số trang hiển thị ra màn hình tối đa hiện tại là 3
                                     $start = $page> 1? $page -1: $page;
                                     $end = $page < $num_of_page? $page +1: $num_of_page;
                                     for($i=$start;$i<=$end;$i++){
                                         ?>
-                                        <a <?php if($i == $page) { echo 'class="active"';} ?> href="productbyprice.php?pricelv=<?php echo $pricelv?>&page=<?php echo $i ?>"><?php echo $i ?></a>
+                                        <a <?php if($i == $page) { echo 'class="active"';} ?> href="price.php?pricelv=<?php echo $pricelv?>&page=<?php echo $i ?>"><?php echo $i ?></a>
                                     <?php
                                     }
                                 ?>
                                 <!-- trang sau -->
-                                <a href="productbyprice.php?pricelv=<?php echo $pricelv?>&page=<?php if($page<$num_of_page) {echo $page+1;}  else {echo $num_of_page;}?>" >></a>
+                                <a href="price.php?pricelv=<?php echo $pricelv?>&page=<?php if($page<$num_of_page) {echo $page+1;}  else {echo $num_of_page;}?>" >></a>
                             </div>
                         </div>
                     </div>
