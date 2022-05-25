@@ -1,4 +1,5 @@
 <?php
+    include 'inc/include_header.php';
     include 'inc/header.php';
     include 'inc/slider.php';
     include 'inc/banner.php';

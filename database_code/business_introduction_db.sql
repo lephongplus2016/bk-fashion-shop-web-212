@@ -32,7 +32,9 @@ CREATE TABLE `tbl_article` (
   `title` varchar(255) NOT NULL,
   `content` text NOT NULL,
   `datetime` timestamp NULL DEFAULT current_timestamp(),
-  `writer` varchar(255) NOT NULL
+  `writer` varchar(255) NOT NULL,
+  `description` varchar(255),
+  `keywords` varchar(255)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -651,7 +653,6 @@ CREATE TABLE `tbl_user` (
 
 INSERT INTO `tbl_user` (`userId`, `name`, `email`, `address`, `phone`, `password`, `role`) VALUES
 (1, 'jack', 'jack@gmail.com', 'Thu Duc, Ho Chi Minh city', '0123', '202cb962ac59075b964b07152d234b70', 'customer'),
-(2, 'name', 'email', 'address', 'phone', 'password', 'customer'),
 (3, 'Phong', 'phong@gmail.com', 'Thu Duc, Ho Chi Minh city', '0123', '202cb962ac59075b964b07152d234b70', 'customer'),
 (4, 'Phong', 'phong1@gmail.com', 'Thu Duc, Ho Chi Minh city', '0123', '202cb962ac59075b964b07152d234b70', 'customer'),
 (5, 'Phong', 'phong2@gmail.com', 'Thu Duc, Ho Chi Minh city', '0123', '202cb962ac59075b964b07152d234b70', 'customer'),

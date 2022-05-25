@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteRule "index.html" "index.php"
+RewriteRule "^blog-page-([0-9]+)$" "blog.php?page=$1"
+RewriteRule "^([\w-]+)-([0-9]+)$" "blog-details.php?id=$2&title=$1"
