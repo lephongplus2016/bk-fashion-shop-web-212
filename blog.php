@@ -41,7 +41,7 @@
                                 <div class="blog__item__text">
                                     <span><img src="img/icon/calendar.png" alt="">'.$fm->formatDate($row["datetime"]).'</span>
                                     <h5>'.$row["title"].'</h5>
-                                    <a href="'.$b_title.'-'.$row["id"].'">Read More</a>
+                                    <a href="'.$b_title.'-'.$row["id"].'">Đọc thêm</a>
                                 </div>
                             </div>
                         </div>';

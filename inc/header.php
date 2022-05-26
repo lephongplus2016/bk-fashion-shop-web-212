@@ -1,45 +1,24 @@
-<?php
-ob_start();
-session_start();
-include 'lib/session.php';
-Session::init();
-
-include 'lib/database.php';
-include 'helper/format.php';
-
-spl_autoload_register(function($class){
-    include_once "classes/".$class.".php";
-});
-    $db = new Database();
-	$fm = new Format();
-    $user = new user();
-    $product = new product();
-    $cart = new cart();
-    $brand = new brand();
-    $category = new category();
-
-
-  header("Cache-Control: no-cache, must-revalidate");
-  header("Pragma: no-cache"); 
-  header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); 
-  header("Cache-Control: max-age=2592000");?>
-
-<?php 
-    if(isset($_GET['user_id'])){
-        Session::destroy();
-    }
-            ?>
-
 <!DOCTYPE html>
 <html lang="zxx">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Male_Fashion Template">
-    <meta name="keywords" content="Male_Fashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>BK Fashion Shop</title>
+    
+    <!-- SEO section -->
+    <title><?php
+        if(isset($title)) echo $title ,' - BK Fashion Shop';
+        else echo 'BK Fashion Shop';
+    ?></title>
+    <meta name="description" content="<?php
+        if (isset($description)) echo $description;
+        else echo 'BK Fashion Shop - Quần áo thời trang phong cách';
+    ?>">
+    <meta name="keywords" content="<?php
+        if(isset($keywords)) echo $keywords; 
+        else echo 'Fashion, thời trang, quần áo, giá rẻ, 2022';
+    ?>"> 
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
@@ -128,7 +107,7 @@ spl_autoload_register(function($class){
                     <nav class="header__menu mobile-menu">
                         <ul>
                             <!--<li class="active"><a href="./index.php">Home</a></li>-->
-                            <li><a href="./index.php">Home</a></li>
+                            <li><a href="./index.php">Trang chủ</a></li>
                             <li><a href="./shop.php">Sản Phẩm</a></li>
                             <li><a href="#">Phân loại</a>
                                 <ul class="dropdown">
@@ -156,7 +135,6 @@ spl_autoload_register(function($class){
                             </li>
                             <li><a href="./blog.php">Blog</a></li>
                             <li><a href="./contact.php">Liên Hệ</a></li>
-                            <li><a href="./orderdetail.php">Đơn hàng</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -194,6 +172,7 @@ spl_autoload_register(function($class){
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item" href="user-info.php">Hồ sơ của tôi</a>
+                                    <a class="dropdown-item" href="orderdetail.php">Đơn hàng</a>
                                     <?php
                                         // quyền admin
                                         $isAdmin = Session::get('user_role');

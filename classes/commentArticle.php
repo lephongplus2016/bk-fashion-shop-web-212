@@ -59,10 +59,10 @@ class commentArticle
         $query = "DELETE FROM tbl_comment_article where commentId = '$CommentId'";
         $result = $this->db->delete($query);
         if($result){
-            $alert = "<span class='success'>Đã xóa bình luận</span>";
+            $alert = "Đã xóa bình luận";
             return $alert;
         }else{
-            $alert = "<span class='error'>Có lỗi, vui lòng xóa lại</span>";
+            $alert = "Có lỗi, vui lòng xóa lại";
             return $alert;
         }
     }
