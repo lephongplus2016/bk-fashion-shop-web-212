@@ -115,7 +115,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
                                         $pre_art = $article_previous->fetch_assoc();
                                         $p_title = vn_to_str($pre_art["title"]);
                                     ?>
-                                        <a href="<?php echo $p_title.'-'.$pre_art["id"]?>" class="blog__details__btns__item">
+                                        <a href="blog/<?php echo $p_title.'-'.$pre_art["id"]?>" class="blog__details__btns__item">
                                             <p><span class="arrow_left"></span> Bài trước</p>
                                             <h5><?php echo $pre_art["title"];?></h5>
                                         </a>
@@ -128,7 +128,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
                                         $next_art = $article_next->fetch_assoc();
                                         $n_title = vn_to_str($next_art["title"]);
                                     ?>
-                                        <a href="<?php echo $n_title.'-'.$next_art["id"]?>" class="blog__details__btns__item blog__details__btns__item--next">
+                                        <a href="blog/<?php echo $n_title.'-'.$next_art["id"]?>" class="blog__details__btns__item blog__details__btns__item--next">
                                             <p>Bài tiếp theo <span class="arrow_right"></span></p>
                                             <h5><?php echo $next_art["title"];?></h5>
                                         </a>

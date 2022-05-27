@@ -101,12 +101,12 @@
 
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts61" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>  
-                                Order  
+                                Đơn đặt hàng  
                            
                             </a>
                             <div class="collapse" id="collapseLayouts61" aria-labelledby="headingOne" data-bs-parent="#collapseLayouts3">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="orderlist.php">Danh sách order</a>
+                                    <a class="nav-link" href="orderlist.php">Danh sách đơn đặt hàng</a>
 
                                 </nav>
                             </div>

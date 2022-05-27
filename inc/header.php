@@ -25,6 +25,7 @@
     rel="stylesheet">
 
     <!-- Css Styles -->
+    <base href="http://localhost/bk-fashion-shop-web-212/">
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
@@ -84,11 +85,6 @@
                             <li><a href="./shop.php">Sản Phẩm</a></li>
                             <li><a href="#">Phân loại</a>
                                 <ul class="dropdown">
-                        <!--        <li><a href="./about.php">About Us</a></li>
-                                    <li><a href="./shop-details.php">Shop Details</a></li>
-                                    <li><a href="./shopping-cart.php">Shopping Cart</a></li>
-                                    <li><a href="./checkout.php">Check Out</a></li>
-                                    <li><a href="./blog-details.php">Blog Details</a></li> -->
                                     <?php 
                                         $catlist = $category->showCategorybyName(); 
                                         if($catlist != false) { 
@@ -99,9 +95,10 @@
                                                 }
                                                 else{
                                                     $num = 0;
-                                                }                                                                
+                                                } 
+                                                $cate_link_name = vn_to_str($row["categoryName"]);                                                               
                                     ?>                                                                                   
-                                                <li><a href="cat.php?Id=<?php echo $row['categoryId']; ?>"><?php echo $row['categoryName'];   echo " ($num)";?> </a></li>
+                                                <li><a href="category/<?php echo $cate_link_name; ?>"><?php echo $row['categoryName'];   echo " ($num)";?> </a></li>
                                     <?php    }  ?>   
                                     <?php }   ?>
                                 </ul>

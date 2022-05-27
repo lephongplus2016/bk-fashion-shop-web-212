@@ -29,10 +29,10 @@
                                                                 else{
                                                                     $num = 0;
                                                                 }
-                                                                
+                                                                $cate_link_name = vn_to_str($row["categoryName"]); 
                                                                 ?>
                                                                                    
-                                                            <li><a href="cat.php?Id=<?php echo $row['categoryId']; ?>"><?php echo $row['categoryName'];   echo " ($num)";?> </a></li>
+                                                            <li><a href="category/<?php echo $cate_link_name; ?>"><?php echo $row['categoryName'];   echo " ($num)";?> </a></li>
                         
                                                     <?php    }  ?>   
                                                     <?php }   ?>   

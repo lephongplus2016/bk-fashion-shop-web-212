@@ -41,7 +41,7 @@
                                 <div class="blog__item__text">
                                     <span><img src="img/icon/calendar.png" alt="">'.$fm->formatDate($row["datetime"]).'</span>
                                     <h5>'.$row["title"].'</h5>
-                                    <a href="'.$b_title.'-'.$row["id"].'">Đọc thêm</a>
+                                    <a href="blog/'.$b_title.'-'.$row["id"].'">Đọc thêm</a>
                                 </div>
                             </div>
                         </div>';
@@ -73,19 +73,19 @@
                         <div class="col-lg-6">
                             <div class="product__pagination">
                                 <!-- trang trước -->
-                                <a href="blog-page-<?php if($page>1) {echo $page-1;}  else {echo $page;}?>" ><</a>
+                                <a href="blog/page-<?php if($page>1) {echo $page-1;}  else {echo $page;}?>" ><</a>
                                 <?php
                                     // số trang hiển thị ra màn hình tối đa hiện tại là 3
                                     $start = $page> 1? $page -1: $page;
                                     $end = $page < $num_of_page? $page +1: $num_of_page;
                                     for($i=$start;$i<=$end;$i++){
                                         ?>
-                                        <a <?php if($i == $page) { echo 'class="active"';} ?> href="blog-page-<?php echo $i ?>"><?php echo $i ?></a>
+                                        <a <?php if($i == $page) { echo 'class="active"';} ?> href="blog/page-<?php echo $i ?>"><?php echo $i ?></a>
                                     <?php
                                     }
                                 ?>
                                 <!-- trang sau -->
-                                <a href="blog-page-<?php if($page<$num_of_page) {echo $page+1;}  else {echo $num_of_page;}?>" >></a>
+                                <a href="blog/page-<?php if($page<$num_of_page) {echo $page+1;}  else {echo $num_of_page;}?>" >></a>
                             </div>
                         </div>
                     </div>

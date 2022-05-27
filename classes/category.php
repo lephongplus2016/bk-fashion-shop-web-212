@@ -125,7 +125,7 @@ class category
 
 	public function showCategoryFontend() {
 		// LENH SELECT DA DUOC VIET TRONG DATABASE.PHP
-		$query ="SELECteT * FROM tbl_category ORDER BY categoryId DESC";
+		$query ="SELECT * FROM tbl_category ORDER BY categoryId DESC";
 		$result = $this->db->select($query);
 		return $result;
 	}
@@ -134,6 +134,19 @@ class category
 		$query = "SELECT * FROM tbl_category WHERE categoryId = '$categoryId'";
 		$result = $this->db->select($query);
 		return $result;
+	}
+
+	public function getCategoryByNameLink($categoryNameLink){
+		$query = "SELECT * FROM tbl_category";
+		$result = $this->db->select($query);
+		if ($result != false){
+			while ($category = $result->fetch_assoc()){
+				if ($categoryNameLink == vn_to_str($category["categoryName"])){
+					return $category;
+				}
+			}
+		}
+		return false;
 	}
 
 }

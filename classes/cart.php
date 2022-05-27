@@ -157,22 +157,22 @@ class cart
 			$query = "SELECT * FROM tbl_cart WHERE userId = '$user_id'";
 		}
 		$getnum = $this->db->select($query);
-		$num_pd_cart = $getnum->num_rows;
-		for ($x = 0; $x < $num_pd_cart; $x++) {
-		  	$cartId = $data['cartId_'.$x];
-		  	$quantity = $data['quantity_'.$x];
-		  	$result = $this->update_quantity_cart($cartId,$quantity);
-		}
-		if($result){
-			$alert = "<span class='success'>Cập nhật số lượng thành công</span>";
-			return $alert;
-		}else{
-			$alert = "<span class='error'>Cập nhật số lượng không thành công</span>";
-			return $alert;
+		if ($getnum != false){
+			$num_pd_cart = $getnum->num_rows;
+			for ($x = 0; $x < $num_pd_cart; $x++) {
+				$cartId = $data['cartId_'.$x];
+				$quantity = $data['quantity_'.$x];
+				$result = $this->update_quantity_cart($cartId,$quantity);
+			}
+			if($result){
+				$alert = "<span class='success'>Cập nhật số lượng thành công</span>";
+				return $alert;
+			}else{
+				$alert = "<span class='error'>Cập nhật số lượng không thành công</span>";
+				return $alert;
+			}	
 		}	
-
-// query
-		
+		return false;
 	}
 
 
