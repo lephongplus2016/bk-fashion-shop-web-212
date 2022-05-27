@@ -489,15 +489,7 @@ INSERT INTO `tbl_image_product` (`id`, `productId`, `image`) VALUES
 (268, 74, '27caa3fa1e.jpg'),
 (269, 74, '2c401d0729.jpg'),
 (270, 74, '6b01ab72e4.jpg'),
-(271, 74, '7e512873d1.jpg'),
-(272, 78, 'ca07121623.jpg'),
-(273, 78, '8346fc339f.jpg'),
-(274, 78, 'd5b239226c.jpg'),
-(275, 78, 'a528bae9cc.jpg'),
-(276, 79, '8617d7f730.jpg'),
-(277, 79, '27d4d4ab2f.jpg'),
-(278, 79, '08fec484a1.jpg'),
-(279, 79, '7d3ae2e221.jpg');
+(271, 74, '7e512873d1.jpg');
 
 -- --------------------------------------------------------
 
@@ -555,7 +547,6 @@ CREATE TABLE `tbl_product` (
 --
 
 INSERT INTO `tbl_product` (`productId`, `productName`, `categoryId`, `brandId`, `price`, `color`, `size`, `model`, `gender`, `season`, `description`) VALUES
-(1, 'Nón kappa', 8, 3, '20000', 'đỏ', '34', 'A1', 'male', '2022', '<p>dsfsdfsdf</p>\r\n'),
 (24, 'Staple áo thun tay ngắn nam', 2, 2, '499000', 'While', '20', '2202C6865', 'male', 'SS22', '<p>► Thiết kế thời trang, trẻ trung, c&aacute; t&iacute;nh.</p>\r\n\r\n<p>►&nbsp;Điểm nhấn ch&iacute;nh l&agrave; d&ograve;ng chữ &ldquo;Staple&rdquo; v&agrave; họa tiết chim bồ c&acirc;u c&aacute;ch điệu in v&ocirc; c&ugrave;ng nổi bật ở mặt trước của &aacute;o.</p>\r\n\r\n<p>►&nbsp;Diện đẹp khi phối c&ugrave;ng nhiều outfits kh&aacute;c nhau.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n'),
 (25, 'Kappa áo thun tay ngắn nam', 2, 1, '299000', 'A02', '20', '35146KW', 'male', 'SS22', '<p>&Aacute;o Thun Tay Ngắn Nam Kappa 35146KW A02 chắc chắn sẽ chinh phục được c&aacute;c anh ch&agrave;ng th&iacute;ch sự đơn giản nhưng vẫn l&agrave;m bật l&ecirc;n được n&eacute;t c&aacute; t&iacute;nh ri&ecirc;ng. Với form &aacute;o su&ocirc;ng, em &aacute;o nam&nbsp;n&agrave;y sẽ mang đến cảm gi&aacute;c thoải m&aacute;i v&agrave; dễ chịu cho người mặc.</p>\r\n\r\n<p>&Aacute;o Thun Tay Ngắn Nam Kappa 35146KW A02 d&ugrave; đơn giản nhưng kh&ocirc;ng hề đơn điệu khi m&agrave; sự tinh tế được thể hiện qua kiểu d&aacute;ng, chất vải, đường may đến cả d&atilde;y banda tr&ecirc;n tay &aacute;o. Em &aacute;o n&agrave;y sẽ mang đến cho người mặc trải nghiệm tuyệt vời bởi độ thấm si&ecirc;u việt từ chất liệu cotton.&nbsp;</p>\r\n\r\n<p>C&ograve;n về phần phối đồ th&igrave; bạn kh&ocirc;ng cần phải lăn tăn, bởi &aacute;o c&oacute; thể đi đ&ocirc;i với tất cả mọi kiểu quần thời trang. Đồng thời, t&iacute;nh ứng dụng của một chiếc &aacute;o basic th&igrave; kh&ocirc;ng c&oacute; g&igrave; để b&agrave;n c&atilde;i. Bạn c&oacute; thể mặc để đi l&agrave;m, đi học, đi chơi đều kh&iacute; chất v&agrave; nam t&iacute;nh.</p>\r\n'),
 (26, 'Staple áo thun tay ngắn nam', 2, 2, '390000', 'White', '20', '2202C6815 ', 'male', 'SS22', '<p>► Thiết kế thời trang, trẻ trung, c&aacute; t&iacute;nh.</p>\r\n\r\n<p>► Điểm nhấn ch&iacute;nh l&agrave; d&ograve;ng chữ &ldquo;Staple&rdquo; v&agrave; họa tiết chim bồ c&acirc;u c&aacute;ch điệu in v&ocirc; c&ugrave;ng nổi bật ở mặt trước của &aacute;o.</p>\r\n\r\n<p>► Diện đẹp khi phối c&ugrave;ng nhiều outfits kh&aacute;c nhau.</p>\r\n'),

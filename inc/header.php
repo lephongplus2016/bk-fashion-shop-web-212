@@ -69,33 +69,6 @@
 
     <!-- Header Section Begin -->
     <header class="header">
-        <!-- <div class="header__top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-md-7">
-                        <div class="header__top__left">
-                            <p>Free shipping, 30-day return or refund guarantee.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-5">
-                        <div class="header__top__right">
-                            <div class="header__top__links">
-                                <a href="#">Sign in</a>
-                                <a href="#">FAQs</a>
-                            </div>
-                            <div class="header__top__hover">
-                                <span>Usd <i class="arrow_carrot-down"></i></span>
-                                <ul>
-                                    <li>USD</li>
-                                    <li>EUR</li>
-                                    <li>USD</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-3"> <!-- 25%-->
@@ -163,7 +136,7 @@
                             // dùng biến login_check ở session để lưu có đăng nhập chưa
                             $login_check = Session::get('user_login'); 
                             if($login_check==false){
-                                echo '<a href="login.php" class="btn btn-info">Login</a>';
+                                echo '<a href="login.php" class="btn btn-info">Đăng nhập</a>';
                             }else{
                                 ?>
                                 <div class="btn-group">
@@ -181,7 +154,7 @@
                                         } 
                                     ?>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="?user_id=<?php echo Session::get('user_id')?>">Đăng xuất</a>
+                                    <a class="dropdown-item" onclick="$.getScript('logout.php?user_id=<?php echo Session::get('user_id')?>');">Đăng xuất</a>
                                 </div>
                                 </div>
                         <?php 

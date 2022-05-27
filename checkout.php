@@ -18,16 +18,15 @@
 <!-- order -->
 <?php
 
-if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])){        
-       $insertOrder = $cart->insertOrder($_POST);
-       // xóa cart sau khi insert
-       $delCart = $cart->del_all_data_cart();
-       // xóa hiển thị cart ở header
-       Session::set('sum',0);
-       Session::set('qty', 0);
-       header('Location:success.php');
-
-    }
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])){
+    $cart->insertOrder($_POST);
+    // xóa cart sau khi insert
+    $delCart = $cart->del_all_data_cart();
+    // xóa hiển thị cart ở header
+    Session::set('sum',0);
+    Session::set('qty', 0);
+    header('Location:success.php');
+}
     
 
  
@@ -55,7 +54,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])){
     <section class="checkout spad">
         <div class="container">
             <div class="checkout__form">
-                <form action="" method="post">
+                <form action="" method="post" enctype="multipart/form-data" >
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
                             <!-- <h6 class="coupon__code"><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click
@@ -90,21 +89,19 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])){
                                     <p>Số điện thoại<span></span></p>
                                     <input value="<?php echo $result['phone'] ?>" type="text" placeholder="Street Address" class="checkout__input__add" readonly>
                                 </div>
-                                 <div class="checkout__input">
+                                <div class="checkout__input">
                                     <a href="user-info.php" type="button" class="site-btn">Sửa thông tin profile</a>
                                 </div>
                                 
                                 <div class="checkout__input">
                                     <p>Ghi chú với shop<span></span></p>
-                                    <input type="text"
-                                    name="note"
-                                    placeholder="...">
+                                    <input type="text" name="note" placeholder="...">
                                 </div>
-                                 <?php
+                                <?php
                                     }
                                 }
                                 ?>
-                    </div >
+                        </div >
                         <div class="col-lg-4 col-md-6">
                             <div class="checkout__order">
                                 <h4 class="order__title">Your order</h4>
@@ -123,7 +120,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])){
                                             <li><?php echo $i.'. '.$result['productName']; ?> 
                                                 <span><?php
                                                     echo $fm->format_currency($total).' '.'VNĐ' ;
-                                             ?></span>
+                                                ?></span>
                                             </li>
                                     
                                     <?php
@@ -138,25 +135,25 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])){
                                 <?php
                                     // $check_cart = $cart->check_cart();
 
-                                        if($get_product_cart){
+                                    if($get_product_cart){
                                 ?>
-                                            <li>Tổng cộng (chưa có VAT) <span>
-                                                <?php 
-                                                    echo $fm->format_currency($subtotal).' '.'VNĐ' ;
-                                                    Session::set('sum',$subtotal);
-                                                    Session::set('qty',$qty);
-                                                ?>
-                                            </span></li>
-                                            <li>
-                                            Tổng cộng <span>
-                                                
-                                                <?php 
+                                        <li>Tổng cộng (chưa có VAT) <span>
+                                            <?php 
+                                                echo $fm->format_currency($subtotal).' '.'VNĐ' ;
+                                                Session::set('sum',$subtotal);
+                                                Session::set('qty',$qty);
+                                            ?>
+                                        </span></li>
+                                        <li>
+                                        Tổng cộng <span>
+                                            
+                                            <?php 
 
-                                                    $vat = $subtotal * 0.1;
-                                                    $gtotal = $subtotal + $vat;
-                                                    echo $fm->format_currency($gtotal).' '.'VNĐ' ;
-                                                ?>
-                                            </span></li>
+                                                $vat = $subtotal * 0.1;
+                                                $gtotal = $subtotal + $vat;
+                                                echo $fm->format_currency($gtotal).' '.'VNĐ' ;
+                                            ?>
+                                        </span></li>
                                     <?php
                                         }else{
                                             echo 'Giỏ hàng bạn đang trống! :(';
@@ -165,25 +162,25 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])){
                                 </ul>
                                 
                                 <div class="form-check">
-                                      <input class="form-check-input" type="radio" name="payment" id="payment1" value="COD" checked>
-                                      <label class="form-check-label" for="payment1">
-                                        Thanh toán COD
-                                      </label>
-                                    </div>
-                                    <div class="form-check">
-                                      <input class="form-check-input" type="radio" name="payment" id="payment2"  value="Online">
-                                      <label class="form-check-label" for="payment2">
-                                        Thanh toán online
-                                      </label>
-                                    </div>
+                                    <input class="form-check-input" type="radio" name="payment" id="payment1" value="COD" checked>
+                                    <label class="form-check-label" for="payment1">
+                                    Thanh toán COD
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="payment" id="payment2"  value="Online">
+                                    <label class="form-check-label" for="payment2">
+                                    Thanh toán online
+                                    </label>
+                                </div>
 
                                 <button type="submit" name="checkout" class="site-btn"
                                 <?php
-                                        if(!$get_product_cart){
-                                            echo "disabled";
-                                        }
+                                    if(!$get_product_cart){
+                                        echo "disabled";
+                                    }
                                 ?>
-                                 ><center>Đặt hàng</center></button>
+                                >Đặt hàng</button>
                             </div>
                         </div>
                     </div>

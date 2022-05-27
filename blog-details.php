@@ -8,7 +8,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
 
     $commentArticle->insert_commentArticle($_POST, $_FILES, $_GET["id"]);
 }
-
 ?>
 
 <?php include 'classes/article.php';
@@ -110,16 +109,30 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
                         <div class="blog__details__btns">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <a href="" class="blog__details__btns__item">
-                                        <p><span class="arrow_left"></span> Previous Pod</p>
-                                        <h5>It S Classified How To Utilize Free Classified Ad Sites</h5>
-                                    </a>
+                                    <?php
+                                    $article_previous = $article->getDetailsArticleById($id-1);
+                                    if ($article_previous != false){
+                                        $pre_art = $article_previous->fetch_assoc();
+                                        $p_title = vn_to_str($pre_art["title"]);
+                                    ?>
+                                        <a href="<?php echo $p_title.'-'.$pre_art["id"]?>" class="blog__details__btns__item">
+                                            <p><span class="arrow_left"></span> Bài trước</p>
+                                            <h5><?php echo $pre_art["title"];?></h5>
+                                        </a>
+                                    <?php } ?>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <a href="" class="blog__details__btns__item blog__details__btns__item--next">
-                                        <p>Next Pod <span class="arrow_right"></span></p>
-                                        <h5>Tips For Choosing The Perfect Gloss For Your Lips</h5>
-                                    </a>
+                                    <?php
+                                    $article_next = $article->getDetailsArticleById($id+1);
+                                    if ($article_next != false){
+                                        $next_art = $article_next->fetch_assoc();
+                                        $n_title = vn_to_str($next_art["title"]);
+                                    ?>
+                                        <a href="<?php echo $n_title.'-'.$next_art["id"]?>" class="blog__details__btns__item blog__details__btns__item--next">
+                                            <p>Bài tiếp theo <span class="arrow_right"></span></p>
+                                            <h5><?php echo $next_art["title"];?></h5>
+                                        </a>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>
@@ -153,7 +166,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
 </script>
                         
                         <div class="blog__details__comment">
-                            <h4>Leave A Comment</h4>
+                            <h4>Bình Luận</h4>
                             <form action="" method = "POST" enctype="multipart/form-data" name="cmtForm" onsubmit="return validate_cmt();">
                                 <div class="row">
                                     <div class="col-lg-12">
@@ -175,12 +188,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
                                 <?php
                                     $login_check = Session::get('user_login');
                                     if($login_check == true){
-                                        echo '<button type="submit" class="site-btn" name = "submit">Post Comment</button>';
+                                        echo '<button type="submit" class="site-btn" name = "submit">Gửi Bình Luận</button>';
                                     }
                                     else {
                                         echo '<button type="button" class="site-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                        Post Comment
-                                      </button>';
+                                        Gửi Bình Luận
+                                        </button>';
                                         }
                                     ?>
                                 </div>
@@ -229,19 +242,22 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
                     html += item.name;
                     html += '<p class="date-commented">Vào lúc:'+item.datetime+'</p>';
                     html += '<p class="content-commented">'+item.content+'</p>';
-                    html += '<button class = "container-btn-ellip"><i class="fa fa-ellipsis-v"></i></button>';
-                    html += '<div class="att-comment">';
                     <?php
                         $isAdmin = Session::get('user_role');
                         $userId = Session::get('user_id');
+                        if ($userId != "") {
                     ?>
+                    html += '<button class = "container-btn-ellip"><i class="fa fa-ellipsis-v"></i></button>';
+                    html += '<div class="att-comment">';
                     if ('<?php echo $isAdmin;?>' == 'admin' || <?php echo $userId;?> == item.userId) {
                         html += '<a onclick="delete_comment('+item.commentId+');">Xóa</a>';
                     }
                     else {
                         html += '<a href="">Báo cáo</a>';
                     }
-                    html += '</div></div>';
+                    html += '</div>';
+                    <?php } ?>
+                    html += '</div>';
                     if(item.image != ""){ 
                         html += '<div class="img-commented">';
                         html += '<img src="img/commentArticle/'+item.image+'" alt="">';

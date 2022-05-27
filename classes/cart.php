@@ -260,33 +260,30 @@ class cart
 
 	// begin handle order============================================================================
 	public function insertOrder($data){
-			$user_id = Session::get('user_id');
-			$query = "SELECT * FROM tbl_cart WHERE userID = '$user_id'";
-			$get_product = $this->db->select($query);
-			if($get_product){
-				while($result = $get_product->fetch_assoc()){
-					$productid = $result['productId'];
-					$productName = $result['productName'];
-					$quantity = $result['quantity'];
-					$price = $result['price'] * $quantity;
-					$image = $result['image'];
-					$size = $result['size'];
-					$user_id = $user_id;
-					$note = $data['note'];
-					$paymentType = $data['payment'];
-					$query_order = "INSERT INTO tbl_order(productId,productName,quantity,price,image,userId,size,note,paymentType) VALUES('$productid','$productName','$quantity','$price','$image','$user_id','$size','$note','$paymentType')";
-					$insert_order = $this->db->insert($query_order);
-				}
+		$user_id = Session::get('user_id');
+		$query = "SELECT * FROM tbl_cart WHERE userID = '$user_id'";
+		$get_product = $this->db->select($query);
+		if($get_product){
+			while($result = $get_product->fetch_assoc()){
+				$productid = $result['productId'];
+				$productName = $result['productName'];
+				$quantity = $result['quantity'];
+				$price = $result['price'] * $quantity;
+				$image = $result['image'];
+				$size = $result['size'];
+				$user_id = $user_id;
+				$note = $data['note'];
+				$paymentType = $data['payment'];
+				$query_order = "INSERT INTO tbl_order(productId,productName,quantity,price,image,userId,size,note,paymentType,status) VALUES('$productid','$productName','$quantity','$price','$image','$user_id','$size','$note','$paymentType', '0')";
+				$insert_order = $this->db->insert($query_order);
 			}
-
-
 		}
+	}
+
 	public function del_all_data_cart(){
 		$user_id = Session::get('user_id');
 		$query = "DELETE FROM tbl_cart WHERE userId = '$user_id'";
-		$result = $this->db->delete($query);
-		
-
+		return $this->db->delete($query);
 	}
 	
 	public function get_cart_ordered($user_id){
