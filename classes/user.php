@@ -84,16 +84,18 @@ class user
                     Session::set('user_name',$value['name']);
                     Session::set('user_role',$value['role']);
                     if($index== 2){
-                    $alert = "<span class='success'>Đăng nhập thành công <a href='shop-details.php?productId=$productId'>Quay lại sản phẩm</a></span>";
-                        return $alert;
+                    // $alert = "<span class='success'>Đăng nhập thành công <a href='shop-details.php?productId=$productId'>Quay lại sản phẩm</a></span>";
+                        return true;
                     }
                     if($index== 1){
-                        $alert = "<span class='success'>Đăng nhập thành công <a href='blog-details.php?id=$productId'>Quay lại bài báo</a></span>";
-                            return $alert;
+                        // $alert = "<span class='success'>Đăng nhập thành công <a href='blog-details.php?id=$productId'>Quay lại bài báo</a></span>";
+                            return true;
+                        // header('Location:blog-details.php?id='.$productId.'');
                         }
                     else {
-                        $alert = "<span class='success'>Đăng nhập thành công <a href='shopping-cart.php'>Đến trang thanh toán</a></span>";
-                        return $alert;
+                        // $alert = "<span class='success'>Đăng nhập thành công <a href='shopping-cart.php'>Đến trang thanh toán</a></span>";
+                        return true;
+                        // header('Location:blog-details.php?id='.$productId.'');
                     }
                 }else{
                     $alert = "<span class='error'>Sai email hoặc password</span>";
