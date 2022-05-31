@@ -30,7 +30,7 @@ include '../classes/category.php';
 
     <main>
     <div class="container-fluid px-4">
-                <h1>Edit Category</h1>
+                <h3 class="mt-4">Thêm Danh mục</h3>
                 <span>
                 <?php 
 
@@ -43,7 +43,7 @@ include '../classes/category.php';
                 ?> 
             </span>
                
-                 <form action="categoryedit.php" method="post">
+                 <form action="" method="post">
                     <table class="form">					
                         <tr>
                             <td>
@@ -52,7 +52,7 @@ include '../classes/category.php';
                         </tr> <br>
 						<tr> 
                             <td>
-                                <br><input type="submit" class="btn btn-primary" name="submit" Value="Edit" onclick="window.location ='categorylist.php'"/>
+                                <br><input type="submit" class="btn btn-primary" name="submit" Value="Edit"/>
                             </td>
                         </tr>
                         <?php 

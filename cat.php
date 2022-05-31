@@ -20,14 +20,9 @@
                     <div class="breadcrumb__text">
                         <h4>Sản Phẩm</h4>
                         <div class="breadcrumb__links">
-<<<<<<< HEAD
                             <a href="./index.php">Trang Chủ</a>
                             <a href="./shop.php">Sản Phẩm</a>
                             <a href="./shop.php">Phân Loại</a>                                                    
-=======
-                            <a href="./index.php">Home</a>
-                            <a href="./shop.php">Shop</a>                                                  
->>>>>>> 46031cc31be1bc0b80515bb23aa3eba00a6b9190
                             <span>
                             <?php
 				               $getCategory = $category->getCategoryByNameLink($categoryName);

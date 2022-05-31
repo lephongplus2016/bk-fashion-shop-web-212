@@ -6,7 +6,8 @@
 	if(isset($_GET['deleteid'])  && $_GET['deleteid'] != NULL) {
 		// lấy query param , không lấy được body parser 
        $id = $_GET['deleteid'];
-        $delcat = $cat->del_category($id);
+        $check = $cat->del_category($id);
+        echo "<script>window.location ='categorylist.php'</script>";
     }
     // dùng else này khi nào đó là 1 site riêng 
    //  else{
@@ -41,7 +42,7 @@
                                                 <td>'.$row["categoryId"].'</td>
                                                 <td>'.$row["categoryName"].'</td>
                                                 <td class="text-center"><button class="btn btn-outline-primary my-1" onclick="location.assign(\'categoryedit.php?categoryId='.$row["categoryId"].'\');">Edit</Button>
-                                                    <button class="btn btn-outline-danger my-1" onclick="openDeleteConfirm(()=>{location.assign(\'?deleteId='.$row["categoryId"].'\')});">Delete</button></td>
+                                                    <button class="btn btn-outline-danger my-1" onclick="openDeleteConfirm(()=>{location.assign(\'?deleteid='.$row["categoryId"].'\')});">Delete</button></td>
                                             </tr>';	
                                         }
                                     }
@@ -62,6 +63,11 @@
 	    $('.datatable').dataTable();
 	    setSidebarHeight();
 	});
+</script>
+<script>
+    title = "Delete";
+    message = "Bạn có chắc chắn muốn xóa dòng này?"
+    setConfirmDialog(title, message);
 </script>
         
 <?php include 'inc_admin/footer.php' ?>

@@ -62,25 +62,26 @@
                         		$no = 0;
 			                	if($result != false) { // tránh lỗi do ko có record nào
 				                	while($row = $result->fetch_assoc())
-				                		{
-				                			$no++;
-				                			
-			                 	?>
+                                    {
+                                        $no++;
+                                        echo '
                                         <tr>
-                                           <td><?php echo $row["orderId"] ?></td>
-                                            <td><?php echo $row['productName']; ?></td>
-                                            <td><?php echo $row['quantity']; ?></td>
-                                            <td><?php echo $row['price']; ?></td>
-                                            <td><?php echo $row['size']; ?></td>
-                                                
+                                            <td>'.$no.'</td>
+                                            <td>'.$row["orderId"].'</td>
+                                            <td>'.$row["productName"].'</td>
+                                            <td>'.$row["quantity"].'</td>
+                                            <td>'.$row["price"].'</td>
+                                            <td>'.$row["size"].'</td>';
+                                            ?>
                                             <td> 
                                                     <image src="../img/product/<?php echo $row['image']?>"width = 100px> 
                                             </td>
-                                                
-                                            <td><?php echo $row['userId']; ?> - <a href="clientEdit.php?userId=<?php echo $row['userId']; ?>">Xem địa chỉ</a></td>
-                                            <td><?php echo $row['note']; ?></td>
-                                            <td><?php echo $row['paymentType']; ?></td>
-                                            <td><?php echo $row['datetime']; ?></td>
+                                            <?php echo'
+                                            
+                                            <td>'.$row["userId"].'<button class="btn btn-outline-primary my-1" onclick="location.assign(\'clientEdit.php?userId='.$row["userId"].'\');">Xem địa chỉ</Button></td>
+                                            <td>'.$row["note"].'</td>
+                                            <td>'.$row["paymentType"].'</td>
+                                            <td>'.$row["datetime"].'</td>'; ?>
                                             <td><?php $status = $row['status']; 
                                                 if($status == 0) {
                                                     echo "Chờ xử lý";
@@ -91,24 +92,22 @@
                                                 else{
                                                     echo "Đã giao hàng";
                                                 }
-                                            ?>
-                                                
+                                            ?></td>
+                                            <?php echo'            				
 
-                                            </td>
-                                            
-
-                                            	
-
-
-											<td>
-												<a href="orderedit.php?orderId=<?php echo $row['orderId'] ;?>">Edit</a> 
-						|| <a onclick="return confirm('Bạn có chắc chắn xóa?')"  href="orderlist.php?orderId=<?php echo $row['orderId'] ;?>&datetime=<?php echo $row['datetime'] ;?>&productId=<?php echo $row['productId'] ;?>">Delete</a>
-											</td>
+                                            <td class="text-center"><button class="btn btn-outline-primary my-1" onclick="location.assign(\'orderedit.php?orderId='.$row["orderId"].'\');">Edit</Button>
+                                                <button class="btn btn-outline-danger my-1" onclick="openDeleteConfirm(()=>{location.assign(\'?orderId='.$row["orderId"].'&datetime='.$row["datetime"].'&productId='.$row["productId"].'\')});">Delete</button></td>
+                                        </tr>';	
+                                    }
+                                }
+                                    ?>
 
 
-							<?php } ?>
-						<?php } ?>	
-										</tr>
+
+
+
+
+				                		
 
                                     </tbody>
                                 </table>
@@ -119,5 +118,9 @@
 	</main>
     
 </div>
-
+<script>
+    title = "Delete";
+    message = "Bạn có chắc chắn muốn xóa dòng này?"
+    setConfirmDialog(title, message);
+</script>
 <?php include 'inc_admin/footer.php' ?>

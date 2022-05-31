@@ -41,11 +41,7 @@
                                 <div class="blog__item__text">
                                     <span><img src="img/icon/calendar.png" alt="">'.$fm->formatDate($row["datetime"]).'</span>
                                     <h5>'.$row["title"].'</h5>
-<<<<<<< HEAD
-                                    <a href="blog-details.php?id='.$row["id"].'">Xem thêm</a>
-=======
                                     <a href="blog/'.$b_title.'-'.$row["id"].'">Đọc thêm</a>
->>>>>>> 46031cc31be1bc0b80515bb23aa3eba00a6b9190
                                 </div>
                             </div>
                         </div>';

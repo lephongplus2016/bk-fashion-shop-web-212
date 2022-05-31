@@ -27,23 +27,20 @@
                                 $result = $brand->showBrand();
 			                	if($result != false) { // tránh lỗi do ko có record nào
 				                	while($row = $result->fetch_assoc())
-				                		{
-				                			$no++;
-				                			
-			                 	?>
+                                    {
+                                        $no++;
+                                        echo '
                                         <tr>
-                                            <td><?php echo $no ?></td>
-                                            <td><?php echo $row['brandId']; ?></td>
-                                            <td><?php echo $row['brandName']; ?></td>  
-											<td>
-												<a href="brandedit.php?brandId=<?php echo $row['brandId'] ;?>">Edit</a> 
-						|| <a onclick="return confirm('Bạn có chắc chắn xóa?')"  href="?deleteid=<?php echo $row['brandId'] ?>">Delete</a>
-											</td>
-
-
-							<?php } ?>
-						<?php } ?>	
-										</tr>
+                                            <td>'.$no.'</td>
+                                            <td>'.$row["brandId"].'</td>
+                                            <td>'.$row["brandName"].'</td>
+                                            <td class="text-center"><button class="btn btn-outline-primary my-1" onclick="location.assign(\'brandedit.php?brandId='.$row["brandId"].'\');">Edit</Button>
+                                                <button class="btn btn-outline-danger my-1" onclick="openDeleteConfirm(()=>{location.assign(\'?deleteid='.$row["brandId"].'\')});">Delete</button></td>
+                                        </tr>';	
+                                    }
+                                }
+                                 ?>
+				                		
 
                                     </tbody>
                             </table>
@@ -58,6 +55,11 @@
 	    $('.datatable').dataTable();
 	    setSidebarHeight();
 	});
+</script>
+<script>
+    title = "Delete";
+    message = "Bạn có chắc chắn muốn xóa dòng này?"
+    setConfirmDialog(title, message);
 </script>
         
 <?php include 'inc_admin/footer.php' ?>
