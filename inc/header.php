@@ -83,7 +83,7 @@
                             <!--<li class="active"><a href="./index.php">Home</a></li>-->
                             <li><a href="./index.php">Trang chủ</a></li>
                             <li><a href="./shop.php">Sản Phẩm</a></li>
-                            <li><a href="#">Phân loại</a>
+                            <li><a>Phân loại</a>
                                 <ul class="dropdown">
                                     <?php 
                                         $catlist = $category->showCategorybyName(); 
@@ -151,7 +151,7 @@
                                         } 
                                     ?>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" onclick="$.getScript('logout.php?user_id=<?php echo Session::get('user_id')?>');">Đăng xuất</a>
+                                    <a class="dropdown-item" onclick="$.getScript('ajax/logout.php?user_id=<?php echo Session::get('user_id')?>');">Đăng xuất</a>
                                 </div>
                                 </div>
                         <?php 

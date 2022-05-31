@@ -46,7 +46,7 @@ function validate_login() {
                         <div class="row justify-content-center">
                             <div class="col-lg-5">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3>
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Đăng nhập</h3>
                                          <?php 
                                         if(isset($login_user)){
                                             echo $login_user; ?>
@@ -55,29 +55,29 @@ function validate_login() {
                                     <div class="card-body">
                                         <form name="loginForm" onsubmit="return validate_login();" action="" method="post">
                                             <div class="form-floating mb-3">
-                                                <label for="inputEmail">Email address</label>
+                                                <label for="inputEmail">Địa chỉ Email</label>
                                                 <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" name="email" onchange="document.getElementById('alert1').style.display = 'none';"/>   
                                                 <span class="invalid-feedback" id="alert1">Vui lòng nhập email</span>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <label for="inputPassword">Password</label>
+                                                <label for="inputPassword">Mật khẩu</label>
                                                 <input class="form-control" id="inputPassword" type="password" placeholder="Password" name="password" onchange="document.getElementById('alert2').style.display = 'none';"/>
-                                                <span class="invalid-feedback" id="alert2">Vui lòng nhập password</span>
+                                                <span class="invalid-feedback" id="alert2">Vui lòng nhập mật khẩu</span>
                                                 <br>
-                                                <input type="checkbox" onclick="hideShowPassword()">Show Password
+                                                <input type="checkbox" onclick="hideShowPassword()">Hiện mật khẩu
                                             </div>
                                             <!-- <div class="form-check mb-3">
                                                 <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
                                                 <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
                                             </div> -->
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <a class="small" href="password.php">Forgot Password?</a>
-                                                <input type="submit" name="loginForm" class="btn btn-primary" value="Login">
+                                                <a class="small" href="password.php">Quên mật khẩu?</a>
+                                                <input type="submit" name="loginForm" class="btn btn-primary" value="Đăng nhập">
                                             </div>
                                         </form>
                                     </div>
                                     <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="register.php">Need an account? Sign up!</a></div>
+                                        <div class="small"><a href="register.php">Chưa có tài khoản? Đăng kí ngay!</a></div>
                                     </div>
                                 </div>
                             </div>
