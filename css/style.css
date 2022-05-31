@@ -3570,7 +3570,7 @@ ol {
 
 @media only screen and (max-width: 767px) {
 
-	.col-lg-3{
+/*	.col-lg-3{
 		-ms-flex:0 0 25%;
 		flex:0 0 25%;
 		max-width:25%
@@ -3594,24 +3594,24 @@ ol {
 	.header__menu {
 		text-align: center;
 		padding: 0px 0 25px;
-	}
+	} */
 	
 	.header__menu ul li {
 		margin-right: 10px;
-	}
+	} 
 	.header__nav__option a {
 		margin-right: 10px;
-	}
+	} 
 	.header__nav__option .price {
 		margin-left: 0;
-	} 
+	}  
 	.canvas__open {
 		display: block;
 		font-size: 22px;
 		color: #111111;
-		height: 35px;
-		width: 35px;
-		line-height: 35px;
+		height: 40px;
+		width: 40px;
+		line-height: 38px;
 		text-align: center;
 		border: 1px solid #111111;
 		border-radius: 2px;
@@ -3791,16 +3791,16 @@ ol {
 		margin-bottom: 0;
 	}
 	.header__top { 	
-		display: block;
+		display: none;
 	}
 	.header .container {
 		position: relative;
 	}
 	.header__menu {
-		display: block;
+		display: none;
 	}
 	.header__nav__option {
-		display: block;
+		display: none;
 	}
 	.search-model-form input {
 		width: 100%;

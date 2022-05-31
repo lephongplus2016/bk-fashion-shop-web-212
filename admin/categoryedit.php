@@ -43,16 +43,16 @@ include '../classes/category.php';
                 ?> 
             </span>
                
-                 <form action="" method="post">
+                 <form action="categoryedit.php" method="post">
                     <table class="form">					
                         <tr>
                             <td>
                                 <input type="text" value="<?php echo $row['categoryName']; ?>" name="categoryName">
                             </td>
-                        </tr>
+                        </tr> <br>
 						<tr> 
                             <td>
-                                <input type="submit" name="submit" Value="Edit"/>
+                                <br><input type="submit" class="btn btn-primary" name="submit" Value="Edit" onclick="window.location ='categorylist.php'"/>
                             </td>
                         </tr>
                         <?php 

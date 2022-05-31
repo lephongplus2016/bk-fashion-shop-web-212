@@ -128,7 +128,7 @@ spl_autoload_register(function($class){
                     <nav class="header__menu mobile-menu">
                         <ul>
                             <!--<li class="active"><a href="./index.php">Home</a></li>-->
-                            <li><a href="./index.php">Home</a></li>
+                            <li><a href="./index.php">Trang chủ</a></li>
                             <li><a href="./shop.php">Sản Phẩm</a></li>
                             <li><a href="#">Phân loại</a>
                                 <ul class="dropdown">
@@ -212,7 +212,22 @@ spl_autoload_register(function($class){
                     </div>
                 </div>
             </div>
-            <div class="canvas__open"><i class="fa fa-bars"></i></div>
+            <div class="canvas__open">            
+                    <div class="btn-group">
+                        <button type="button" class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-bars"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="./index.php">Trang Chủ</a>
+                        <a class="dropdown-item" href="./shop.php">Sản Phẩm</a>
+                        <a class="dropdown-item" href="./shop.php">Phân Loại</a>
+                        <a class="dropdown-item" href="./blog.php">Blog</a>
+                        <a class="dropdown-item" href="./contact.php">Liên Hệ</a>
+                        <a class="dropdown-item" href="./orderdetail.php">Đơn Hàng</a>
+                        </div>             
+        
+        
+            </div>
         </div>
     </header>
     <!-- Header Section End -->
