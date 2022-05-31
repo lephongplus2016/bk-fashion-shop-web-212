@@ -44,10 +44,8 @@
                                         <td>'.$row['address'].'</td>
                                         <td>'.$row['phone'].'</td>
                                         <td>'.$row['role'].'</td>
-                                        <td>
-                                        <a href="clientEdit.php?userId='.$row['userId'].'">Edit</a> 
-                                        || <a onclick="return confirm(\'Bạn có chắc chắn xóa?\')"  href="?deleteid='.$row['userId'].'">Delete</a>
-                                        </td>
+                                        <td class="text-center"><button class="btn btn-outline-primary my-1" onclick="location.assign(\'clientEdit.php?userId='.$row["userId"].'\');">Edit</Button>
+                                                <button class="btn btn-outline-danger my-1" onclick="openDeleteConfirm(()=>{location.assign(\'?deleteid='.$row["userId"].'\')});">Delete</button></td>                       
                                         </tr>';
                                         $stt++;
                                     }
@@ -58,5 +56,10 @@
                 </main>
                 
             </div>
-        
+
+<script>
+    title = "Delete";
+    message = "Bạn có chắc chắn muốn xóa dòng này?"
+    setConfirmDialog(title, message);
+</script>
 <?php include 'inc_admin/footer.php' ?>

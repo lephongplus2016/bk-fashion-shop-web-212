@@ -21,10 +21,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__text">
-                        <h4>Shop</h4>
+                        <h4>Sản Phẩm</h4>
                         <div class="breadcrumb__links">
-                            <a href="./index.php">Home</a>
-                            <a href="./shop.php">Shop</a>
+                            <a href="./index.php">Trang Chủ</a>
+                            <a href="./shop.php">Sản Phẩm</a>
                             <a href="./shop.php">Giá</a>                                                    
                             <span>
                             <?php

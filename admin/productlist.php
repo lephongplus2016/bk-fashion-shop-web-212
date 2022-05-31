@@ -69,49 +69,47 @@
                         		$no = 0;
 			                	if($result != false) { // tránh lỗi do ko có record nào
 				                	while($row = $result->fetch_assoc())
-				                		{
-				                			$no++;
-				                			
-			                 	?>
+                                    {
+                                        $no++;
+                                        echo '
                                         <tr>
-                                            <td><?php echo $no ?></td>
-                                            <td><?php echo $row['productName']; ?></td>
-                                            <td><?php echo $row['categoryName']; ?></td>
-                                            <td><?php echo $row['brandName']; ?></td>
-                                            <td><?php echo $row['price']; ?></td>
-                                            <td><?php echo $row['color']; ?></td>
-
-                                            <td><?php echo $row['size']; ?></td>
-                                            <td><?php echo $row['model']; ?></td>
-                                            <td><?php echo $row['gender']; ?></td>
-                                            <td><?php echo $row['season']; ?></td>
-                                            <td><?php echo $fm->textShorten( $row['description'],200); ?></td>
-                                            
-
-                                            	<!-- lấy 1 hình đại diện cho sản phẩm thôi -->
-                                            	<?php 
+                                            <td>'.$no.'</td>
+                                            <td>'.$row["productName"].'</td>
+                                            <td>'.$row["categoryName"].'</td>
+                                            <td>'.$row["brandName"].'</td>
+                                            <td>'.$row["price"].'</td>
+                                            <td>'.$row["color"].'</td>
+                                            <td>'.$row["size"].'</td>
+                                            <td>'.$row["model"].'</td>
+                                            <td>'.$row["gender"].'</td>
+                                            <td>'.$row["season"].'</td>
+                                            <td>'.$row["gender"].'</td>  
+                                            <td>'.$fm->textShorten( $row['description'],200).'</td>';
+                                                                                      
+                                                                                      
+                                            	
 
                                             		$image_list = $product->getImgByProductId($row['productId']);
 	                                            	while($i = $image_list->fetch_assoc())
 								                		{
-								                ?>
-								                 	<td> 
+                                                            ?>
+								                 	    <td> 
 	                                            			<image src="../img/product/<?php echo $i['image']?>"width = 100px>
-	                                           		</td>
-												<?php		
+	                                           		    </td>
+                                                        <?php														
 														break; } 	  
-												?>
+											echo'	
+
+                                            <td class="text-center"><button class="btn btn-outline-primary my-1" onclick="location.assign(\'productedit.php?productId='.$row["productId"].'\');">Edit</Button>
+                                                <button class="btn btn-outline-danger my-1" onclick="openDeleteConfirm(()=>{location.assign(\'?deleteid='.$row["productId"].'\')});">Delete</button></td>
+                                        </tr>';	
+                                    }
+                                }
+                                    ?>
 
 
-											<td>
-												<a href="productedit.php?productId=<?php echo $row['productId'] ;?>">Edit</a> 
-						|| <a onclick="return confirm('Bạn có chắc chắn xóa?')"  href="?deleteid=<?php echo $row['productId'] ?>">Delete</a>
-											</td>
 
-
-							<?php } ?>
-						<?php } ?>	
-										</tr>
+				                		
 
                                     </tbody>
                                 </table>
@@ -122,5 +120,11 @@
 	</main>
     
 </div>
+
+<script>
+    title = "Delete";
+    message = "Bạn có chắc chắn muốn xóa dòng này?"
+    setConfirmDialog(title, message);
+</script>
 
 <?php include 'inc_admin/footer.php' ?>

@@ -161,7 +161,22 @@
                     </div>
                 </div>
             </div>
-            <div class="canvas__open"><i class="fa fa-bars"></i></div>
+            <div class="canvas__open">            
+                    <div class="btn-group">
+                        <button type="button" class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-bars"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="./index.php">Trang Chủ</a>
+                        <a class="dropdown-item" href="./shop.php">Sản Phẩm</a>
+                        <a class="dropdown-item" href="./shop.php">Phân Loại</a>
+                        <a class="dropdown-item" href="./blog.php">Blog</a>
+                        <a class="dropdown-item" href="./contact.php">Liên Hệ</a>
+                        <a class="dropdown-item" href="./orderdetail.php">Đơn Hàng</a>
+                        </div>             
+        
+        
+            </div>
         </div>
     </header>
     <!-- Header Section End -->
