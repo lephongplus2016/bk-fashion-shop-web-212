@@ -38,18 +38,19 @@ class Session{
 // khởi tạo đối tượng session lưu login, khi nào có đối tượng này thì là đang login
 // -> sẽ dùng để validation các trang index của login sau này
  public static function checkLogin(){
-    self::init();
-    if (self::get("user_login")== true) {
-     header("Location:index.php");
-    }
+   self::init();
+   if (self::get("user_login")== true) {
+      header("Location:index.php");
+   }
  }
 
 // hủy session login đối
 // buộc phải login để vào những site nào có checkSession-> 
- public static function destroy(){
-  session_destroy();
-     header("Location:login.php");
- }
+public static function destroy(){
+   session_destroy();
+   //header("Location:login.php");
+}
+
 }
 ?>
 

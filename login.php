@@ -1,4 +1,5 @@
 <?php
+    include 'inc/include_header.php';
     include 'inc/header.php';
 ?>
 <?php
@@ -14,7 +15,18 @@ $index = 0;
     }
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['loginForm'])) {
         
-        $login_user = $user->login_user($_POST, $id,$index);        
+        $login_user = $user->login_user($_POST, $id,$index);
+        if($login_user===true){
+            if($index==1){
+                header('Location:blog-details.php?id='.$id.'');
+            }
+            else if($index==2){
+                header('Location:shop-details.php?id='.$id.'');
+            }
+            else {
+                header('Location:index.php');
+            }
+        }       
     }
 ?>
 

@@ -84,16 +84,18 @@ class user
                     Session::set('user_name',$value['name']);
                     Session::set('user_role',$value['role']);
                     if($index== 2){
-                    $alert = "<span class='success'>Đăng nhập thành công <a href='shop-details.php?productId=$productId'>Quay lại sản phẩm</a></span>";
-                        return $alert;
+                    // $alert = "<span class='success'>Đăng nhập thành công <a href='shop-details.php?productId=$productId'>Quay lại sản phẩm</a></span>";
+                        return true;
                     }
                     if($index== 1){
-                        $alert = "<span class='success'>Đăng nhập thành công <a href='blog-details.php?id=$productId'>Quay lại bài báo</a></span>";
-                            return $alert;
+                        // $alert = "<span class='success'>Đăng nhập thành công <a href='blog-details.php?id=$productId'>Quay lại bài báo</a></span>";
+                            return true;
+                        // header('Location:blog-details.php?id='.$productId.'');
                         }
                     else {
-                        $alert = "<span class='success'>Đăng nhập thành công <a href='shopping-cart.php'>Đến trang thanh toán</a></span>";
-                        return $alert;
+                        // $alert = "<span class='success'>Đăng nhập thành công <a href='shopping-cart.php'>Đến trang thanh toán</a></span>";
+                        return true;
+                        // header('Location:blog-details.php?id='.$productId.'');
                     }
                 }else{
                     $alert = "<span class='error'>Sai email hoặc password</span>";
@@ -158,9 +160,28 @@ class user
             else return false;
         }
 
+        public function password_edit($id, $new_password) {
+            $password = md5($new_password);
+            $query = "UPDATE `tbl_user` SET 
+            `password` = '$password'
+            WHERE userId = '$id'";
+            if ($this->db->update($query)){
+                return true;
+            }
+            else return false;
+        }
+
         public function profile_check_unique_email($id, $email){
             $check_email = "SELECT * FROM tbl_user WHERE email='$email' and userId != $id";
             if ($this->db->select($check_email) === false) return true;
+            else return false;
+        }
+
+        public function check_only_password($id,$password){
+            $password = md5($password);
+            $query = "SELECT * FROM tbl_user WHERE password='$password' and userId = $id";
+
+            if ($this->db->select($query) != false) return true;
             else return false;
         }
 

@@ -1,13 +1,11 @@
 <?php
+    include 'inc/include_header.php';
     include 'inc/header.php';
 ?>
 
-
-
-
 <?php   //get category ID
-	if(isset($_GET['Id'])  && $_GET['Id'] != NULL) {
-        $categoryId = $_GET['Id'];
+	if(isset($_GET['type'])  && $_GET['type'] != NULL) {
+        $categoryName = $_GET['type'];
     }
     else{
         // code mặc định trở về trang web cũ
@@ -22,17 +20,22 @@
                     <div class="breadcrumb__text">
                         <h4>Sản Phẩm</h4>
                         <div class="breadcrumb__links">
+<<<<<<< HEAD
                             <a href="./index.php">Trang Chủ</a>
                             <a href="./shop.php">Sản Phẩm</a>
                             <a href="./shop.php">Phân Loại</a>                                                    
+=======
+                            <a href="./index.php">Home</a>
+                            <a href="./shop.php">Shop</a>                                                  
+>>>>>>> 46031cc31be1bc0b80515bb23aa3eba00a6b9190
                             <span>
                             <?php
-				               $getNameCat = $category->getNameCat($categoryId);
-	      		                if($getNameCat){
-	      			                while($row = $getNameCat->fetch_assoc()){
-	      				                $nameCategory = $row['categoryName'];
-	      			                }	
+				               $getCategory = $category->getCategoryByNameLink($categoryName);
+	      		                if($getCategory){
+	      			                $categoryId = $getCategory['categoryId'];
+                                    $nameCategory = $getCategory['categoryName'];	
 	      		                }
+                                else echo '<script>alert("false")</script>';
 	      	                    ?>
                                 <p><?php echo $nameCategory;?> </p>
                             </span> 
@@ -117,19 +120,19 @@
                         <div class="col-lg-6">
                             <div class="product__pagination">
                                 <!-- trang trước -->
-                                <a href="cat.php?Id=<?php echo $categoryId?>&page=<?php if($page>1) {echo $page-1;}  else {echo $page;}?>" ><</a>
+                                <a href="category/<?php echo $categoryName?>/page-<?php if($page>1) {echo $page-1;}  else {echo $page;}?>" ><</a>
                                 <?php
                                     // số trang hiển thị ra màn hình tối đa hiện tại là 3
                                     $start = $page> 1? $page -1: $page;
                                     $end = $page < $num_of_page? $page +1: $num_of_page;
                                     for($i=$start;$i<=$end;$i++){
                                         ?>
-                                        <a <?php if($i == $page) { echo 'class="active"';} ?> href="cat.php?Id=<?php echo $categoryId?>&page=<?php echo $i ?>"><?php echo $i ?></a>
+                                        <a <?php if($i == $page) { echo 'class="active"';} ?> href="category/<?php echo $categoryName?>/page-<?php echo $i ?>"><?php echo $i ?></a>
                                     <?php
                                     }
                                 ?>
                                 <!-- trang sau -->
-                                <a href="cat.php?Id=<?php echo $categoryId?>&page=<?php if($page<$num_of_page) {echo $page+1;}  else {echo $num_of_page;}?>" >></a>
+                                <a href="category/<?php echo $categoryName?>/page-<?php if($page<$num_of_page) {echo $page+1;}  else {echo $num_of_page;}?>" >></a>
                             </div>
                         </div>
                     </div>

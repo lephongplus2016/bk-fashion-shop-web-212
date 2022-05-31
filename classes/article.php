@@ -20,6 +20,8 @@ class Article
         $title = mysqli_real_escape_string($this->db->link, $data['articleTitle']);
         $author = mysqli_real_escape_string($this->db->link, $data['author']);
         $content = mysqli_real_escape_string($this->db->link, $data['contents']);
+        $description = mysqli_real_escape_string($this->db->link, $data['description']);
+        $keywords = mysqli_real_escape_string($this->db->link, $data['keywords']);
 
         if (trim($title) == "" || trim($author) == ""){
             return "Chưa điền các trường bắt buộc";
@@ -39,7 +41,8 @@ class Article
             $uploaded_image = "../img/article/".$unique_image;
 
             move_uploaded_file($file_temp,$uploaded_image);
-            $query = "INSERT INTO `tbl_article`(`title`, `content`, `writer`) VALUES ('$title', '$content', '$author');";
+            $query = "INSERT INTO `tbl_article`(`title`, `content`, `writer`, `description`, `keywords`) 
+            VALUES ('$title', '$content', '$author', '$description', '$keywords');";
             if ($this->db->insert($query) === false) return $this->db->error;
             $query = "SELECT max(id) AS id FROM tbl_article;";
             $result = $this->db->select($query);
@@ -92,6 +95,8 @@ class Article
         $title = mysqli_real_escape_string($this->db->link, $data['articleTitle']);
         $author = mysqli_real_escape_string($this->db->link, $data['author']);
         $content = mysqli_real_escape_string($this->db->link, $data['contents']);
+        $desciption = mysqli_real_escape_string($this->db->link, $data['description']);
+        $keywords = mysqli_real_escape_string($this->db->link, $data['keywords']);
 
         if (trim($title) == "" || trim($author) == ""){
             return "Để trống các trường bắt buộc";;
@@ -129,7 +134,9 @@ class Article
         $query = "UPDATE `tbl_article` SET
         `title` = '$title',
         `content` = '$content',
-        `writer` = '$author'
+        `writer` = '$author',
+        `description` = '$description',
+        `keywords` = '$keywords'
         WHERE `id` = '$id';";
         $result = $this->db->update($query);
         if ($result === false) return "Cơ sở dữ liệu";

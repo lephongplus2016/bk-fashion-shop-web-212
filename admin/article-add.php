@@ -82,6 +82,22 @@
                                 <span class="invalid-feedback" id="alert4">Vui lòng chọn file có các định dạng sau .jpeg .jpg .png .gif</span>
                             </div>
                         </div>
+                        <details>
+                            <summary>Thiết lập SEO</summary>
+                            <div class="form-group row">
+                                <label for="description" class="col-sm-2 col-form-label">Mô tả</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="description" name="description" placeholder="Thêm mô tả">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="keywords" class="col-sm-2 col-form-label">Từ khóa</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="keywords" name="keywords" placeholder="VD: từ khóa 1, từ khóa 2, ..." title="Từ khóa phân cách nhau bằng dấu phẩy">
+                                </div>
+                            </div>
+                        </details>
+                        
                         <div class="form-group row">
                             <div class="col-sm-2 offset-sm-4">
                                 <button type="submit" class="btn btn-primary" name="submit" style="width:100%">Đăng bài</button>

@@ -32,7 +32,9 @@ CREATE TABLE `tbl_article` (
   `title` varchar(255) NOT NULL,
   `content` text NOT NULL,
   `datetime` timestamp NULL DEFAULT current_timestamp(),
-  `writer` varchar(255) NOT NULL
+  `writer` varchar(255) NOT NULL,
+  `description` varchar(255),
+  `keywords` varchar(255)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -487,15 +489,7 @@ INSERT INTO `tbl_image_product` (`id`, `productId`, `image`) VALUES
 (268, 74, '27caa3fa1e.jpg'),
 (269, 74, '2c401d0729.jpg'),
 (270, 74, '6b01ab72e4.jpg'),
-(271, 74, '7e512873d1.jpg'),
-(272, 78, 'ca07121623.jpg'),
-(273, 78, '8346fc339f.jpg'),
-(274, 78, 'd5b239226c.jpg'),
-(275, 78, 'a528bae9cc.jpg'),
-(276, 79, '8617d7f730.jpg'),
-(277, 79, '27d4d4ab2f.jpg'),
-(278, 79, '08fec484a1.jpg'),
-(279, 79, '7d3ae2e221.jpg');
+(271, 74, '7e512873d1.jpg');
 
 -- --------------------------------------------------------
 
@@ -650,7 +644,6 @@ CREATE TABLE `tbl_user` (
 
 INSERT INTO `tbl_user` (`userId`, `name`, `email`, `address`, `phone`, `password`, `role`) VALUES
 (1, 'jack', 'jack@gmail.com', 'Thu Duc, Ho Chi Minh city', '0123', '202cb962ac59075b964b07152d234b70', 'customer'),
-(2, 'name', 'email', 'address', 'phone', 'password', 'customer'),
 (3, 'Phong', 'phong@gmail.com', 'Thu Duc, Ho Chi Minh city', '0123', '202cb962ac59075b964b07152d234b70', 'customer'),
 (4, 'Phong', 'phong1@gmail.com', 'Thu Duc, Ho Chi Minh city', '0123', '202cb962ac59075b964b07152d234b70', 'customer'),
 (5, 'Phong', 'phong2@gmail.com', 'Thu Duc, Ho Chi Minh city', '0123', '202cb962ac59075b964b07152d234b70', 'customer'),

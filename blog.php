@@ -1,5 +1,5 @@
 <?php
-    include 'inc/header.php';
+    include 'inc/include_header.php';
 ?>
 
 <?php include 'classes/article.php'; 
@@ -7,11 +7,12 @@
     $fm = new Format();
 	$list_article = $article->show_article_by_pagination();
 
-    echo '<script>
-        var temp = document.getElementsByTagName("title");
-        temp[0].innerHTML = "Blog - BK Fashion Shop";
-        </script>';
+    $title = "Blog"; 
 ?> 
+
+<?php
+    include 'inc/header.php';
+?>
 
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-blog set-bg" data-setbg="img/breadcrumb-bg.jpg">
@@ -32,6 +33,7 @@
                 <?php
                 if($list_article){
                     while($row = $list_article->fetch_assoc()){
+                        $b_title = vn_to_str($row["title"]);
                         echo '
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="blog__item">
@@ -39,7 +41,11 @@
                                 <div class="blog__item__text">
                                     <span><img src="img/icon/calendar.png" alt="">'.$fm->formatDate($row["datetime"]).'</span>
                                     <h5>'.$row["title"].'</h5>
+<<<<<<< HEAD
                                     <a href="blog-details.php?id='.$row["id"].'">Xem thêm</a>
+=======
+                                    <a href="blog/'.$b_title.'-'.$row["id"].'">Đọc thêm</a>
+>>>>>>> 46031cc31be1bc0b80515bb23aa3eba00a6b9190
                                 </div>
                             </div>
                         </div>';
@@ -71,19 +77,19 @@
                         <div class="col-lg-6">
                             <div class="product__pagination">
                                 <!-- trang trước -->
-                                <a href="blog.php?page=<?php if($page>1) {echo $page-1;}  else {echo $page;}?>" ><</a>
+                                <a href="blog/page-<?php if($page>1) {echo $page-1;}  else {echo $page;}?>" ><</a>
                                 <?php
                                     // số trang hiển thị ra màn hình tối đa hiện tại là 3
                                     $start = $page> 1? $page -1: $page;
                                     $end = $page < $num_of_page? $page +1: $num_of_page;
                                     for($i=$start;$i<=$end;$i++){
                                         ?>
-                                        <a <?php if($i == $page) { echo 'class="active"';} ?> href="blog.php?page=<?php echo $i ?>"><?php echo $i ?></a>
+                                        <a <?php if($i == $page) { echo 'class="active"';} ?> href="blog/page-<?php echo $i ?>"><?php echo $i ?></a>
                                     <?php
                                     }
                                 ?>
                                 <!-- trang sau -->
-                                <a href="blog.php?page=<?php if($page<$num_of_page) {echo $page+1;}  else {echo $num_of_page;}?>" >></a>
+                                <a href="blog/page-<?php if($page<$num_of_page) {echo $page+1;}  else {echo $num_of_page;}?>" >></a>
                             </div>
                         </div>
                     </div>

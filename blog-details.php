@@ -1,20 +1,13 @@
 <?php
-    include 'inc/header.php';
+    include 'inc/include_header.php';
 ?>
 <?php include 'classes/commentArticle.php';
 $commentArticle = new commentArticle();
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
     // echo '<pre>'; print_r($_FILES); echo '</pre>';
 
-    $check = $commentArticle->insert_commentArticle($_POST, $_FILES, $_GET["id"]);
+    $commentArticle->insert_commentArticle($_POST, $_FILES, $_GET["id"]);
 }
-else if(isset($_GET['deleteCommentId'])){
-    $CommentId = $_GET['deleteCommentId'];
-    $delUser = $commentArticle->delete_comment($CommentId);
-    $id = $_GET['id'];
-    echo "<script>window.location ='blog-details.php?id=$id'</script>";
-}
-
 ?>
 
 <?php include 'classes/article.php';
@@ -34,95 +27,16 @@ else if(isset($_GET['deleteCommentId'])){
         $data = $article_details->fetch_assoc();
     }
 
-    echo '<script>
-        var temp = document.getElementsByTagName("title");
-        temp[0].innerHTML = "'.$data["title"].' - BK Fashion Shop";
-        </script>';
+    // SEO section
+    $title = $data["title"];
+    if (trim($data["description"]) != "") $description = $data["description"];
+    if (trim($data["keywords"]) != "") $keywords = $data["keywords"];
 ?>
-        <style>
-            .container-commented-contented {
-                margin-top: 50px;
-            }
-            .in4-comment-user {
-                display: flex;
-                height: 180px;
-                margin-bottom: 20px;
-                /* border-bottom: 1px solid rgba(0,0,0,.09); */
-            }
-            .img-user-comment {
-                height: 40px;
-                flex-basis: 5%;
-                margin-right: 10px;
-            }
-            .img-user-comment img {
-                border-radius: 50%;
-                width: 40px;
-                height: 100%;
-                object-fit: cover;
-            }
-            .content-main {
-                flex-basis: 75%;
-                position: relative;
-                border-bottom: 1px solid rgba(0,0,0,.09);
-            }
-            .content-main:hover .container-btn-ellip {
-                color: #000;
-            }
-            .img-commented {
-                flex-basis: 20%;
-            }
-            .img-commented img{
-                
-                width: 100%;
-                height: 90%;
-                object-fit: cover;
-            }
-            .date-commented {
-                font-size: 12px;
-            }
-            .comments-from-users {
-                font-size: 18px;
-                background: rgba(0,0,0,.02);
-                color: rgba(0,0,0,.87);
-                padding: 0.875rem;
-                text-transform: capitalize;
-                margin-bottom: 20px;
-            }
-            .container-btn-ellip {
-                background: transparent;
-                border: transparent;
-                position: absolute;
-                top: 0;
-                right: 0;
-                padding: 8px 16px;
-                z-index: 999;
-                color: #fff;
-                transition: all 0.3s ease;
-            }
-            .att-comment {
-                position: absolute;
-                top: 30px;
-                right: 0;
-                box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%), 0 3px 1px -2px rgb(0 0 0 / 20%);
-                visibility: hidden;
-                z-index: -999;
-            }
-            .att-comment a:hover {
-                background: #ccc;
-            }
-            .att-comment a {
-                padding: 5px 30px;
-                color: black;
-                display: block;
-            }
-            .show-att-coment {
-                visibility: visible;
-                z-index: 999;
-            }
-            .text-black {
-                color: black !important;
-            }
-        </style>
+
+<?php
+    include 'inc/header.php';
+?>
+
     <!-- Blog Details Hero Begin -->
     <section class="blog-hero spad">
         <div class="container">
@@ -135,7 +49,6 @@ else if(isset($_GET['deleteCommentId'])){
                         <ul>
                             <li>By '.$data["writer"].'</li>
                             <li>'.date("d-m-Y", strtotime($data["datetime"])).'</li>
-                            <li>8 Comments</li>
                         </ul>';
                         ?>
                     </div>
@@ -196,16 +109,30 @@ else if(isset($_GET['deleteCommentId'])){
                         <div class="blog__details__btns">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <a href="" class="blog__details__btns__item">
-                                        <p><span class="arrow_left"></span> Previous Pod</p>
-                                        <h5>It S Classified How To Utilize Free Classified Ad Sites</h5>
-                                    </a>
+                                    <?php
+                                    $article_previous = $article->getDetailsArticleById($id-1);
+                                    if ($article_previous != false){
+                                        $pre_art = $article_previous->fetch_assoc();
+                                        $p_title = vn_to_str($pre_art["title"]);
+                                    ?>
+                                        <a href="blog/<?php echo $p_title.'-'.$pre_art["id"]?>" class="blog__details__btns__item">
+                                            <p><span class="arrow_left"></span> Bài trước</p>
+                                            <h5><?php echo $pre_art["title"];?></h5>
+                                        </a>
+                                    <?php } ?>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <a href="" class="blog__details__btns__item blog__details__btns__item--next">
-                                        <p>Next Pod <span class="arrow_right"></span></p>
-                                        <h5>Tips For Choosing The Perfect Gloss For Your Lips</h5>
-                                    </a>
+                                    <?php
+                                    $article_next = $article->getDetailsArticleById($id+1);
+                                    if ($article_next != false){
+                                        $next_art = $article_next->fetch_assoc();
+                                        $n_title = vn_to_str($next_art["title"]);
+                                    ?>
+                                        <a href="blog/<?php echo $n_title.'-'.$next_art["id"]?>" class="blog__details__btns__item blog__details__btns__item--next">
+                                            <p>Bài tiếp theo <span class="arrow_right"></span></p>
+                                            <h5><?php echo $next_art["title"];?></h5>
+                                        </a>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>
@@ -239,134 +166,155 @@ else if(isset($_GET['deleteCommentId'])){
 </script>
                         
                         <div class="blog__details__comment">
-                            <h4>Leave A Comment</h4>
+                            <h4>Bình Luận</h4>
                             <form action="" method = "POST" enctype="multipart/form-data" name="cmtForm" onsubmit="return validate_cmt();">
                                 <div class="row">
-                                    <div class="col-lg-12 text-center">
+                                    <div class="col-lg-12">
                                         <textarea placeholder="Comment" id = 'content' name = 'content'></textarea>
                                         <span class="invalid-feedback" id="alert1">Vui lòng nhập nội dung</span>
                                     </div>
                                 </div>
-                                <div class="mb-3">
+                                <div class="row">
+                                <div class="col-lg-12">
                                     <label for="image1" class="form-label">Ảnh liên quan</label>
                                     <input class="form-control" type="file" name = "image1" id="image1" accept=".jpeg, .jpg, .png, .gif">
                                     <div style="padding-top: 5px;">
-                                            <img id="upload-img1" style="max-width: 50%">
-                                            </div>
+                                        <img id="upload-img1" style="max-width: 50%">
                                     </div>
                                     <span class="invalid-feedback" id="alert2">Vui lòng chọn file có các định dạng sau .jpeg .jpg .png .gif</span>
+                                </div>
+                                </div>
+                                <div class="mb-3 text-center">
                                 <?php
                                     $login_check = Session::get('user_login');
                                     if($login_check == true){
-                                        echo '<button type="submit" class="site-btn" name = "submit">Post Comment</button>';
+                                        echo '<button type="submit" class="site-btn" name = "submit">Gửi Bình Luận</button>';
                                     }
                                     else {
                                         echo '<button type="button" class="site-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                        Post Comment
-                                      </button>';
+                                        Gửi Bình Luận
+                                        </button>';
                                         }
                                     ?>
-                                    </div>
+                                </div>
                             </form>
                         </div>
-                        <div class="container-commented-contented">
-                                    <h2 class="comments-from-users">Bình luận bài báo</h2>
-                                        <?php 
-                                                    $commentArticles = $commentArticle->getImgByCommentArticlerticleId($_GET["id"]);
-                                                    if($commentArticles != false) {
-                                                    while($i = $commentArticles->fetch_assoc())
-								                	{
-                                                            ?>
-                                                            <div class = "in4-comment-user">
-                                                                <div class = "img-user-comment">
-                                                                <img src="img/avatar.jpg" alt="">
-                                                                </div>
-                                                                <div class = "content-main">
-                                                                <?php
-                                                                $nameUser = $commentArticle->getNameUserCommentArticle($i['userId']);
-                                                                if($nameUser!=false){
-                                                                while($m = $nameUser->fetch_assoc()){
-                                                                    echo $m['name'];
-                                                                }
-                                                            }
-                                                                ?>
-                                                                <p class="date-commented">Vào lúc: <?=$i['datetime']?></p>
-                                                                <p class="content-commented"><?=$i['content']?></p>
-                                                                <button class = "container-btn-ellip"><i class="fa fa-ellipsis-v"></i></button>
-                                                                <div class="att-comment">
-                                                                <?php
-                                                                    $isAdmin = Session::get('user_role');
-                                                                    $userId = Session::get('user_id');
-                                                                    if ($isAdmin == 'admin' || $userId == $i['userId']) {
-                                                                        echo '<a href="?deleteCommentId='.$i['commentId'].'&id='.$id.'">Xóa</a>';
-                                                                    }
-                                                                    else {
-                                                                        echo '<a href="">Báo cáo</a>';
-                                                                    }
-                                                                    ?>
-                                                            </div>
-                                                            </div>
-                                                            <?php if($i['image']!=""){ 
-                                                                echo '<div class="img-commented">
-                                                                    <img src="img/commentArticle/'.$i['image'].'" alt="">
-                                                                    </div>';
-                                                                    }?>
-                                                            </div>
-                                                            <?php
-                                                    }
-                                                } 	  
-												?>
-                                        </div>
-                                </div>
+                        <div class="container-commented-contented" id="comments-ajax">
+                            <!-- comments -->
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- Blog Details Section End -->
- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
-        <button type="button" class="fa fa-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Vui lòng <a href="login.php?id=<?=$_GET['id']?>">Đăng nhập</a> để bình luận
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
+            <button type="button" class="fa fa-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            Vui lòng <a href="login.php?id=<?=$_GET['id']?>">Đăng nhập</a> để bình luận
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+        </div>
     </div>
-  </div>
-</div>
+    </div>
+
 <script>
 
-const fileUploader = document.getElementById(`formFile`);
-const reader = new FileReader();
-fileUploader.addEventListener('change', (event) => {
-    const files = event.target.files;
-    const file = files[0];
-    reader.readAsDataURL(file);
-    
-    reader.addEventListener('load', (event) => {
-        img = document.getElementById(`upload-img1`);
-        img.src = event.target.result;
-        img.alt = file.name;
-    });
-});   
+    function load_comments(){
+    $.get( "ajax/article-comment.php", { id: <?php echo $id?> }, 
+        function( result ) {
+            var html = '<h2 class="comments-from-users">Bình luận bài viết</h2>';
+            //console.log(result);
+            try{
+                $.each (result, function (key, item){
+                    html += '<div class = "in4-comment-user">';
+                    html += '<div class = "img-user-comment">';
+                    html += '<img src="img/avatar.jpg" alt=""></div>';
+                    html += '<div class = "content-main">';
+                    html += item.name;
+                    html += '<p class="date-commented">Vào lúc:'+item.datetime+'</p>';
+                    html += '<p class="content-commented">'+item.content+'</p>';
+                    <?php
+                        $isAdmin = Session::get('user_role');
+                        $userId = Session::get('user_id');
+                        if ($userId != "") {
+                    ?>
+                    html += '<button class = "container-btn-ellip"><i class="fa fa-ellipsis-v"></i></button>';
+                    html += '<div class="att-comment">';
+                    if ('<?php echo $isAdmin;?>' == 'admin' || <?php echo $userId;?> == item.userId) {
+                        html += '<a onclick="delete_comment('+item.commentId+');">Xóa</a>';
+                    }
+                    else {
+                        html += '<a href="">Báo cáo</a>';
+                    }
+                    html += '</div>';
+                    <?php } ?>
+                    html += '</div>';
+                    if(item.image != ""){ 
+                        html += '<div class="img-commented">';
+                        html += '<img src="img/commentArticle/'+item.image+'" alt="">';
+                        html += '</div>';
+                    }
+                    html += '</div>';
+                });
+            }
+            catch(e)
+            {
+                alert(e);
+            }
 
+            $("#comments-ajax").html(html);
+            add_event_ellip();
+        }, "json" );
+    }
 
-const btnEllips = document.querySelectorAll('.container-btn-ellip');
-    btnEllips.forEach((btnEllip)=>{
-        const attComment = btnEllip.parentNode.querySelector('.att-comment');
-        btnEllip.addEventListener('click', () => {
-            btnEllip.classList.toggle('text-black');
-            attComment.classList.toggle('show-att-coment');
+    const fileUploader = document.getElementById(`image1`);
+    const reader = new FileReader();
+    fileUploader.addEventListener('change', (event) => {
+        const files = event.target.files;
+        const file = files[0];
+        reader.readAsDataURL(file);
+        
+        reader.addEventListener('load', (event) => {
+            img = document.getElementById(`upload-img1`);
+            img.src = event.target.result;
+            img.alt = file.name;
         });
-    });
+    }); 
+
+    function add_event_ellip(){
+        const btnEllips = document.querySelectorAll('.container-btn-ellip');
+        //console.log(btnEllips);
+        btnEllips.forEach((btnEllip)=>{
+            const attComment = btnEllip.parentNode.querySelector('.att-comment');
+            btnEllip.addEventListener('click', () => {
+                btnEllip.classList.toggle('text-black');
+                attComment.classList.toggle('show-att-coment');
+            });
+        });
+    }
+
+    function delete_comment(commentId){
+        if (confirm('Bạn có muốn xóa bình luận này?'))
+        {
+            $.getScript("ajax/article-comment.php?commentId="+commentId, function(){
+                load_comments();
+            });
+        }
+    }
+
+    load_comments();
 
 </script>
+
 <?php
     include 'inc/footer.php';
 ?>

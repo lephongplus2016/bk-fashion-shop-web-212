@@ -1,0 +1,6 @@
+RewriteEngine On
+RewriteRule "index.html" "index.php"
+RewriteRule "^blog/page-([0-9]+)$" "blog.php?page=$1"
+RewriteRule "^blog/([\w-]+)-([0-9]+)$" "blog-details.php?id=$2&title=$1"
+RewriteRule "^category/([\w-]+)$" "cat.php?type=$1"
+RewriteRule "^category/([\w-]+)/page-([0-9]+)" "cat.php?type=$1&page=$2"

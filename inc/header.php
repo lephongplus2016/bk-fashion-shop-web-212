@@ -1,51 +1,31 @@
-<?php
-ob_start();
-session_start();
-include 'lib/session.php';
-Session::init();
-
-include 'lib/database.php';
-include 'helper/format.php';
-
-spl_autoload_register(function($class){
-    include_once "classes/".$class.".php";
-});
-    $db = new Database();
-	$fm = new Format();
-    $user = new user();
-    $product = new product();
-    $cart = new cart();
-    $brand = new brand();
-    $category = new category();
-
-
-  header("Cache-Control: no-cache, must-revalidate");
-  header("Pragma: no-cache"); 
-  header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); 
-  header("Cache-Control: max-age=2592000");?>
-
-<?php 
-    if(isset($_GET['user_id'])){
-        Session::destroy();
-    }
-            ?>
-
 <!DOCTYPE html>
 <html lang="zxx">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Male_Fashion Template">
-    <meta name="keywords" content="Male_Fashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>BK Fashion Shop</title>
+    
+    <!-- SEO section -->
+    <title><?php
+        if(isset($title)) echo $title ,' - BK Fashion Shop';
+        else echo 'BK Fashion Shop';
+    ?></title>
+    <meta name="description" content="<?php
+        if (isset($description)) echo $description;
+        else echo 'BK Fashion Shop - Quần áo thời trang phong cách';
+    ?>">
+    <meta name="keywords" content="<?php
+        if(isset($keywords)) echo $keywords; 
+        else echo 'Fashion, thời trang, quần áo, giá rẻ, 2022';
+    ?>"> 
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
     rel="stylesheet">
 
     <!-- Css Styles -->
+    <base href="http://localhost/bk-fashion-shop-web-212/">
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
@@ -90,33 +70,6 @@ spl_autoload_register(function($class){
 
     <!-- Header Section Begin -->
     <header class="header">
-        <!-- <div class="header__top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-md-7">
-                        <div class="header__top__left">
-                            <p>Free shipping, 30-day return or refund guarantee.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-5">
-                        <div class="header__top__right">
-                            <div class="header__top__links">
-                                <a href="#">Sign in</a>
-                                <a href="#">FAQs</a>
-                            </div>
-                            <div class="header__top__hover">
-                                <span>Usd <i class="arrow_carrot-down"></i></span>
-                                <ul>
-                                    <li>USD</li>
-                                    <li>EUR</li>
-                                    <li>USD</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-3"> <!-- 25%-->
@@ -132,11 +85,6 @@ spl_autoload_register(function($class){
                             <li><a href="./shop.php">Sản Phẩm</a></li>
                             <li><a href="#">Phân loại</a>
                                 <ul class="dropdown">
-                        <!--        <li><a href="./about.php">About Us</a></li>
-                                    <li><a href="./shop-details.php">Shop Details</a></li>
-                                    <li><a href="./shopping-cart.php">Shopping Cart</a></li>
-                                    <li><a href="./checkout.php">Check Out</a></li>
-                                    <li><a href="./blog-details.php">Blog Details</a></li> -->
                                     <?php 
                                         $catlist = $category->showCategorybyName(); 
                                         if($catlist != false) { 
@@ -147,16 +95,16 @@ spl_autoload_register(function($class){
                                                 }
                                                 else{
                                                     $num = 0;
-                                                }                                                                
+                                                } 
+                                                $cate_link_name = vn_to_str($row["categoryName"]);                                                               
                                     ?>                                                                                   
-                                                <li><a href="cat.php?Id=<?php echo $row['categoryId']; ?>"><?php echo $row['categoryName'];   echo " ($num)";?> </a></li>
+                                                <li><a href="category/<?php echo $cate_link_name; ?>"><?php echo $row['categoryName'];   echo " ($num)";?> </a></li>
                                     <?php    }  ?>   
                                     <?php }   ?>
                                 </ul>
                             </li>
                             <li><a href="./blog.php">Blog</a></li>
                             <li><a href="./contact.php">Liên Hệ</a></li>
-                            <li><a href="./orderdetail.php">Đơn hàng</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -185,7 +133,7 @@ spl_autoload_register(function($class){
                             // dùng biến login_check ở session để lưu có đăng nhập chưa
                             $login_check = Session::get('user_login'); 
                             if($login_check==false){
-                                echo '<a href="login.php" class="btn btn-info">Login</a>';
+                                echo '<a href="login.php" class="btn btn-info">Đăng nhập</a>';
                             }else{
                                 ?>
                                 <div class="btn-group">
@@ -194,6 +142,7 @@ spl_autoload_register(function($class){
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item" href="user-info.php">Hồ sơ của tôi</a>
+                                    <a class="dropdown-item" href="orderdetail.php">Đơn hàng</a>
                                     <?php
                                         // quyền admin
                                         $isAdmin = Session::get('user_role');
@@ -202,7 +151,7 @@ spl_autoload_register(function($class){
                                         } 
                                     ?>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="?user_id=<?php echo Session::get('user_id')?>">Đăng xuất</a>
+                                    <a class="dropdown-item" onclick="$.getScript('logout.php?user_id=<?php echo Session::get('user_id')?>');">Đăng xuất</a>
                                 </div>
                                 </div>
                         <?php 
