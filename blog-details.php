@@ -292,7 +292,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
 
     function add_event_ellip(){
         const btnEllips = document.querySelectorAll('.container-btn-ellip');
-        //console.log(btnEllips);
+        console.log(btnEllips);
         btnEllips.forEach((btnEllip)=>{
             const attComment = btnEllip.parentNode.querySelector('.att-comment');
             btnEllip.addEventListener('click', () => {

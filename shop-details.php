@@ -18,7 +18,17 @@ else if(isset($_GET['deleteCommentId'])){
 
 ?>
 
+<?php 
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submitEdit'])){
+    $alert = $comment->edit_comment($_POST['content'],$_POST['submitEdit'],1);
+    echo $alert;
+}
+else if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deletedImg'])){
+    $alert = $comment->edit_comment($_POST['content'],$_POST['deletedImg'],0);
+    echo $alert;
+}
 
+?>
 <?php 
     if(isset($_GET['productId'])  && $_GET['productId'] != NULL) {
         $id = $_GET['productId'];
@@ -47,6 +57,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
 }
 
 ?>
+
     <!-- Shop Details Section Begin -->
     <section class="shop-details">
         <div class="product__details__pic">
@@ -150,6 +161,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
             .content-main:hover .container-btn-ellip {
                 color: #000;
             }
+            .img-commented{
+                position: relative;
+            }
+            .btn-del-img {
+                position: absolute;
+                border-color: transparent;
+                top: 0;
+                right: 0;
+            }
             .img-commented img{
                 width: 100%;
                 height: 90%;
@@ -181,10 +201,21 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
             .att-comment {
                 position: absolute;
                 top: 30px;
-                right: 0;
+                right: 16px;
                 box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%), 0 3px 1px -2px rgb(0 0 0 / 20%);
                 visibility: hidden;
                 z-index: -999;
+                
+            }
+            .att-comment button:hover {
+                background-color: #ccc;
+            }
+            .att-comment button{
+                height: 34px;
+                border-color: transparent; 
+                background-color: transparent;
+                transition: all 0.3s linear;
+
             }
             .att-comment a:hover {
                 background: #ccc;
@@ -193,6 +224,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
                 padding: 5px 30px;
                 color: black;
                 display: block;
+                transition: all 0.3s linear;
             }
             .show-att-coment {
                 visibility: visible;
@@ -200,6 +232,41 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
             }
             .text-black {
                 color: black !important;
+            }
+            .form-control-edit {
+                width: 100%;
+                border: none;
+                border-bottom: 1px solid #ccc;
+            }
+            .form-control-edit:focus {
+                border-bottom: 2px solid #000;
+
+            }
+            .btn-edit {
+                border-color: transparent;
+                padding: 3px 12px;
+                text-transform: uppercase;
+                font-weight: bold;
+                font-size: 13px;
+            }
+            .btn-save {
+                background: #0069D9;
+                color: #fff;
+            }
+            .btn-exit {
+                background: transparent;
+            }
+            .container-btn-edit {
+                float: right;
+                margin-top: 12px;
+            }
+            .alert-commented-edit {
+                display: none;
+                color: red;
+                margin-top: 8px;
+            }
+            .show-alert {
+                display: inline-block;
             }
         </style>
         <div class="product__details__content">
@@ -356,7 +423,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
                                     <?php
                                     $login_check = Session::get('user_login');
                                     if($login_check == true){
-                                    echo '<form action="" method = "POST" style = "margin-top: 40px;" enctype="multipart/form-data" name="cmtForm" onsubmit="return validate_cmt();">
+                                        ?>
+                                    <form action="" method = "POST" style = "margin-top: 40px;" enctype="multipart/form-data" name="cmtForm" onsubmit="return validate_cmt();">
                                     <div class="form-floating">
                                         <label for="content">Bình Luận sản phẩm</label>
                                         <div class="form-floating">
@@ -376,7 +444,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
                                         </div>
                                     </div>
                                         <button style = "margin-top: 10px;" type="submit" name = "submit" class="btn btn-primary">Gửi Bình Luận</button>
-                                    </form>';
+                                    </form>;
+                                    <?php
                                     }
                                     else {
                                         echo '<p class="fw-normal" style="margin-top: 20px">Đăng nhập để bình luận <a href = "login.php?productId='.$_GET["productId"].'">Đến đăng nhập</a></p>';
@@ -392,7 +461,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
                                                     $nameUser = $comment->getNameUserComment($i['userId']);
                                                     if($nameUser!=false){
                                                             ?>
-                                                            <div class = "in4-comment-user">
+                                                            <div id="container-form-edit<?=$i['commentId']?>"></div>
+                                                            <div class = "in4-comment-user" id="in4-comment-user<?=$i['commentId']?>">
                                                                 <div class = "img-user-comment">
                                                                 <img src="img/avatar.jpg" alt="">
                                                                 </div>
@@ -404,13 +474,17 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
                                                                 ?>
                                                                 <p class="date-commented">Vào lúc: <?=$i['dateComment']?></p>
                                                                 <p class="content-commented"><?=$i['content']?></p>
-                                                                <button class = "container-btn-ellip"><i class="fa fa-ellipsis-v"></i></button>
-                                                                <div class="att-comment">
+                                                                <?php
+                                                                if($login_check) echo '<button class = "container-btn-ellip"><i class="fa fa-ellipsis-v"></i></button>'
+                                                                ?>
+                                                                <div class="att-comment" id="att-comment<?=$i['commentId']?>">
                                                                 <?php
                                                                     $isAdmin = Session::get('user_role');
                                                                     $userId = Session::get('user_id');
                                                                     if ($isAdmin == 'admin' || $userId == $i['userId']) {
-                                                                        echo '<a href="?deleteCommentId='.$i['commentId'].'&productId='.$id.'">Xóa</a>';
+                                                                    $img = $i['image'];
+                                                                        echo '<button  onClick="handleEditcomment('.$i['commentId'].',\''.$img.'\',\''.$i['content'].'\')">Chỉnh sửa</button>';
+                                                                        echo '<a href="shop-details.php?deleteCommentId='.$i['commentId'].'&productId='.$id.'">Xóa</a>';
                                                                     }
                                                                     else {
                                                                         echo '<a href="">Báo cáo</a>';
@@ -600,8 +674,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
     </section>
     <!-- Related Section End -->
     <script>
-
-	const fileUploader = document.getElementById(`image1`);
+	const fileUploader = document.getElementById("image1");
+if(fileUploader){
     const reader = new FileReader();
     fileUploader.addEventListener('change', (event) => {
         const files = event.target.files;
@@ -613,17 +687,90 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
             img.src = event.target.result;
             img.alt = file.name;
         });
-    });   
+    });  
+}
     const btnEllips = document.querySelectorAll('.container-btn-ellip');
+
     btnEllips.forEach((btnEllip)=>{
         const attComment = btnEllip.parentNode.querySelector('.att-comment');
+
         btnEllip.addEventListener('click', () => {
             btnEllip.classList.toggle('text-black');
             attComment.classList.toggle('show-att-coment');
         });
     });
-    
+    function handleEditcomment(id,img,content) {
+        const contentComment = document.getElementById(`in4-comment-user${id}`)
+        const formEdit = document.getElementById(`container-form-edit${id}`)
+        const attComment = document.getElementById(`att-comment${id}`)
+        attComment.classList.toggle('show-att-coment');
+        contentComment.style = "display: none";
+        formEdit.style = "display: block";
+        let output = `<div class = "in4-comment-user">
+                    <div class = "img-user-comment">
+                    <img src="img/avatar.jpg" alt="">
+                    </div>
+                    <div class = "content-main">
+                    <form method="post" style="margin-right: 20px">
+                    <lable for="content" style="margin-bottom: 7px;opacity: 0.7; display: block;
+                    ">Chỉnh sửa Bình luận</lable>
+                    <input type="text" autoFocus name="content" value="${content}" class="form-control-edit" id="form-control-edit${id}" onchange="handleChangeText('${id}','${content}')"/>
+                    <span class="alert-commented-edit" id="alert-commented-edit${id}"></span>
+                    <div class="container-btn-edit">
+                    <button type="button" class="btn-edit btn-exit" onClick="handleOutEdit(${id})">Hủy</button>
+                    <button type="button" name="submitEdit" class="btn-edit btn-save" id="btn-save${id}" value="${id}" onClick="handleChangeText('${id}','${content}')">Lưu</button>
+                    </div>
+                    </form>
+                    </div>`;
+                    if(img){
+                    output+=`<div class="img-commented" id="img-commented${id}">
+                    <img src="img/comment/${img}" alt="">
+                    <button class="btn-del-img" onclick="handleDelimg(${id})"><i class="fa fa-close"></i></button>
+                    </div>
+                    </div>`;
+                }
+                    
+        formEdit.innerHTML= output;
+    }
+    function handleOutEdit(id) {
+        const contentComment = document.getElementById(`in4-comment-user${id}`);
+        const formEdit = document.getElementById(`container-form-edit${id}`);
+        contentComment.style = "display: flex";
+        formEdit.style = "display: none";
 
+    }
+    function handleDelimg(id){
+        const isConfirm = confirm("Xác Nhận xóa");
+        const imgCommented = document.getElementById(`img-commented${id}`);
+         const buttonSave = document.getElementById(`btn-save${id}`);
+
+        if(isConfirm){
+            imgCommented.style = "display: none";
+            buttonSave.name="deletedImg";
+            // console.log(imgCommented)
+        }
+    }
+function handleChangeText(id,content){
+    const valueInput = document.getElementById(`form-control-edit${id}`).value;
+    const alertInput = document.getElementById(`alert-commented-edit${id}`);
+    const buttonSave = document.getElementById(`btn-save${id}`);
+    if(valueInput=="") {
+        alertInput.innerHTML = "Trương này không được trống";
+        alertInput.classList.add("show-alert")
+        buttonSave.type="button";
+
+    }
+    else if(valueInput==content){
+        alertInput.innerHTML = "Nội dung không đổi";
+        alertInput.classList.add("show-alert")
+        buttonSave.type="button";
+    }
+    else {
+        buttonSave.type="submit";
+        alertInput.classList.remove("show-alert");
+    }
+
+}
    
 </script>
 <?php
