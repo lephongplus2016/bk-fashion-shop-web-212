@@ -66,5 +66,24 @@ class comment
             return $alert;
         }
     }
+    public function edit_comment($content, $id, $index){
+        if($index){
+                        $query =  "UPDATE `tbl_comment_product` SET 
+                        `content` = '$content' 
+                        WHERE commentId = '$id'" ;
+                        $result = $this->db->update($query);
+                    return "Đã chỉnh sửa bình luận";
+            }
+        else {
+                        $query =  "UPDATE `tbl_comment_product` SET 
+                        `content` = '$content', 
+                         `image`  = ''
+                        WHERE commentId = '$id'" ;
+                        $result = $this->db->update($query);
+        }
+        $alert = "<span class='success'>Sửa bình luận thành công</span>";
+        return $alert;
+        
+    }
 }
 ?>
