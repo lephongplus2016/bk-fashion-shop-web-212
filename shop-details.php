@@ -719,7 +719,7 @@ if(fileUploader){
                     <span class="alert-commented-edit" id="alert-commented-edit${id}"></span>
                     <div class="container-btn-edit">
                     <button type="button" class="btn-edit btn-exit" onClick="handleOutEdit(${id})">Hủy</button>
-                    <button type="button" name="submitEdit" class="btn-edit btn-save" id="btn-save${id}" value="${id}">Lưu</button>
+                    <button type="button" name="submitEdit" class="btn-edit btn-save" id="btn-save${id}" value="${id}" onClick="handleChangeText('${id}','${content}')">Lưu</button>
                     </div>
                     </form>
                     </div>`;
