@@ -695,7 +695,6 @@ if(fileUploader){
         const attComment = btnEllip.parentNode.querySelector('.att-comment');
 
         btnEllip.addEventListener('click', () => {
-            console.log(btnEllip)
             btnEllip.classList.toggle('text-black');
             attComment.classList.toggle('show-att-coment');
         });
