@@ -7,14 +7,23 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Dashboard</h1>
+                        <h1 class="mt-4">Trang Admin</h1>
                         <div class="row">
+                            <div class="col-sm-6">
+                                <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Đơn đặt hàng</h5>
+                                    <p class="card-text">Quản lý các đơn đặt hàng của khách hàng.</p>
+                                    <a href="orderlist.php" class="btn btn-primary">Danh sách đơn đặt hàng</a>
+                                </div>
+                                </div>
+                            </div>
                             <div class="col-sm-6">
                                 <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">Sản Phẩm</h5>
                                     <p class="card-text">Thêm sản phẩm mới và xem danh sách sản phẩm.</p>
-                                    <a href="producadd.php" class="btn btn-primary">Thêm sản phẩm</a>
+                                    <a href="productadd.php" class="btn btn-primary">Thêm sản phẩm</a>
                                     <a href="productlist.php" class="btn btn-primary">Danh sách Sản phẩm</a>
                                 </div>
                                 </div>
@@ -68,15 +77,7 @@
                                 </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Đơn đặt hàng</h5>
-                                    <p class="card-text">Quản lý các đơn đặt hàng của khách hàng.</p>
-                                    <a href="orderlist.php" class="btn btn-primary">Danh sách đơn đặt hàng</a>
-                                </div>
-                                </div>
-                            </div>
+                            
                             <div class="col-sm-6">
                                 <div class="card">
                                 <div class="card-body">
