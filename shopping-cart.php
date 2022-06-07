@@ -118,7 +118,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_cart'])){
                                         echo  $fm->format_currency($total)." VND";
                                         ?>
                                     </td>
-                                    <td class="cart__close"> <a onclick="return confirm('Bạn có muốn xóa không?');" href="?cartId=<?php echo $row['cartId']; ?>"><i class="fa fa-close"></i></a></td>
+                                    <td class="cart__close"> <a onclick="return confirm('Bạn có muốn xóa không?');" href="shopping-cart.php?cartId=<?php echo $row['cartId']; ?>"><i class="fa fa-close"></i></a></td>
                                 </tr>
                                 
                                 <?php
