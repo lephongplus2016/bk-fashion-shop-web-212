@@ -1,10 +1,6 @@
 <?php
     include 'inc/include_header.php';
-    include 'inc/header.php';
 ?>
-
-
-
 
 <?php   //get category ID
 	if(isset($_GET['pricelv'])  && $_GET['pricelv'] != NULL) {
@@ -12,8 +8,31 @@
     }
     else{
         // code mặc định trở về trang web cũ
-        echo "<script>window.location ='404.php'</script>";
+        header("Location: 404.php");
+        exit;
     }   
+
+    if($pricelv == 0){
+        $namePrice = "0 - 200.000";
+    }
+    elseif($pricelv == 1){
+        $namePrice = "200.000 - 500.000";
+    }
+    elseif($pricelv == 2){
+        $namePrice = "500.000 - 1.000.000";
+    }
+    elseif($pricelv == 3){
+        $namePrice = "1.000.000 - 2.000.000";
+    } 	      	                    
+    elseif($pricelv == 4){
+        $namePrice = "2.000.000 - 5.000.000";
+    }
+    elseif($pricelv == 5){
+        $namePrice = "5.000.000+";
+    }
+
+    $title = "Sản phẩm ".$namePrice." VNĐ";
+    include 'inc/header.php';
 ?>
         <!-- Breadcrumb Section Begin -->
         <section class="breadcrumb-option">
@@ -24,33 +43,8 @@
                         <h4>Sản Phẩm</h4>
                         <div class="breadcrumb__links">
                             <a href="./index.php">Trang Chủ</a>
-                            <a href="./shop.php">Sản Phẩm</a>
-                            <a href="./shop.php">Giá</a>                                                    
-                            <span>
-                            <?php
-				               if($pricelv == 0){
-                                   $namePrice = "0 - 200.000";
-                               }
-                               elseif($pricelv == 1){
-                                   $namePrice = "200.000 - 500.000";
-                               }
-                               elseif($pricelv == 2){
-                                $namePrice = "500.000 - 1.000.000";
-                                }
-                                elseif($pricelv == 3){
-                                    $namePrice = "1.000.000 - 2.000.000";
-                                    } 	      	                    
-                                elseif($pricelv == 4){
-                                    $namePrice = "2.000.000 - 5.000.000";
-                                }
-                                elseif($pricelv == 5){
-                                    $namePrice = "5.000.000+";
-                                }
-
-                                ?>
-                                <p><?php echo $namePrice;?> </p>
-                            </span> 
-                            
+                            <a href="./shop.php">Sản Phẩm</a>                                                    
+                            <span>Giá từ: <?php echo $namePrice;?> VNĐ</span> 
                         </div>
                     </div>
                 </div>
@@ -130,19 +124,23 @@
                         <div class="col-lg-6">
                             <div class="product__pagination">
                                 <!-- trang trước -->
-                                <a href="price.php?pricelv=<?php echo $pricelv?>&page=<?php if($page>1) {echo $page-1;}  else {echo $page;}?>" ><</a>
+                                <?php if ($page>1) {?>
+                                    <a href="price/level-<?php echo $pricelv?>/page-<?php echo $page-1;?>" ><</a>
                                 <?php
+                                }
                                     // số trang hiển thị ra màn hình tối đa hiện tại là 3
                                     $start = $page> 1? $page -1: $page;
                                     $end = $page < $num_of_page? $page +1: $num_of_page;
                                     for($i=$start;$i<=$end;$i++){
                                         ?>
-                                        <a <?php if($i == $page) { echo 'class="active"';} ?> href="price.php?pricelv=<?php echo $pricelv?>&page=<?php echo $i ?>"><?php echo $i ?></a>
-                                    <?php
+                                        <a <?php if($i == $page) { echo 'class="active"';} else {echo 'href="price/level-'.$pricelv.'/page-'.$i.'"';}?>><?php echo $i ?></a>
+                                        <?php
                                     }
                                 ?>
                                 <!-- trang sau -->
-                                <a href="price.php?pricelv=<?php echo $pricelv?>&page=<?php if($page<$num_of_page) {echo $page+1;}  else {echo $num_of_page;}?>" >></a>
+                                <?php if($page<$num_of_page){?>
+                                    <a href="price/level-<?php echo $pricelv?>/page-<?php echo $page+1;?>" >></a>
+                                <?php }?>
                             </div>
                         </div>
                     </div>

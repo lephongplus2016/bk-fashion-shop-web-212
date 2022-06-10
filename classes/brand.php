@@ -126,5 +126,18 @@ class brand
 		$result = $this->db->select($query);
 		return $result;
 	}
+
+	public function getBrandByNameLink($nameLink){
+		$query = "SELECT * FROM tbl_brand";
+		$result = $this->db->select($query);
+		if($result != false){
+			while ($brand = $result->fetch_assoc()){
+				if ($nameLink == vn_to_str($brand["brandName"])){
+					return $brand;
+				}
+			}
+		}
+		return false;
+	}
 }
 ?>

@@ -22,7 +22,6 @@
                         <table id="datatablesSimple">
                             <thead>
                             <tr>
-                                <th>No</th>
                                 <th>ID</th>
                                 <th>Name</th>                            
                                 <th>Action</th>
@@ -30,15 +29,12 @@
                             </thead>
                             <tbody>
                         	<?php 
-                        		$no = 0;
                                 $result = $cat->showCategory();
 			                	if($result != false) { // tránh lỗi do ko có record nào
 				                	while($row = $result->fetch_assoc())
 				                		{
-				                			$no++;
                                             echo '
                                             <tr>
-                                                <td>'.$no.'</td>
                                                 <td>'.$row["categoryId"].'</td>
                                                 <td>'.$row["categoryName"].'</td>
                                                 <td class="text-center"><button class="btn btn-outline-primary my-1" onclick="location.assign(\'categoryedit.php?categoryId='.$row["categoryId"].'\');">Edit</Button>

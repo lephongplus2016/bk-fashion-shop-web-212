@@ -1,6 +1,5 @@
 <?php
     include 'inc/include_header.php';
-    include 'inc/header.php';
 ?>
 
 <?php   //get category ID
@@ -9,8 +8,23 @@
     }
     else{
         // code mặc định trở về trang web cũ
-        echo "<script>window.location ='404.php'</script>";
-    }   
+        header("Location: 404.php");
+        exit;
+    } 
+
+    $getCategory = $category->getCategoryByNameLink($categoryName);
+    if($getCategory){
+        $categoryId = $getCategory['categoryId'];
+        $nameCategory = $getCategory['categoryName'];	
+    }
+    else {
+        echo '<script>alert("false")</script>';
+        header("Location: 404.php");
+        exit;
+    }
+    
+    $title = $nameCategory;
+    include 'inc/header.php';
 ?>
         <!-- Breadcrumb Section Begin -->
         <section class="breadcrumb-option">
@@ -21,20 +35,10 @@
                         <h4>Sản Phẩm</h4>
                         <div class="breadcrumb__links">
                             <a href="./index.php">Trang Chủ</a>
-                            <a href="./shop.php">Sản Phẩm</a>
-                            <a href="./shop.php">Phân Loại</a>                                                    
-                            <span>
-                            <?php
-				               $getCategory = $category->getCategoryByNameLink($categoryName);
-	      		                if($getCategory){
-	      			                $categoryId = $getCategory['categoryId'];
-                                    $nameCategory = $getCategory['categoryName'];	
-	      		                }
-                                else echo '<script>alert("false")</script>';
-	      	                    ?>
-                                <p><?php echo $nameCategory;?> </p>
+                            <a href="./shop.php">Sản Phẩm</a>                                                   
+                            <span>Phân Loại: 
+                            <?php echo $nameCategory;?>
                             </span> 
-                            
                         </div>
                     </div>
                 </div>
@@ -81,10 +85,6 @@
                                 </div>
                             </div>
                         </div>
-
-                  
-                        
-                       
 
 <?php             
         }

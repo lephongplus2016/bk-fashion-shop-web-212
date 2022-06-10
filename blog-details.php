@@ -15,7 +15,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
         $id = $_GET['id'];
     }
     else{
-        echo "<script>window.location ='blog.php'</script>";
+        header("Location: blog.php");
+        exit;
     } 
 
     $article = new Article();

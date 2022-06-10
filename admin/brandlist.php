@@ -15,7 +15,6 @@
                         <table id="datatablesSimple">
                             <thead>
                             <tr>
-                                <th>No</th>
                                 <th>ID</th>
                                 <th>Tên Thương Hiệu</th>                            
                                 <th>Action</th>
@@ -23,15 +22,12 @@
                             </thead>
                             <tbody>
                         	<?php 
-                        		$no = 0;
                                 $result = $brand->showBrand();
 			                	if($result != false) { // tránh lỗi do ko có record nào
 				                	while($row = $result->fetch_assoc())
                                     {
-                                        $no++;
                                         echo '
                                         <tr>
-                                            <td>'.$no.'</td>
                                             <td>'.$row["brandId"].'</td>
                                             <td>'.$row["brandName"].'</td>
                                             <td class="text-center"><button class="btn btn-outline-primary my-1" onclick="location.assign(\'brandedit.php?brandId='.$row["brandId"].'\');">Edit</Button>

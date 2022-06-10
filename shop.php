@@ -1,7 +1,7 @@
 <?php
     include 'inc/include_header.php';
+    $title = "Sản phẩm";
     include 'inc/header.php';
-   
 ?>
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-option">
@@ -9,10 +9,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__text">
-                        <h4>Shop</h4>
+                        <h4>Sản phẩm</h4>
                         <div class="breadcrumb__links">
-                            <a href="./index.php">Home</a>
-                            <span>Shop</span>
+                            <a href="./index.php">Trang chủ</a>
+                            <span>Sản phẩm</span>
                         </div>
                     </div>
                 </div>
@@ -92,19 +92,23 @@
                         <div class="col-lg-6">
                             <div class="product__pagination">
                                 <!-- trang trước -->
-                                <a href="shop.php?page=<?php if($page>1) {echo $page-1;}  else {echo $page;}?>" ><</a>
+                                <?php if ($page>1) {?>
+                                    <a href="shop/page-<?php echo $page-1;?>" ><</a>
                                 <?php
+                                }
                                     // số trang hiển thị ra màn hình tối đa hiện tại là 5
                                     $start = $page> 2? $page -2: 1;
                                     $end = $page < $num_of_page -1 ? $page + 2: $num_of_page;
                                     for($i=$start;$i<=$end;$i++){
                                         ?>
-                                        <a <?php if($i == $page) { echo 'class="active"';} ?> href="shop.php?page=<?php echo $i ?>"><?php echo $i ?></a>
-                                    <?php
+                                        <a <?php if($i == $page) { echo 'class="active"';} else {echo 'href="shop/page-'.$i.'"';} ?>><?php echo $i ?></a>
+                                        <?php
                                     }
                                 ?>
                                 <!-- trang sau -->
-                                <a href="shop.php?page=<?php if($page<$num_of_page) {echo $page+1;}  else {echo $num_of_page;}?>" >></a>
+                                <?php if ($page<$num_of_page) {?>
+                                    <a href="shop/page-<?php echo $page+1;?>" >></a>
+                                <?php }?>
                             </div>
                         </div>
                     </div>

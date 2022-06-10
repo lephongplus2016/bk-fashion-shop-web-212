@@ -1,17 +1,30 @@
 <?php
     include 'inc/include_header.php';
-    include 'inc/header.php';
 ?>
 
 
-<?php   //get brand ID
-	if(isset($_GET['id'])  && $_GET['id'] != NULL) {
-        $brandId = $_GET['id'];
+<?php   //get brand name
+	if(isset($_GET['brand'])  && $_GET['brand'] != NULL) {
+        $brandName = $_GET['brand'];
     }
     else{
         // code mặc định trở về trang web cũ
-        echo "<script>window.location ='404.php'</script>";
-    }   
+        header("Location: 404.php");
+        exit;
+    } 
+
+    $getBrand = $brand->getBrandByNameLink($brandName);
+    if($getBrand){
+        $nameBrand = $getBrand['brandName'];
+        $brandId = $getBrand['brandId'];
+    }
+    else {
+        header("Location: 404.php");
+        exit;
+    }
+
+    $title = "Thương hiệu ".$nameBrand;
+    include 'inc/header.php';
 ?>
         <!-- Breadcrumb Section Begin -->
         <section class="breadcrumb-option">
@@ -22,19 +35,9 @@
                         <h4>Sản Phẩm</h4>
                         <div class="breadcrumb__links">
                             <a href="./index.php">Trang Chủ</a>
-                            <a href="./shop.php">Sản Phẩm</a>   
-                            <a href="./shop.php">Thương Hiệu</a> 
-                                                                                
-                            <span>
-                            <?php
-				               $getNamebrand = $brand->getNameBrand($brandId);
-	      		                if($getNamebrand){
-	      			                while($row = $getNamebrand->fetch_assoc()){
-	      				                $nameBrand = $row['brandName'];
-	      			                }	
-	      		                }
-	      	                    ?>
-                                <p><?php echo $nameBrand;?> </p>
+                            <a href="./shop.php">Sản Phẩm</a>                     
+                            <span>Thương Hiệu:
+                            <?php echo $nameBrand;?>
                             </span>                
                         </div>
                     </div>
@@ -87,10 +90,6 @@
                             </div>
                         </div>
 
-                       
-                    
-
-
 <?php             
         } ?>
 
@@ -120,19 +119,19 @@
                         <div class="col-lg-6">
                             <div class="product__pagination">
                                 <!-- trang trước -->
-                                <a href="brand.php?id=<?php echo $brandId?>&page=<?php if($page>1) {echo $page-1;}  else {echo $page;}?>" ><</a>
+                                <a href="brand/<?php echo $brandName;?>/page-<?php if($page>1) {echo $page-1;}  else {echo $page;}?>" ><</a>
                                 <?php
                                     // số trang hiển thị ra màn hình tối đa hiện tại là 3
                                     $start = $page> 1? $page -1: $page;
                                     $end = $page < $num_of_page? $page +1: $num_of_page;
                                     for($i=$start;$i<=$end;$i++){
                                         ?>
-                                        <a <?php if($i == $page) { echo 'class="active"';} ?> href="brand.php?id=<?php echo $brandId?>&page=<?php echo $i ?>"><?php echo $i ?></a>
+                                        <a <?php if($i == $page) { echo 'class="active"';} ?> href="brand/<?php echo $brandName?>/page-<?php echo $i ?>"><?php echo $i ?></a>
                                     <?php
                                     }
                                 ?>
                                 <!-- trang sau -->
-                                <a href="brand.php?id=<?php echo $brandId?>&page=<?php if($page<$num_of_page) {echo $page+1;}  else {echo $num_of_page;}?>" >></a>
+                                <a href="brand/<?php echo $brandName;?>/page-<?php if($page<$num_of_page) {echo $page+1;}  else {echo $num_of_page;}?>" >></a>
                             </div>
                         </div>
                     </div>
