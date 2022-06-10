@@ -1,5 +1,6 @@
 <?php
     include 'inc/include_header.php';
+    $title ="Thanh toán";
     include 'inc/header.php';
 ?>
 <?php

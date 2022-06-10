@@ -1,5 +1,6 @@
 <?php
     include 'inc/include_header.php';
+    $title = "Hồ sơ của tôi";
     include 'inc/header.php';
 ?>
 <?php

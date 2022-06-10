@@ -1,6 +1,5 @@
 <?php
     include 'inc/include_header.php';
-    include 'inc/header.php';
 ?>
 <?php include 'classes/comment.php';
 $comment = new comment();
@@ -30,14 +29,26 @@ else if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deletedImg'])){
 
 ?>
 <?php 
-    if(isset($_GET['productId'])  && $_GET['productId'] != NULL) {
-        $id = $_GET['productId'];
+    if(isset($_GET['productTitle'])  && $_GET['productTitle'] != NULL) {
+        $productLink = $_GET['productTitle'];
     }
     else{
         // code mặc định trở về trang web cũ
-        echo "<script>window.location ='shop.php'</script>";
+        header("Location: shop.php");
+        exit;
     }
-    
+
+    $getProduct = $product->getProductByLink($productLink);
+    if ($getProduct != false){
+        $id = $getProduct['productId'];
+    }
+    else{
+        header("Location: 404.php");
+        exit;
+    }
+
+    $title = $getProduct['productName']." ".$getProduct['model'];
+    include 'inc/header.php';
 
 ?>
 <?php
@@ -65,8 +76,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="product__details__breadcrumb">
-                            <a href="./index.php">Home</a>
-                            <a href="./shop.php">Shop</a>
+                            <a href="./index.php">Trang chủ</a>
+                            <a href="./shop.php">Sản phẩm</a>
                             <span>Chi tiết sản phẩm</span>
                         </div>
                     </div>
@@ -133,151 +144,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart'])){
                 {
 
 $categoryRelative = $productRow['categoryId'];
- ?>
-        <style>
-            .container-commented-contented {
-                margin-top: 50px;
-            }
-            .in4-comment-user {
-                display: flex;
-                height: 180px;
-                margin-bottom: 20px;
-                /* border-bottom: 1px solid rgba(0,0,0,.09); */
-            }
-            .img-user-comment {
-                height: 40px;
-                flex-basis: 5%;
-                margin-right: 10px;
-            }
-            .img-user-comment img {
-                border-radius: 50%;
-                width: 40px;
-                height: 100%;
-                object-fit: cover;
-            }
-            .content-main {
-                flex-basis: 75%;
-                position: relative;
-                border-bottom: 1px solid rgba(0,0,0,.09);
-            }
-            .content-main:hover .container-btn-ellip {
-                color: #000;
-            }
-            .img-commented{
-                position: relative;
-            }
-            .btn-del-img {
-                position: absolute;
-                border-color: transparent;
-                top: 0;
-                right: 0;
-            }
-            .img-commented img{
-                width: 100%;
-                height: 90%;
-                object-fit: cover;
-            }
-            .date-commented {
-                font-size: 12px;
-            }
-            .comments-from-users {
-                font-size: 18px;
-                background: rgba(0,0,0,.02);
-                color: rgba(0,0,0,.87);
-                padding: 0.875rem;
-                text-transform: capitalize;
-                margin-bottom: 20px;
-                width: 100%;
-            }
-            .container-btn-ellip {
-                background: transparent;
-                border: transparent;
-                position: absolute;
-                top: 0;
-                right: 0;
-                padding: 8px 16px;
-                z-index: 999;
-                color: #fff;
-                transition: all 0.3s ease;
-            }
-            .att-comment {
-                position: absolute;
-                top: 30px;
-                right: 16px;
-                box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%), 0 3px 1px -2px rgb(0 0 0 / 20%);
-                visibility: hidden;
-                z-index: -999;
-                
-            }
-            .att-comment button:hover {
-                background-color: #ccc;
-            }
-            .att-comment button{
-                height: 34px;
-                border-color: transparent; 
-                background-color: transparent;
-                transition: all 0.3s linear;
-
-            }
-            .att-comment a:hover {
-                background: #ccc;
-            }
-            .att-comment a {
-                padding: 5px 30px;
-                color: black;
-                display: block;
-                transition: all 0.3s linear;
-            }
-            .show-att-coment {
-                visibility: visible;
-                z-index: 999;
-            }
-            .text-black {
-                color: black !important;
-            }
-            .form-control-edit {
-                width: 100%;
-                border: none;
-                border-bottom: 1px solid #ccc;
-            }
-            .form-control-edit:focus {
-                border-bottom: 2px solid #000;
-
-            }
-            .btn-edit {
-                border-color: transparent;
-                padding: 3px 12px;
-                text-transform: uppercase;
-                font-weight: bold;
-                font-size: 13px;
-            }
-            .btn-save {
-                background: #0069D9;
-                color: #fff;
-            }
-            .btn-exit {
-                background: transparent;
-            }
-            .container-btn-edit {
-                float: right;
-                margin-top: 12px;
-            }
-            .alert-commented-edit {
-                display: none;
-                color: red;
-                margin-top: 8px;
-            }
-            .show-alert {
-                display: inline-block;
-            }
-        </style>
+?>
         <div class="product__details__content">
             <div class="container">
                 
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-8">
                         <div class="product__details__text">
-                            <h1><?php echo $productRow['productName']; ?></h1>
+                            <h2><?php echo $title; ?></h2>
                             
                             <h3><?php echo $fm->format_currency($productRow['price'])." VNĐ"; ?> 
                             <span><?php $oldprice = (int)$productRow['price']; echo $fm->format_currency($oldprice*1.5)." VNĐ"; ?></span>
@@ -327,9 +201,8 @@ $categoryRelative = $productRow['categoryId'];
                                         <?php
                                             if(isset($addCart)){
                                                 echo "<br>";
-                                                 echo $addCart ;
-                                                
-                                                }
+                                                echo $addCart;
+                                            }
                                             ?>  
                                     </div>
                              </form> 
@@ -340,7 +213,7 @@ $categoryRelative = $productRow['categoryId'];
                                 <a href="#"><i class="fa fa-exchange"></i> Add To Compare</a>
                             </div> -->
                             <div class="product__details__last__option">
-                                <h5><span>Mô tả sản phẩm</span></h5>
+                                <h5><span>Thông tin sản phẩm</span></h5>
                                 <!-- <img src="img/shop-details/details-payment.png" alt=""> -->
                                 <ul>
                                     <li><span>Model:</span> <?php echo $productRow['model']; ?></li>
@@ -368,7 +241,7 @@ $categoryRelative = $productRow['categoryId'];
                                 <li class="nav-item">
                                                 <?php 
                                                 $n = 0;
-                                                    $comments = $comment->getImgByCommentProductId($_GET["productId"]);
+                                                    $comments = $comment->getImgByCommentProductId($id);
                                                     if($comments != false) {
                                                         $n = mysqli_num_rows($comments);
                                                     } 	  
@@ -446,7 +319,7 @@ $categoryRelative = $productRow['categoryId'];
                                         </div>
                                     </div>
                                         <button style = "margin-top: 10px;" type="submit" name = "submit" class="btn btn-primary">Gửi Bình Luận</button>
-                                    </form>;
+                                    </form>
                                     <?php
                                     }
                                     else {
@@ -456,7 +329,7 @@ $categoryRelative = $productRow['categoryId'];
                                     <div class="container-commented-contented">
                                     <h2 class="comments-from-users">Bình luận sản phẩm</h2>
                                         <?php 
-                                                    $comments = $comment->getImgByCommentProductId($_GET["productId"]);
+                                                    $comments = $comment->getImgByCommentProductId($id);
                                                     if($comments != false) {
                                                     while($i = $comments->fetch_assoc())
 								                	{
@@ -534,53 +407,51 @@ $categoryRelative = $productRow['categoryId'];
             </div>
             <div class="row">
                 <?php 
-    //get product that match category ID and show pagination
-    $getcat = $product->search_product_by_category($categoryRelative);
-    $count = 0;
-    if($getcat){
-        while($row = $getcat->fetch_assoc()){
-       $count++;
-       // chỉ hiện tối đa 6 sản phẩm liên quan
-       if ($count>6){
-        break;
-       }
-    ?>
-               
-                <?php
-                $image_list = $product->getImgByProductId($row['productId']);
-            while($i = $image_list->fetch_assoc())
-                {
-                    $image_product = $i['image'];
-                    break;
-                }
-?>
+                //get product that match category ID and show pagination
+                $getcat = $product->search_product_by_category($categoryRelative);
+                $count = 0;
+                if($getcat){
+                    while($row = $getcat->fetch_assoc()){
+                        $count++;
+                        // chỉ hiện tối đa 6 sản phẩm liên quan
+                        if ($count>6){
+                            break;
+                        }
+                        //trừ ra sản phẩm hiện tại
+                        if ($row['productId'] == $id){
+                            continue;
+                        }
+
+                        $productTitle = $row['productName']." ".$row['model'];
+                        $productLink = vn_to_str($productTitle);
+                
+                        $image_list = $product->getImgByProductId($row['productId']);
+                        while($i = $image_list->fetch_assoc())
+                        {
+                            $image_product = $i['image'];
+                            break;
+                        }
+                ?>
                     <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="img/product/<?php echo $image_product ; ?>">
                                     <ul class="product__hover">
-<!--                                         <li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
- -->                                        <li><a href="shop-details.php?productId=<?php echo $row["productId"] ?>"><img src="img/icon/search.png" alt=""></a></li>
+                                        <!-- <li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>-->
+                                        <li><a href="products/<?php echo $productLink ?>"><img src="img/icon/search.png" alt=""></a></li>
                                     </ul>
                                 </div>
-                                <div class="product__item__text">
-                                    <h6><?php echo $row['productName'] ; ?></h6>
-                                    <a href="#" class="add-cart">+ Thêm vào giỏ hàng</a>                                   
+                                <div class="product__item__text offset-1">
+                                    <h6><?php echo $productTitle; ?></h6>
+                                    <a href="products/<?php echo $productLink ?>" class="add-cart">+ Thêm vào giỏ hàng</a>                                   
                                     <h5><?php echo $fm->format_currency($row['price'])  ; ?> VNĐ</h5>                                    
                                 </div>
                             </div>
                         </div>
 
-                  
-                        
-                       
-
 <?php             
         }
     }
-?>
-
-
-               
+?>        
             </div>
         </div>
     </section>

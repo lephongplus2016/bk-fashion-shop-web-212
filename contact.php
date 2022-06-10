@@ -1,5 +1,6 @@
 <?php
     include 'inc/include_header.php';
+    $title = "Liên hệ";
     include 'inc/header.php';
 ?>
 

@@ -1,5 +1,6 @@
 <?php
     include 'inc/include_header.php';
+    $title = "Giỏ hàng";
     include 'inc/header.php';
 ?>
 
@@ -25,7 +26,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_cart'])){
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__text">
-                        <h4>Shopping Cart</h4>
+                        <h4>Giỏ hàng</h4>
                         <?php 
                             if(isset($updateQuantityCart)){
                             echo $updateQuantityCart;
@@ -37,9 +38,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_cart'])){
                             }
                              ?>
                         <div class="breadcrumb__links">
-                            <a href="./index.php">Home</a>
-                            <a href="./shop.php">Shop</a>
-                            <span>Shopping Cart</span>
+                            <a href="./index.php">Trang chủ</a>
+                            <a href="./shop.php">Sản phẩm</a>
+                            <span>Giỏ hàng</span>
                             <?php
                             $user_id = Session::get('user_id');
                             if (empty($user_id)){

@@ -27,7 +27,6 @@
             
 <?php
     include 'inc/sidebar_in_shoppage.php';
-   
 ?>
 
             <div class="row">
@@ -38,23 +37,25 @@
         while($row = $getProduct->fetch_assoc()){
             $image_list = $product->getImgByProductId($row['productId']);
             while($i = $image_list->fetch_assoc())
-                {
-                    $image_product = $i['image'];
-                    break;
-                }
+            {
+                $image_product = $i['image'];
+                break;
+            }
+            $productTitle = $row['productName']." ".$row['model'];
+            $productLink = vn_to_str($productTitle);
 ?>
 
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="img/product/<?php echo $image_product ; ?>">
                                     <ul class="product__hover">
-                                        <li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-                                        <li><a href="shop-details.php?productId=<?php echo $row["productId"] ?>"><img src="img/icon/search.png" alt=""></a></li>
+                                        <li><a><img src="img/icon/heart.png" alt=""></a></li>
+                                        <li><a href="products/<?php echo $productLink ?>"><img src="img/icon/search.png" alt=""></a></li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><?php echo $row['productName'] ; ?></h6>
-                                    <a href="shop-details.php?productId=<?php echo $row["productId"] ?>" class="add-cart">+ Thêm vào giỏ hàng</a>
+                                    <h6><?php echo $productTitle; ?></h6>
+                                    <a href="products/<?php echo $productLink ?>" class="add-cart">+ Thêm vào giỏ hàng</a>
                                    
                                     <h5><?php echo $fm->format_currency($row['price'])  ; ?> VNĐ</h5>
                                     

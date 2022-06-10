@@ -15,6 +15,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>BK Fashion Admin</title>
+        <link href='../img/icon/favicon.ico' rel='shortcut icon' type='image/x-icon'/>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -25,18 +26,6 @@
         <script src="js/popup.js"></script>
         <!-- jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
-        <style type="text/css">
-            span.error
-                {
-                    color: #FF0000;
-                }
-
-                span.success
-                {
-                    color: #7b912b;
-                }
-        </style>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">

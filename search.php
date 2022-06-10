@@ -1,13 +1,14 @@
 <?php
     include 'inc/include_header.php';
-    include 'inc/header.php';
-?>
-<?php
+    
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $tukhoa = $_POST['tukhoa'];
         $search_product = $product->search_product($tukhoa);
     }
+
+    $title = $tukhoa.' - Tìm kiếm từ khóa';
+    include 'inc/header.php';
 ?>
 
     <!-- Breadcrumb Section Begin -->

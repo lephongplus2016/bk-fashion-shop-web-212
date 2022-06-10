@@ -1,5 +1,6 @@
 <?php
     include 'inc/include_header.php';
+    $title = "Lỗi";
     include 'inc/header.php';
 ?>
         <div id="layoutError">

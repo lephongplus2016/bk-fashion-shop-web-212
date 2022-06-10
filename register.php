@@ -1,5 +1,6 @@
 <?php
     include 'inc/include_header.php';
+    $title = "Đăng kí";
     include 'inc/header.php';
 ?>
 

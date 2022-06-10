@@ -1,5 +1,6 @@
 <?php
     include 'inc/include_header.php';
+    $title = "Đơn hàng của tôi";
     include 'inc/header.php';
 ?>
  <?php
@@ -29,8 +30,8 @@
                         <h4>Chi tiết đơn hàng</h4>
                         
                         <div class="breadcrumb__links">
-                            <a href="./index.php">Home</a>
-                            <a href="./shop.php">Shop</a>
+                            <a href="./index.php">Trang chủ</a>
+                            <a href="./shop.php">Sản phẩm</a>
                             <span>Đơn hàng</span>
                         </div>
                     </div>
@@ -111,7 +112,7 @@
                                             }elseif($row['status']=='1'){
                                             
                                         ?>
-                                                <a href="orderdetail.php?confirmid=<?php echo $row['orderId']?>">Đang vận chuyển</a>
+                                                <a href="orderdetail.php?confirmid=<?php echo $row['orderId']?>" class="btn-link">Đang vận chuyển</a>
                                         <?php
                                             }else{
                                         ?>

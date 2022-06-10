@@ -12242,3 +12242,13 @@ body {
     font-size: 0.75rem;
     border-radius: 0.25rem !important;
 }
+
+span.error
+{
+    color: #FF0000;
+}
+
+span.success
+{
+    color: #7b912b;
+}

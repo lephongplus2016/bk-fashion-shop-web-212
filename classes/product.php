@@ -346,5 +346,18 @@ class product
         return $result;
     }
 
+    public function getProductByLink($productLink){
+        $query = "SELECT * FROM tbl_product";
+        $result = $this->db->select($query);
+        if ($result != false){
+            while ($product = $result->fetch_assoc()){
+                $tempStr = $product['productName'].' '.$product['model'];
+                if($productLink == vn_to_str($tempStr)){
+                    return $product;
+                }
+            }
+        }
+        return false;
+    }
 }
 ?>
