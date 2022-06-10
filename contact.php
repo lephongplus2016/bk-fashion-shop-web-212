@@ -19,23 +19,22 @@
                         <div class="section-title">
                             <span>Information</span>
                             <h2>Contact Us</h2>
-                            <p>As you might expect of a company that began as a high-end interiors contractor, we pay
-                                strict attention.</p>
+                            <p>Nhóm chúng mình là sinh viên Khoa Khoa học và Kỹ thuật máy tính thuộc trường Đại học Bách Khoa - Đại học Quốc gia Thành phố Hồ Chí Minh..</p>
                         </div>
-                        <ul>
+                        <!-- <ul>
                             <li>
-                                <h4>America</h4>
-                                <p>195 E Parker Square Dr, Parker, CO 801 <br />+43 982-314-0958</p>
+                                <h4>Thông tin</h4>
+                                <p>Đây là project môn học Lập trình web - tháng 05/2022</p>
                             </li>
                             <li>
-                                <h4>France</h4>
-                                <p>109 Avenue Léon, 63 Clermont-Ferrand <br />+12 345-423-9893</p>
+                                <h4>Nội dung</h4>
+                                <p>Project hiện thực trang web giới thiệu sản phẩm của doanh nghiệp. </br > Hệ thống giới thiệu sản phẩm là quần áo, cho phép khách hàng thêm giỏ hàng, đặt order, bình luận cho các sản phẩm.  </p>
                             </li>
-                        </ul>
+                        </ul> -->
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
-                    <div class="contact__form">
+                    <!-- <div class="contact__form">
                         <form action="#">
                             <div class="row">
                                 <div class="col-lg-6">
@@ -50,8 +49,66 @@
                                 </div>
                             </div>
                         </form>
+                    </div> -->
+                    <div class="contact__text">
+                        
+                        <ul>
+                            <li>
+                                <h4>Thông tin</h4>
+                                <p>Đây là project môn học Lập trình web - tháng 05/2022</p>
+                            </li>
+                            <li>
+                                <h4>Nội dung</h4>
+                                <p>Project hiện thực trang web giới thiệu sản phẩm của doanh nghiệp. </br > Hệ thống giới thiệu sản phẩm là quần áo, cho phép khách hàng thêm giỏ hàng, đặt order, bình luận cho các sản phẩm.  </p>
+                            </li>
+                        </ul>
                     </div>
                 </div>
+                <!-- team -->
+                <!-- Team Section Begin -->
+    <section class="team spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <span>Our Team</span>
+                        <h2>Các thành viên của nhóm</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="team__item">
+                        <img src="img/about/phong.jpg" alt="">
+                        <h4>Lê Hồng Phong</h4>
+                        <span>1813518</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="team__item">
+                        <img src="img/about/nhat.jpg" alt="">
+                        <h4>Nguyễn Trọng Nhật</h4>
+                        <span>1813373</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="team__item">
+                        <img src="img/about/khoa.jpg" alt="">
+                        <h4>Võ Minh Khoa</h4>
+                        <span>1812670</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="team__item">
+                        <img src="img/about/LogoBK.jpg" alt="">
+                        <h4>Nguyễn Thanh Minh</h4>
+                        <span>2013777</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Team Section End -->
             </div>
         </div>
     </section>

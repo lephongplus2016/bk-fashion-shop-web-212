@@ -111,7 +111,7 @@
                                             }elseif($row['status']=='1'){
                                             
                                         ?>
-                                                <a href="?confirmid=<?php echo $row['orderId']?>">Đang vận chuyển</a>
+                                                <a href="orderdetail.php?confirmid=<?php echo $row['orderId']?>">Đang vận chuyển</a>
                                         <?php
                                             }else{
                                         ?>
