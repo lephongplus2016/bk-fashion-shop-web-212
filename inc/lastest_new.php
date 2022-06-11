@@ -17,6 +17,7 @@
             <?php
                 for($i = 0; $i < 3; $i++){
                     if($row = $list_article->fetch_assoc()){
+                        $b_title = vn_to_str($row["title"]);
                         echo '
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="blog__item">
@@ -24,7 +25,7 @@
                                 <div class="blog__item__text">
                                     <span><img src="img/icon/calendar.png" alt="">'.$fm->formatDate1($row["datetime"]).'</span>
                                     <h5>'.$row["title"].'</h5>
-                                    <a href="blog-details.php?id='.$row["id"].'">Đọc thêm</a>
+                                    <a href="blog/'.$b_title.'-'.$row["id"].'">Đọc thêm</a>
                                 </div>
                             </div>
                         </div>';
