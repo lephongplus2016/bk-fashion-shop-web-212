@@ -173,12 +173,12 @@ $categoryRelative = $productRow['categoryId'];
                                             </label>
 
                                             <?php
-                                                for ($x = 1; $x <= 6; $x++) {
+                                                for ($x = 2; $x <= 7; $x++) {
                                                     $sizeLoop = (int)$productRow["size"] + $x;
                                                     
                                                   echo 
-                                                  '<label for="x'.$sizeLoop.'">'.$sizeLoop.'
-                                                        <input type="radio" id="x'.$sizeLoop.'" name="size" value="'.$sizeLoop.'">
+                                                  '<label for="x'.$sizeLoop.'">'.($sizeLoop-1).'
+                                                        <input type="radio" id="x'.$sizeLoop.'" name="size" value="'.($sizeLoop-1).'">
                                                     </label>';
                                                 }
                                             ?> 
