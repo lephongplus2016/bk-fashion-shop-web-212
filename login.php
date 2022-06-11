@@ -6,6 +6,7 @@
 <?php
 $id = "";
 $index = 0;
+$link = 'index.php';
     
     if(isset($_GET['service'])){
         $link = $_GET['service'];
