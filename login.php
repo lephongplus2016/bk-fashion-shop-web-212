@@ -6,27 +6,16 @@
 <?php
 $id = "";
 $index = 0;
-    if(isset($_GET['id'])){
-        $id = $_GET['id'];
-        $index = 1;
-    }
-    if(isset($_GET['productId'])){
-        $id = $_GET['productId'];
-        $index = 2;
+    
+    if(isset($_GET['service'])){
+        $link = $_GET['service'];
     }
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['loginForm'])) {
         
-        $login_user = $user->login_user($_POST, $id,$index);
+        $login_user = $user->login_user($_POST, $id);
         if($login_user===true){
-            if($index==1){
-                header('Location:blog-details.php?id='.$id.'');
-            }
-            else if($index==2){
-                header('Location:shop-details.php?id='.$id.'');
-            }
-            else {
-                header('Location:index.php');
-            }
+            header("Location: ".$link);
+            exit;
         }       
     }
 ?>

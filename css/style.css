@@ -2795,7 +2795,7 @@ ol {
 	width: 100%;
 	border: 1px solid #e1e1e1;
 	font-size: 14px;
-	color: #b7b7b7;
+	color: #111;
 	padding-left: 20px;
 	margin-bottom: 10px;
 }
@@ -2825,6 +2825,46 @@ ol {
 }
 
 .profile__button {
+	display: flex;
+	justify-content: space-evenly;
+	margin-top: 2rem;
+}
+
+.password__input input {
+	height: 50px;
+	width: 100%;
+	border: 1px solid #e1e1e1;
+	font-size: 14px;
+	color: #111;
+	padding-left: 20px;
+	margin-bottom: 10px;
+}
+
+.password__input input::-webkit-input-placeholder {
+	color: #b7b7b7;
+}
+
+.password__input input::-moz-placeholder {
+	color: #b7b7b7;
+}
+
+.password__input input:-ms-input-placeholder {
+	color: #b7b7b7;
+}
+
+.password__input input::-ms-input-placeholder {
+	color: #b7b7b7;
+}
+
+.password__input input::placeholder {
+	color: #b7b7b7;
+}
+
+.password__input input:focus {
+	color: #111;
+}
+
+.password__button {
 	display: flex;
 	justify-content: space-evenly;
 	margin-top: 2rem;
@@ -3276,8 +3316,7 @@ ol {
 	border: 1px solid #e1e1e1;
 	padding-left: 20px;
 	font-size: 15px;
-	color: #b7b7b7;
-	margin-bottom: 30px;
+	color: #111;
 	-webkit-transition: all, 0.3s;
 	-o-transition: all, 0.3s;
 	transition: all, 0.3s;
@@ -3314,8 +3353,7 @@ ol {
 	padding-left: 20px;
 	padding-top: 12px;
 	font-size: 15px;
-	color: #b7b7b7;
-	margin-bottom: 24px;
+	color: #111;
 	resize: none;
 	-webkit-transition: all, 0.3s;
 	-o-transition: all, 0.3s;

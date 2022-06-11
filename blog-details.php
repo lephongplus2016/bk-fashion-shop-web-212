@@ -1,18 +1,11 @@
 <?php
     include 'inc/include_header.php';
 ?>
-<?php include 'classes/commentArticle.php';
-$commentArticle = new commentArticle();
-if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
-    // echo '<pre>'; print_r($_FILES); echo '</pre>';
-
-    $commentArticle->insert_commentArticle($_POST, $_FILES, $_GET["id"]);
-}
-?>
 
 <?php include 'classes/article.php';
     if(isset($_GET['id'])  && $_GET['id'] != NULL) {
         $id = $_GET['id'];
+        $titleLink = $_GET['title'];
     }
     else{
         header("Location: blog.php");
@@ -27,15 +20,26 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
     else {
         $data = $article_details->fetch_assoc();
     }
+    if (vn_to_str($data["title"]) != $titleLink) {
+        header("Location: 404.php");
+        exit;
+    }
 
     // SEO section
     $title = $data["title"];
     if (trim($data["description"]) != "") $description = $data["description"];
     if (trim($data["keywords"]) != "") $keywords = $data["keywords"];
+
+    include 'inc/header.php';
 ?>
 
-<?php
-    include 'inc/header.php';
+<?php include 'classes/commentArticle.php';
+$commentArticle = new commentArticle();
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
+    // echo '<pre>'; print_r($_FILES); echo '</pre>';
+
+    $commentArticle->insert_commentArticle($_POST, $_FILES, $_GET["id"]);
+}
 ?>
 
     <!-- Blog Details Hero Begin -->
@@ -218,7 +222,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
             <button type="button" class="fa fa-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            Vui lòng <a href="login.php?id=<?=$_GET['id']?>">Đăng nhập</a> để bình luận
+            Vui lòng <a href="login.php?service=blog/<?=$titleLink.'-'.$id?>">Đăng nhập</a> để bình luận
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

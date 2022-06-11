@@ -172,4 +172,16 @@ class Article
         $result = $this->db->select($query);
         return $result;
     }
+
+    public function getDetailsArticleByLink($Link)
+    {
+        $query = "SELECT `tbl_article`.* , `tbl_image_article`.`image`
+                FROM `tbl_article` JOIN `tbl_image_article` ON `tbl_article`.`id` =`tbl_image_article`.`articleId`;";
+        $result = $this->db->select($query);
+        if ($result != false){
+            while($article = $result->fetch_assoc()){
+                
+            }
+        }
+    }
 }

@@ -171,7 +171,7 @@
             
             // Execute script
             posting.done(function( data ) {
-                console.log(data);
+                //console.log(data);
                 eval(data);
             });
         });
@@ -213,7 +213,7 @@
 
             // // Execute script from password_edit.php
             posting.done(function( data ) {
-                console.log(data);
+                //console.log(data);
                 eval(data);
             });
         });

@@ -1,33 +1,6 @@
 <?php
     include 'inc/include_header.php';
 ?>
-<?php include 'classes/comment.php';
-$comment = new comment();
-if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
-    // echo '<pre>'; print_r($_FILES); echo '</pre>';
-
-    $check = $comment->insert_comment($_POST, $_FILES, $_GET["productId"]);
-}
-else if(isset($_GET['deleteCommentId'])){
-    $CommentId = $_GET['deleteCommentId'];
-    $delUser = $comment->delete_comment($CommentId);
-    $id = $_GET['productId'];
-    echo "<script>window.location ='shop-details.php?productId=$id'</script>";
-}
-
-?>
-
-<?php 
-if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submitEdit'])){
-    $alert = $comment->edit_comment($_POST['content'],$_POST['submitEdit'],1);
-    echo $alert;
-}
-else if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deletedImg'])){
-    $alert = $comment->edit_comment($_POST['content'],$_POST['deletedImg'],0);
-    echo $alert;
-}
-
-?>
 <?php 
     if(isset($_GET['productTitle'])  && $_GET['productTitle'] != NULL) {
         $productLink = $_GET['productTitle'];
@@ -48,7 +21,38 @@ else if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deletedImg'])){
     }
 
     $title = $getProduct['productName']." ".$getProduct['model'];
+    $description = strip_tags(nl2br($getProduct['description']));
     include 'inc/header.php';
+
+?>
+
+<?php include 'classes/comment.php';
+$comment = new comment();
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
+    // echo '<pre>'; print_r($_FILES); echo '</pre>';
+
+    $check = $comment->insert_comment($_POST, $_FILES, $id);
+}
+if(isset($_GET['deleteCommentId'])){
+    $CommentId = $_GET['deleteCommentId'];
+    $delUser = $comment->delete_comment($CommentId);
+    $host  = $_SERVER['HTTP_HOST'];
+    $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+    $extra = "products/".$productLink;
+    header("Location: http://$host$uri/$extra");
+    exit;
+}
+?>
+
+<?php 
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submitEdit'])){
+    $alert = $comment->edit_comment($_POST['content'],$_POST['submitEdit'],1);
+    echo $alert;
+}
+else if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deletedImg'])){
+    $alert = $comment->edit_comment($_POST['content'],$_POST['deletedImg'],0);
+    echo $alert;
+}
 
 ?>
 <?php
@@ -318,14 +322,14 @@ $categoryRelative = $productRow['categoryId'];
                                             <span class="invalid-feedback" id="alert2">Vui lòng chọn file có các định dạng sau .jpeg .jpg .png .gif</span>
                                         </div>
                                     </div>
-                                        <button style = "margin-top: 10px;" type="submit" name = "submit" class="btn btn-primary">Gửi Bình Luận</button>
+                                        <button type="submit" name = "submit" class="site-btn mt-1">Gửi Bình Luận</button>
                                     </form>
                                     <?php
                                     }
                                     else {
-                                        echo '<p class="fw-normal" style="margin-top: 20px">Đăng nhập để bình luận <a href = "login.php?productId='.$_GET["productId"].'">Đến đăng nhập</a></p>';
-                                    }
                                     ?>
+                                        <p class="fw-normal mt-2">Đăng nhập để bình luận <a href = "login.php?service=products/<?php echo $productLink; ?>" class="btn-link">Đến đăng nhập</a></p>
+                                    <?php } ?>
                                     <div class="container-commented-contented">
                                     <h2 class="comments-from-users">Bình luận sản phẩm</h2>
                                         <?php 
@@ -357,9 +361,9 @@ $categoryRelative = $productRow['categoryId'];
                                                                     $isAdmin = Session::get('user_role');
                                                                     $userId = Session::get('user_id');
                                                                     if ($isAdmin == 'admin' || $userId == $i['userId']) {
-                                                                    $img = $i['image'];
+                                                                        $img = $i['image'];
                                                                         echo '<button  onClick="handleEditcomment('.$i['commentId'].',\''.$img.'\',\''.$i['content'].'\')">Chỉnh sửa</button>';
-                                                                        echo '<a href="shop-details.php?deleteCommentId='.$i['commentId'].'&productId='.$id.'">Xóa</a>';
+                                                                        echo '<a href="products/'.$productLink.'/deleteCommentId-'.$i['commentId'].'">Xóa</a>';
                                                                     }
                                                                     else {
                                                                         echo '<a href="">Báo cáo</a>';
