@@ -65,7 +65,7 @@ class user
         }
     }
 
-    public function login_user($data, $productId){
+    public function login_user($data){
 
             $email = mysqli_real_escape_string($this->db->link, $data['email']);
             $password = mysqli_real_escape_string($this->db->link, md5($data['password']));

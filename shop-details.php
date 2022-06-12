@@ -6,8 +6,7 @@
         $productLink = $_GET['productTitle'];
     }
     else{
-        // code mặc định trở về trang web cũ
-        header("Location: shop.php");
+        header("Location: ../404.php");
         exit;
     }
 
@@ -16,7 +15,7 @@
         $id = $getProduct['productId'];
     }
     else{
-        header("Location: 404.php");
+        header("Location: ../404.php");
         exit;
     }
 
@@ -29,8 +28,6 @@
 <?php include 'classes/comment.php';
 $comment = new comment();
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
-    // echo '<pre>'; print_r($_FILES); echo '</pre>';
-
     $check = $comment->insert_comment($_POST, $_FILES, $id);
 }
 if(isset($_GET['deleteCommentId'])){

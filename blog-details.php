@@ -3,25 +3,21 @@
 ?>
 
 <?php include 'classes/article.php';
-    if(isset($_GET['id'])  && $_GET['id'] != NULL) {
-        $id = $_GET['id'];
-        $titleLink = $_GET['title'];
+    if(isset($_GET['blogTitle'])  && $_GET['blogTitle'] != NULL) {
+        $titleLink = $_GET['blogTitle'];
     }
     else{
-        header("Location: blog.php");
+        header("Location: ../404.php");
         exit;
     } 
 
     $article = new Article();
-	$article_details = $article->getDetailsArticleById($id);
-    if ($article_details === false){
-        echo "<script>alert('Lấy dữ liệu bị lỗi. Trở lại trang trước'); window.location ='blog.php'</script>";
+	$data = $article->getDetailsArticleByLink($titleLink);
+    if ($data != false){
+        $id = $data["id"];
     }
     else {
-        $data = $article_details->fetch_assoc();
-    }
-    if (vn_to_str($data["title"]) != $titleLink) {
-        header("Location: 404.php");
+        header("Location: ../404.php");
         exit;
     }
 
@@ -38,7 +34,7 @@ $commentArticle = new commentArticle();
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
     // echo '<pre>'; print_r($_FILES); echo '</pre>';
 
-    $commentArticle->insert_commentArticle($_POST, $_FILES, $_GET["id"]);
+    $commentArticle->insert_commentArticle($_POST, $_FILES, $id);
 }
 ?>
 
@@ -222,7 +218,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
             <button type="button" class="fa fa-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            Vui lòng <a href="login.php?service=blog/<?=$titleLink.'-'.$id?>">Đăng nhập</a> để bình luận
+            Vui lòng <a href="login.php?service=blog/<?=$titleLink?>">Đăng nhập</a> để bình luận
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

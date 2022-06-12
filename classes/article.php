@@ -180,8 +180,11 @@ class Article
         $result = $this->db->select($query);
         if ($result != false){
             while($article = $result->fetch_assoc()){
-                
+                if ($Link == vn_to_str($article["title"])."-".$article["id"]){
+                    return $article;
+                }
             }
         }
+        return false;
     }
 }

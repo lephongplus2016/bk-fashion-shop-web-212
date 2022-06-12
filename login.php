@@ -4,16 +4,13 @@
     include 'inc/header.php';
 ?>
 <?php
-$id = "";
-$index = 0;
-$link = 'index.php';
-    
+    $link = 'index.php';
     if(isset($_GET['service'])){
         $link = $_GET['service'];
     }
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['loginForm'])) {
         
-        $login_user = $user->login_user($_POST, $id);
+        $login_user = $user->login_user($_POST);
         if($login_user===true){
             header("Location: ".$link);
             exit;
