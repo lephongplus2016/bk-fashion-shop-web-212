@@ -156,7 +156,7 @@
                                         </form>
                                     </div>
                                     <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="login.php">Đã có tài khoản? Đi tới đăng nhập</a></div>
+                                        <div class="small"><a href="login.php" class="btn-link">Đã có tài khoản? Đi tới đăng nhập</a></div>
                                     </div>
                                 </div>
                             </div>

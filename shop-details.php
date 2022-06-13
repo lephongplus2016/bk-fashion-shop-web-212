@@ -459,20 +459,20 @@ $categoryRelative = $productRow['categoryId'];
     <!-- Related Section End ======================================================================= -->
     <script>
 	const fileUploader = document.getElementById("image1");
-if(fileUploader){
-    const reader = new FileReader();
-    fileUploader.addEventListener('change', (event) => {
-        const files = event.target.files;
-        const file = files[0];
-        reader.readAsDataURL(file);
-        
-        reader.addEventListener('load', (event) => {
-            img = document.getElementById(`upload-img1`);
-            img.src = event.target.result;
-            img.alt = file.name;
-        });
-    });  
-}
+    if(fileUploader){
+        const reader = new FileReader();
+        fileUploader.addEventListener('change', (event) => {
+            const files = event.target.files;
+            const file = files[0];
+            reader.readAsDataURL(file);
+            
+            reader.addEventListener('load', (event) => {
+                img = document.getElementById(`upload-img1`);
+                img.src = event.target.result;
+                img.alt = file.name;
+            });
+        });  
+    }
     const btnEllips = document.querySelectorAll('.container-btn-ellip');
 
     btnEllips.forEach((btnEllip)=>{

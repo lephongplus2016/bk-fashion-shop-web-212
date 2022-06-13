@@ -83,7 +83,6 @@
                                             <td>'.$row["model"].'</td>
                                             <td>'.$row["gender"].'</td>
                                             <td>'.$row["season"].'</td>
-                                            <td>'.$row["gender"].'</td>  
                                             <td>'.$fm->textShorten( $row['description'],200).'</td>';
                                                                                       
                                                                                       

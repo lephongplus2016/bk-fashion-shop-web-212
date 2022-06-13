@@ -30,12 +30,10 @@
 ?>
 
 <?php include 'classes/commentArticle.php';
-$commentArticle = new commentArticle();
-if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
-    // echo '<pre>'; print_r($_FILES); echo '</pre>';
-
-    $commentArticle->insert_commentArticle($_POST, $_FILES, $id);
-}
+    $commentArticle = new commentArticle();
+    if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
+        $commentArticle->insert_commentArticle($_POST, $_FILES, $id);
+    }
 ?>
 
     <!-- Blog Details Hero Begin -->
@@ -218,7 +216,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])){
             <button type="button" class="fa fa-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            Vui lòng <a href="login.php?service=blog/<?=$titleLink?>">Đăng nhập</a> để bình luận
+            Vui lòng <a href="login.php?service=blog/<?=$titleLink?>" class="btn-link">Đăng nhập</a> để bình luận
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

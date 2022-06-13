@@ -70,13 +70,13 @@ function validate_login() {
                                                 <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
                                             </div> -->
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <a class="small" href="password.php">Quên mật khẩu?</a>
+                                                <a class="small btn-link">Quên mật khẩu?</a>
                                                 <input type="submit" name="loginForm" class="btn btn-primary" value="Đăng nhập">
                                             </div>
                                         </form>
                                     </div>
                                     <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="register.php">Chưa có tài khoản? Đăng kí ngay!</a></div>
+                                        <div class="small"><a href="register.php" class="btn-link">Chưa có tài khoản? Đăng kí ngay!</a></div>
                                     </div>
                                 </div>
                             </div>
