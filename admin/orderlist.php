@@ -23,7 +23,7 @@
 
 	<main>
     	<div class="container-fluid px-4">
-        	<h3 class="mt-4">Danh sách sản phẩm</h3>
+        	<h3 class="mt-4">Danh sách Order</h3>
         	<?php 
             if(isset($delOrder)){
                  echo "<script>window.location ='orderlist.php'</script>";
