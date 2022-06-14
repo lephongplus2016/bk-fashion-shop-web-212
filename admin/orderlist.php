@@ -66,7 +66,6 @@
                                         $no++;
                                         echo '
                                         <tr>
-                                            <td>'.$no.'</td>
                                             <td>'.$row["orderId"].'</td>
                                             <td>'.$row["productName"].'</td>
                                             <td>'.$row["quantity"].'</td>
